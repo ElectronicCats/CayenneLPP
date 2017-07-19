@@ -1,17 +1,36 @@
 #######################################
-# Syntax Coloring Map
+# Syntax Coloring Map For CayenneLPP
 #######################################
 
 #######################################
 # Class (KEYWORD1)
 #######################################
 
-
+CayenneLPP            KEYWORD1 CayenneLPP
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
+reset                 KEYWORD2
+getSize               KEYWORD2
+*getBuffer            KEYWORD2
+copy                  KEYWORD2
+
+addDigitalInput       KEYWORD2
+addDigitalOutput      KEYWORD2
+
+addAnalogInput        KEYWORD2
+addAnalogOutput       KEYWORD2
+
+addLuminosity         KEYWORD2
+addPresence           KEYWORD2
+addTemperature        KEYWORD2
+addRelativeHumidity   KEYWORD2
+addAccelerometer      KEYWORD2
+addBarometricPressure KEYWORD2
+addGyrometer          KEYWORD2
+addGPS                KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
