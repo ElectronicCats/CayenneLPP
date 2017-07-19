@@ -2,7 +2,7 @@
  LoRaWAN Weather Station Example
  By: Eduardo Contreras and Andres Sabas
  Electronic Cats
- 
+
  By: Nathan Seidle
  SparkFun Electronics
  Date: Jun 27, 2017
@@ -39,8 +39,8 @@ HTU21D myHumidity; //Create an instance of the humidity sensor
 //Hardware pin definitions
 //-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 // digital I/O pins
-const byte WSPEED = 18; //3; //Pines empalmados
-const byte RAIN = 19;   //2; //Pines empalmados
+const byte WSPEED = 18;
+const byte RAIN = 19;
 const byte STAT1 = 7;
 const byte STAT2 = 8;
 
@@ -493,15 +493,9 @@ float get_light_level()
 //3.9K on the high side (R1), and 1K on the low side (R2)
 float get_battery_level()
 {
-  float operatingVoltage = analogRead(REFERENCE_3V3);
-
   float rawVoltage = analogRead(BATT);
 
-  operatingVoltage = 3.30 / operatingVoltage; //The reference voltage is 3.3V
-
-  rawVoltage = operatingVoltage * rawVoltage; //Convert the 0 to 1023 int to actual voltage on BATT pin
-
-  rawVoltage *= 4.90; //(3.9k+1k)/1k - multiple BATT voltage by the voltage divider to get actual system voltage
+  rawVoltage = (5.00 * rawVoltage) / 1023.0;
 
   return(rawVoltage);
 }
@@ -591,8 +585,8 @@ void printWeather()
   lpp.addAnalogInput(6, dailyrainin);
 
   Serial.print(F(",pressure="));
-  Serial.print(pressure, 2);
-  lpp.addBarometricPressure(7,pressure);
+  Serial.print((pressure/100.0), 2);
+  lpp.addBarometricPressure(7,(pressure/100.0));
 
   Serial.print(F(",batt_lvl="));
   Serial.print(batt_lvl, 2);
@@ -602,4 +596,3 @@ void printWeather()
   Serial.println(light_lvl, 2);
   lpp.addLuminosity(9,light_lvl);
 }
-
