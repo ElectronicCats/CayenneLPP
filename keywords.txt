@@ -6,7 +6,7 @@
 # Class (KEYWORD1)
 #######################################
 
-CayenneLPP	KEYWORD1	CayenneLPP
+CayenneLPP	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
