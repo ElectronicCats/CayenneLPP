@@ -29,6 +29,7 @@ addTemperature	KEYWORD2
 addRelativeHumidity	KEYWORD2
 addAccelerometer	KEYWORD2
 addBarometricPressure	KEYWORD2
+addUnixTime	KEYWORD2
 addGyrometer	KEYWORD2
 addGPS	KEYWORD2
 

@@ -190,6 +190,24 @@ uint8_t CayenneLPP::addBarometricPressure(uint8_t channel, float hpa)
   return cursor;
 }
 
+uint8_t CayenneLPP::addUnixTime(uint8_t channel, uint32_t unixtime)
+{
+  if ((cursor + LPP_UNIXTIME_SIZE) > maxsize)
+  {
+    return 0;
+  }
+  int32_t val = unixtime;
+
+  buffer[cursor++] = channel;
+  buffer[cursor++] = LPP_UNIXTIME;
+  buffer[cursor++] = val >> 24;
+  buffer[cursor++] = val >> 16;
+  buffer[cursor++] = val >> 8;
+  buffer[cursor++] = val;
+
+  return cursor;
+}
+
 uint8_t CayenneLPP::addGyrometer(uint8_t channel, float x, float y, float z)
 {
   if ((cursor + LPP_GYROMETER_SIZE) > maxsize)
