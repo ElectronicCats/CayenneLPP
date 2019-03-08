@@ -121,10 +121,18 @@ uint8_t CayenneLPP::addGenericValue (uint8_t channel, float value) {
 
     buffer[cursor++] = channel;
     buffer[cursor++] = LPP_GENERIC_SENSOR;
+
+#if BYTE_ORDER == LITTLE_ENDIAN
+    buffer[cursor++] = ptr[3];
+    buffer[cursor++] = ptr[2];
+    buffer[cursor++] = ptr[1];
+    buffer[cursor++] = ptr[0];
+#elif
     buffer[cursor++] = ptr[0];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[2];
     buffer[cursor++] = ptr[3];
+#endif
 
     return cursor;
 }
@@ -218,10 +226,18 @@ uint8_t CayenneLPP::addVoltage (uint8_t channel, float voltage) {
 
     buffer[cursor++] = channel;
     buffer[cursor++] = LPP_VOLTAGE;
+
+#if BYTE_ORDER == LITTLE_ENDIAN
+    buffer[cursor++] = ptr[3];
+    buffer[cursor++] = ptr[2];
+    buffer[cursor++] = ptr[1];
+    buffer[cursor++] = ptr[0];
+#elif
     buffer[cursor++] = ptr[0];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[2];
     buffer[cursor++] = ptr[3];
+#endif
 
     return cursor;
 }
@@ -236,10 +252,18 @@ uint8_t CayenneLPP::addPercentage (uint8_t channel, float percent) {
 
     buffer[cursor++] = channel;
     buffer[cursor++] = LPP_PERCENTAGE;
+
+#if BYTE_ORDER == LITTLE_ENDIAN
+    buffer[cursor++] = ptr[3];
+    buffer[cursor++] = ptr[2];
+    buffer[cursor++] = ptr[1];
+    buffer[cursor++] = ptr[0];
+#elif
     buffer[cursor++] = ptr[0];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[2];
     buffer[cursor++] = ptr[3];
+#endif
 
     return cursor;
 }
