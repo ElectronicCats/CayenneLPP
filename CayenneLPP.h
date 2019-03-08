@@ -15,6 +15,7 @@
 #define LPP_DIGITAL_OUTPUT 1        // 1 byte
 #define LPP_ANALOG_INPUT 2          // 2 bytes, 0.01 signed
 #define LPP_ANALOG_OUTPUT 3         // 2 bytes, 0.01 signed
+#define LPP_GENERIC_SENSOR 100      // 4 bytes float IEEE754-2008
 #define LPP_LUMINOSITY 101          // 2 bytes, 1 lux unsigned
 #define LPP_PRESENCE 102            // 1 byte, 1
 #define LPP_TEMPERATURE 103         // 2 bytes, 0.1°C signed
@@ -30,6 +31,7 @@
 #define LPP_DIGITAL_OUTPUT_SIZE 3      // 1 byte
 #define LPP_ANALOG_INPUT_SIZE 4        // 2 bytes, 0.01 signed
 #define LPP_ANALOG_OUTPUT_SIZE 4       // 2 bytes, 0.01 signed
+#define LPP_GENERIC_SENSOR_SIZE 6      // 4 bytes float IEEE754-2008
 #define LPP_LUMINOSITY_SIZE 4          // 2 bytes, 1 lux unsigned
 #define LPP_PRESENCE_SIZE 3            // 1 byte, 1
 #define LPP_TEMPERATURE_SIZE 4         // 2 bytes, 0.1°C signed
@@ -58,6 +60,7 @@ public:
   uint8_t addAnalogOutput(uint8_t channel, float value);
 
   uint8_t addLuminosity(uint8_t channel, uint16_t lux);
+  uint8_t addGenericValue (uint8_t channel, float value);
   uint8_t addPresence(uint8_t channel, uint8_t value);
   uint8_t addTemperature(uint8_t channel, float celsius);
   uint8_t addRelativeHumidity(uint8_t channel, float rh);

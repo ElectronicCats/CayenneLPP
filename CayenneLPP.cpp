@@ -111,6 +111,24 @@ uint8_t CayenneLPP::addLuminosity(uint8_t channel, uint16_t lux)
   return cursor;
 }
 
+uint8_t addGenericValue (uint8_t channel, float value) {
+    if ((cursor + LPP_GENERIC_SENSOR_SIZE) > maxsize)
+    {
+        return 0;
+    }
+    float val = value;
+    uint8_t *ptr = (uint8_t *)&val;
+
+    buffer[cursor++] = channel;
+    buffer[cursor++] = LPP_GENERIC_SENSOR;
+    buffer[cursor++] = ptr[0];
+    buffer[cursor++] = ptr[1];
+    buffer[cursor++] = ptr[2];
+    buffer[cursor++] = ptr[3];
+
+    return cursor;
+}
+
 uint8_t CayenneLPP::addPresence(uint8_t channel, uint8_t value)
 {
   if ((cursor + LPP_PRESENCE_SIZE) > maxsize)
