@@ -23,6 +23,7 @@
 #define LPP_ACCELEROMETER 113       // 2 bytes per axis, 0.001G
 #define LPP_BAROMETRIC_PRESSURE 115 // 2 bytes 0.1 hPa Unsigned
 #define LPP_VOLTAGE 116             // 4 bytes float IEEE754-2008
+#define LPP_PERCENTAGE 120          // 4 bytes float IEEE754-2008
 #define LPP_UNIXTIME 133            // 4 bytes, unsigned uint_32_t
 #define LPP_GYROMETER 134           // 2 bytes per axis, 0.01 °/s
 #define LPP_GPS 136                 // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01 meter
@@ -40,6 +41,7 @@
 #define LPP_ACCELEROMETER_SIZE 8       // 2 bytes per axis, 0.001G
 #define LPP_BAROMETRIC_PRESSURE_SIZE 4 // 2 bytes 0.1 hPa Unsigned
 #define LPP_VOLTAGE_SIZE 6             // 4 bytes float IEEE754-2008
+#define LPP_PERCENTAGE_SIZE 6          // 4 bytes float IEEE754-2008
 #define LPP_UNIXTIME_SIZE 6            // 4 bytes, unsigned uint_32_t
 #define LPP_GYROMETER_SIZE 8           // 2 bytes per axis, 0.01 °/s
 #define LPP_GPS_SIZE 11                // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01 meter
@@ -69,6 +71,7 @@ public:
   uint8_t addAccelerometer(uint8_t channel, float x, float y, float z);
   uint8_t addBarometricPressure(uint8_t channel, float hpa);
   uint8_t addVoltage(uint8_t channel, float voltage);
+  uint8_t addPercentage(uint8_t channel, float percent);
   uint8_t addUnixTime(uint8_t channel, uint32_t unixtime);
   uint8_t addGyrometer(uint8_t channel, float x, float y, float z);
   uint8_t addGPS(uint8_t channel, float latitude, float longitude, float meters);

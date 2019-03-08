@@ -226,6 +226,24 @@ uint8_t addVoltage (uint8_t channel, float voltage) {
     return cursor;
 }
 
+uint8_t addPercentage (uint8_t channel, float percent) {
+    if ((cursor + LPP_PERCENTAGE_SIZE) > maxsize)
+    {
+        return 0;
+    }
+    float val = percent;
+    uint8_t *ptr = (uint8_t *)&val;
+
+    buffer[cursor++] = channel;
+    buffer[cursor++] = LPP_PERCENTAGE;
+    buffer[cursor++] = ptr[0];
+    buffer[cursor++] = ptr[1];
+    buffer[cursor++] = ptr[2];
+    buffer[cursor++] = ptr[3];
+
+    return cursor;
+}
+
 uint8_t CayenneLPP::addUnixTime(uint8_t channel, uint32_t unixtime)
 {
   if ((cursor + LPP_UNIXTIME_SIZE) > maxsize)
