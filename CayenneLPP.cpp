@@ -208,6 +208,24 @@ uint8_t CayenneLPP::addBarometricPressure(uint8_t channel, float hpa)
   return cursor;
 }
 
+uint8_t addVoltage (uint8_t channel, float voltage) {
+    if ((cursor + LPP_VOLTAGE_SIZE) > maxsize)
+    {
+        return 0;
+    }
+    float val = voltage;
+    uint8_t *ptr = (uint8_t *)&val;
+
+    buffer[cursor++] = channel;
+    buffer[cursor++] = LPP_VOLTAGE;
+    buffer[cursor++] = ptr[0];
+    buffer[cursor++] = ptr[1];
+    buffer[cursor++] = ptr[2];
+    buffer[cursor++] = ptr[3];
+
+    return cursor;
+}
+
 uint8_t CayenneLPP::addUnixTime(uint8_t channel, uint32_t unixtime)
 {
   if ((cursor + LPP_UNIXTIME_SIZE) > maxsize)
