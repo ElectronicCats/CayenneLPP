@@ -24,11 +24,14 @@ addAnalogInput	KEYWORD2
 addAnalogOutput	KEYWORD2
 
 addLuminosity	KEYWORD2
+addGenericValue	KEYWORD2
 addPresence	KEYWORD2
 addTemperature	KEYWORD2
 addRelativeHumidity	KEYWORD2
 addAccelerometer	KEYWORD2
 addBarometricPressure	KEYWORD2
+addVoltage	KEYWORD2
+addPercentage	KEYWORD2
 addUnixTime	KEYWORD2
 addGyrometer	KEYWORD2
 addGPS	KEYWORD2
