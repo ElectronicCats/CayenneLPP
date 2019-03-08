@@ -111,7 +111,7 @@ uint8_t CayenneLPP::addLuminosity(uint8_t channel, uint16_t lux)
   return cursor;
 }
 
-uint8_t addGenericValue (uint8_t channel, float value) {
+uint8_t CayenneLPP::addGenericValue (uint8_t channel, float value) {
     if ((cursor + LPP_GENERIC_SENSOR_SIZE) > maxsize)
     {
         return 0;
@@ -208,7 +208,7 @@ uint8_t CayenneLPP::addBarometricPressure(uint8_t channel, float hpa)
   return cursor;
 }
 
-uint8_t addVoltage (uint8_t channel, float voltage) {
+uint8_t CayenneLPP::addVoltage (uint8_t channel, float voltage) {
     if ((cursor + LPP_VOLTAGE_SIZE) > maxsize)
     {
         return 0;
@@ -226,7 +226,7 @@ uint8_t addVoltage (uint8_t channel, float voltage) {
     return cursor;
 }
 
-uint8_t addPercentage (uint8_t channel, float percent) {
+uint8_t CayenneLPP::addPercentage (uint8_t channel, float percent) {
     if ((cursor + LPP_PERCENTAGE_SIZE) > maxsize)
     {
         return 0;
