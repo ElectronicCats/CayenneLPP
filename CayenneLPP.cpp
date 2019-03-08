@@ -127,7 +127,7 @@ uint8_t CayenneLPP::addGenericValue (uint8_t channel, float value) {
     buffer[cursor++] = ptr[2];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[0];
-#elif
+#else
     buffer[cursor++] = ptr[0];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[2];
@@ -232,7 +232,7 @@ uint8_t CayenneLPP::addVoltage (uint8_t channel, float voltage) {
     buffer[cursor++] = ptr[2];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[0];
-#elif
+#else
     buffer[cursor++] = ptr[0];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[2];
@@ -258,7 +258,7 @@ uint8_t CayenneLPP::addPercentage (uint8_t channel, float percent) {
     buffer[cursor++] = ptr[2];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[0];
-#elif
+#else
     buffer[cursor++] = ptr[0];
     buffer[cursor++] = ptr[1];
     buffer[cursor++] = ptr[2];
