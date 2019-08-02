@@ -5,30 +5,30 @@
 
 #include "CayenneLPP.h"
 
-CayenneLPP::CayenneLPP(uint8_t size) : maxsize(size) {
-  buffer = (uint8_t *)malloc(size);
-  cursor = 0;
+CayenneLPP::CayenneLPP(uint8_t size) : _maxsize(size) {
+  _buffer = (uint8_t *)malloc(size);
+  _cursor = 0;
 }
 
 CayenneLPP::~CayenneLPP(void) {
-  free(buffer);
+  free(_buffer);
 }
 
 void CayenneLPP::reset(void) {
-  cursor = 0;
+  _cursor = 0;
 }
 
 uint8_t CayenneLPP::getSize(void) {
-  return cursor;
+  return _cursor;
 }
 
 uint8_t *CayenneLPP::getBuffer(void) {
-  return buffer;
+  return _buffer;
 }
 
 uint8_t CayenneLPP::copy(uint8_t *dst) {
-  memcpy(dst, buffer, cursor);
-  return cursor;
+  memcpy(dst, _buffer, _cursor);
+  return _cursor;
 }
 
 // ----------------------------------------------------------------------------
@@ -36,7 +36,7 @@ uint8_t CayenneLPP::copy(uint8_t *dst) {
 template <typename T> uint8_t CayenneLPP::addValue(uint8_t channel, uint8_t type, T value, uint32_t multiplier, uint8_t size, bool is_signed) {
 
   // check buffer overflow
-  if ((cursor + size + 2) > maxsize) return 0;
+  if ((_cursor + size + 2) > _maxsize) return 0;
 
   // check sign  
   bool sign = value < 0;
@@ -53,18 +53,18 @@ template <typename T> uint8_t CayenneLPP::addValue(uint8_t channel, uint8_t type
   }
 
   // header
-  buffer[cursor++] = channel;
-  buffer[cursor++] = type;
+  _buffer[_cursor++] = channel;
+  _buffer[_cursor++] = type;
   
   // add bytes (MSB first)
   for (uint8_t i=1; i<=size; i++) {
-    buffer[cursor + size - i] = (v & 0xFF);
+    _buffer[_cursor + size - i] = (v & 0xFF);
     v >>= 8;
   }
 
-  // update & return cursor
-  cursor += size;
-  return cursor;
+  // update & return _cursor
+  _cursor += size;
+  return _cursor;
 
 }
 
@@ -156,66 +156,66 @@ uint8_t CayenneLPP::addSwitch(uint8_t channel, uint8_t value) {
 
 uint8_t CayenneLPP::addAccelerometer(uint8_t channel, float x, float y, float z) {
   
-  if ((cursor + LPP_ACCELEROMETER_SIZE + 2) > maxsize) return 0;
+  if ((_cursor + LPP_ACCELEROMETER_SIZE + 2) > _maxsize) return 0;
 
   int16_t vx = x * LPP_ACCELEROMETER_MULT;
   int16_t vy = y * LPP_ACCELEROMETER_MULT;
   int16_t vz = z * LPP_ACCELEROMETER_MULT;
 
-  buffer[cursor++] = channel;
-  buffer[cursor++] = LPP_ACCELEROMETER;
-  buffer[cursor++] = vx >> 8;
-  buffer[cursor++] = vx;
-  buffer[cursor++] = vy >> 8;
-  buffer[cursor++] = vy;
-  buffer[cursor++] = vz >> 8;
-  buffer[cursor++] = vz;
+  _buffer[_cursor++] = channel;
+  _buffer[_cursor++] = LPP_ACCELEROMETER;
+  _buffer[_cursor++] = vx >> 8;
+  _buffer[_cursor++] = vx;
+  _buffer[_cursor++] = vy >> 8;
+  _buffer[_cursor++] = vy;
+  _buffer[_cursor++] = vz >> 8;
+  _buffer[_cursor++] = vz;
 
-  return cursor;
+  return _cursor;
 
 }
 
 uint8_t CayenneLPP::addGyrometer(uint8_t channel, float x, float y, float z) {
 
-  if ((cursor + LPP_GYROMETER_SIZE + 2) > maxsize) return 0;
+  if ((_cursor + LPP_GYROMETER_SIZE + 2) > _maxsize) return 0;
 
   int16_t vx = x * LPP_GYROMETER_MULT;
   int16_t vy = y * LPP_GYROMETER_MULT;
   int16_t vz = z * LPP_GYROMETER_MULT;
 
-  buffer[cursor++] = channel;
-  buffer[cursor++] = LPP_GYROMETER;
-  buffer[cursor++] = vx >> 8;
-  buffer[cursor++] = vx;
-  buffer[cursor++] = vy >> 8;
-  buffer[cursor++] = vy;
-  buffer[cursor++] = vz >> 8;
-  buffer[cursor++] = vz;
+  _buffer[_cursor++] = channel;
+  _buffer[_cursor++] = LPP_GYROMETER;
+  _buffer[_cursor++] = vx >> 8;
+  _buffer[_cursor++] = vx;
+  _buffer[_cursor++] = vy >> 8;
+  _buffer[_cursor++] = vy;
+  _buffer[_cursor++] = vz >> 8;
+  _buffer[_cursor++] = vz;
 
-  return cursor;
+  return _cursor;
 
 }
 
 uint8_t CayenneLPP::addGPS(uint8_t channel, float latitude, float longitude, float altitude) {
   
-  if ((cursor + LPP_GPS_SIZE + 2) > maxsize) return 0;
+  if ((_cursor + LPP_GPS_SIZE + 2) > _maxsize) return 0;
 
   int32_t lat = latitude * LPP_GPS_LAT_LON_MULT;
   int32_t lon = longitude * LPP_GPS_LAT_LON_MULT;
   int32_t alt = altitude * LPP_GPS_ALT_MULT;
 
-  buffer[cursor++] = channel;
-  buffer[cursor++] = LPP_GPS;
-  buffer[cursor++] = lat >> 16;
-  buffer[cursor++] = lat >> 8;
-  buffer[cursor++] = lat;
-  buffer[cursor++] = lon >> 16;
-  buffer[cursor++] = lon >> 8;
-  buffer[cursor++] = lon;
-  buffer[cursor++] = alt >> 16;
-  buffer[cursor++] = alt >> 8;
-  buffer[cursor++] = alt;
+  _buffer[_cursor++] = channel;
+  _buffer[_cursor++] = LPP_GPS;
+  _buffer[_cursor++] = lat >> 16;
+  _buffer[_cursor++] = lat >> 8;
+  _buffer[_cursor++] = lat;
+  _buffer[_cursor++] = lon >> 16;
+  _buffer[_cursor++] = lon >> 8;
+  _buffer[_cursor++] = lon;
+  _buffer[_cursor++] = alt >> 16;
+  _buffer[_cursor++] = alt >> 8;
+  _buffer[_cursor++] = alt;
 
-  return cursor;
+  return _cursor;
 
 }

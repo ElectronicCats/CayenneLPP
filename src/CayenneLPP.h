@@ -132,9 +132,9 @@ protected:
 
   template <typename T> uint8_t addValue(uint8_t channel, uint8_t type, T value, uint32_t multiplier, uint8_t size, bool is_signed = false);
   
-  uint8_t *buffer;
-  uint8_t maxsize;
-  uint8_t cursor;
+  uint8_t * _buffer;
+  uint8_t _maxsize;
+  uint8_t _cursor;
 
 };
 
