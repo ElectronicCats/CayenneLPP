@@ -109,7 +109,7 @@ Example output:
 
 ### Method: `getTypeName`
 
-Returns a pointer to a cstring containing the name of the requested type.
+Returns a pointer to a C-string containing the name of the requested type.
 
 ```c
 const char * getTypeName(uint8_t type);
@@ -152,7 +152,6 @@ uint8_t addSwitch(uint8_t channel, uint32_t value); // 0 or 1
 
 * [Cayenne Low Power Payload](https://mydevices.com/cayenne/docs/#lora-cayenne-low-power-payload)
 * [IPSO data types](http://openmobilealliance.org/wp/OMNA/LwM2M/LwM2MRegistry.html#extlabel)
-* [API](API.md)
 
 ## License
 
