@@ -14,6 +14,10 @@ It supports multichannel data, which means that you can use it on multisensor de
 
 This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people. In addition it includes fully backwards compatibly decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance.
 
+## Dependencies
+
+When using the decoder, you must install the [ArduinoJson 6.X](https://arduinojson.org/) library. You can find it in both the Arduino IDE and PlatformIO library managers.
+
 ## API Reference
 
 The `CayenneLPP` class enables Arduino devices to encode data with the Cayenne Lower Power Protocol (LPP). [Read more about Cayenne LPP](https://mydevices.com/cayenne/docs/#lora-cayenne-low-power-payload)
