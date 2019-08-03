@@ -44,6 +44,9 @@ addEnergy KEYWORD2
 addDirection KEYWORD2
 addSwitch KEYWORD2
 
+getTypeName KEYWORD2
+decode KEYWORD2
+
 #######################################
 # Constants (LITERAL1)
 #######################################

@@ -78,6 +78,39 @@ Copies the internal buffer to a specified buffer and returns the copied size.
 uint8_t copy(uint8_t *buffer);
 ```
 
+### Method: `decode`
+
+Decodes a byte array into a JsonArray (requires ArduinoJson library). The result is an array of objects, each one containing channel, type, type name and value. The value can be a scalar or an object (for accelerometer, gyroscope and GPS data). The method call returns the number of decoded fields or 0 if error.
+
+```c
+uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray& root);
+```
+
+Example output:
+
+```
+[
+  {
+    "channel": 1,
+    "type": 136,
+    "name": "gps",
+    "value": {
+      "latitude": 42.3518,
+      "longitude": -87.9094,
+      "altitude": 10
+    }
+  }
+]
+```
+
+### Method: `getTypeName`
+
+Returns a pointer to a cstring containing the name of the requested type.
+
+```c
+const char * getTypeName(uint8_t type);
+```
+
 ### Methods: `add...`
 
 Add data to the buffer. The `channel` parameter acts as a key for the data field. The data fields you send are dynamic; you can selectively send data as long as the channel matches.
