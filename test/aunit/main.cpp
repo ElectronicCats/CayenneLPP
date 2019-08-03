@@ -114,43 +114,6 @@ class DecoderTest: public TestOnce {
 
 };
 
-class DecoderCallbackTest: public TestOnce {
-
-    protected:
-
-        virtual void setup() override {
-            lpp = new CayenneLPP(10);
-            lpp->reset();
-        }
-
-        virtual void teardown() override {
-            delete lpp;
-        }
-
-        virtual void compare(uint8_t * buffer, uint8_t len, uint8_t fields, float value = 0, float precission = 0) {
-            
-            #if LPP_TEST_VERBOSE
-                PC_SERIAL.println();
-            #endif
-
-            assertEqual(fields, lpp->decode(buffer, len, [](uint8_t channel, uint8_t type, uint8_t index, float result){
-
-                #if LPP_TEST_VERBOSE
-                    char buff[64];
-                    snprintf(buff, sizeof(buff), "channel %d, type %d, index %d, value ", channel, type, index);
-                    PC_SERIAL.print(buff);
-                    PC_SERIAL.println(result);
-                #endif
-
-            }));
-
-        }
-
-        CayenneLPP * lpp;
-        
-
-};
-
 // -----------------------------------------------------------------------------
 // Tests
 // -----------------------------------------------------------------------------

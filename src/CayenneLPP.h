@@ -128,8 +128,7 @@ public:
 
   const char * getTypeName(uint8_t type);
 
-  uint8_t decode(uint8_t *buffer, uint8_t len, JsonArray& root);
-  uint8_t decode(uint8_t *buffer, uint8_t len, void (*)(uint8_t channel, uint8_t type,  uint8_t index, float value));
+  uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray& root);
 
 protected:
 
