@@ -7,6 +7,7 @@
 #define CAYENNE_LPP_H
 
 #include <Arduino.h>
+#include <ArduinoJson.h>
 
 #define LPP_DIGITAL_INPUT               0     // 1 byte
 #define LPP_DIGITAL_OUTPUT              1     // 1 byte
@@ -125,10 +126,20 @@ public:
   uint8_t addDirection(uint8_t channel, float value);
   uint8_t addSwitch(uint8_t channel, uint32_t value);
 
+  template <typename T> uint8_t addField(uint8_t type, uint8_t channel, T value);
+  const char * getTypeName(uint8_t type);
+
+  uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray& root);
+
 protected:
 
-  template <typename T> uint8_t addValue(uint8_t channel, uint8_t type, T value, uint32_t multiplier, uint8_t size, bool is_signed = false);
-  
+  bool isType(uint8_t type);
+  uint8_t getTypeSize(uint8_t type);
+  uint32_t getTypeMultiplier(uint8_t type);
+  bool getTypeSigned(uint8_t type);
+
+  float getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, bool is_signed);
+
   uint8_t * _buffer;
   uint8_t _maxsize;
   uint8_t _cursor;

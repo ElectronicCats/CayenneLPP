@@ -5,6 +5,8 @@
 
 #include "CayenneLPP.h"
 
+// ----------------------------------------------------------------------------
+
 CayenneLPP::CayenneLPP(uint8_t size) : _maxsize(size) {
   _buffer = (uint8_t *)malloc(size);
   _cursor = 0;
@@ -33,7 +35,137 @@ uint8_t CayenneLPP::copy(uint8_t *dst) {
 
 // ----------------------------------------------------------------------------
 
-template <typename T> uint8_t CayenneLPP::addValue(uint8_t channel, uint8_t type, T value, uint32_t multiplier, uint8_t size, bool is_signed) {
+bool CayenneLPP::isType(uint8_t type) {
+  if (LPP_DIGITAL_INPUT == type) return true;
+  if (LPP_DIGITAL_OUTPUT == type) return true;
+  if (LPP_ANALOG_INPUT == type) return true;
+  if (LPP_ANALOG_OUTPUT == type) return true;
+  if (LPP_GENERIC_SENSOR == type) return true;
+  if (LPP_LUMINOSITY == type) return true;
+  if (LPP_PRESENCE == type) return true;
+  if (LPP_TEMPERATURE == type) return true;
+  if (LPP_RELATIVE_HUMIDITY == type) return true;
+  if (LPP_ACCELEROMETER == type) return true;
+  if (LPP_BAROMETRIC_PRESSURE == type) return true;
+  if (LPP_VOLTAGE == type) return true;
+  if (LPP_CURRENT == type) return true;
+  if (LPP_FREQUENCY == type) return true;
+  if (LPP_PERCENTAGE == type) return true;
+  if (LPP_ALTITUDE == type) return true;
+  if (LPP_POWER == type) return true;
+  if (LPP_DISTANCE == type) return true;
+  if (LPP_ENERGY == type) return true;
+  if (LPP_DIRECTION == type) return true;
+  if (LPP_UNIXTIME == type) return true;
+  if (LPP_GYROMETER == type) return true;
+  if (LPP_GPS == type) return true;
+  if (LPP_SWITCH == type) return true;
+  return false;
+}
+
+const char * CayenneLPP::getTypeName(uint8_t type) {
+  if (LPP_DIGITAL_INPUT == type) return "digital_input";
+  if (LPP_DIGITAL_OUTPUT == type) return "digital_output";
+  if (LPP_ANALOG_INPUT == type) return "analog_input";
+  if (LPP_ANALOG_OUTPUT == type) return "analog_output";
+  if (LPP_GENERIC_SENSOR == type) return "generic";
+  if (LPP_LUMINOSITY == type) return "luminosity";
+  if (LPP_PRESENCE == type) return "presence";
+  if (LPP_TEMPERATURE == type) return "temperature";
+  if (LPP_RELATIVE_HUMIDITY == type) return "humidity";
+  if (LPP_ACCELEROMETER == type) return "accelerometer";
+  if (LPP_BAROMETRIC_PRESSURE == type) return "pressure";
+  if (LPP_VOLTAGE == type) return "voltage";
+  if (LPP_CURRENT == type) return "current";
+  if (LPP_FREQUENCY == type) return "frequency";
+  if (LPP_PERCENTAGE == type) return "percentage";
+  if (LPP_ALTITUDE == type) return "altitude";
+  if (LPP_POWER == type) return "power";
+  if (LPP_DISTANCE == type) return "distance";
+  if (LPP_ENERGY == type) return "energy";
+  if (LPP_DIRECTION == type) return "direction";
+  if (LPP_UNIXTIME == type) return "time";
+  if (LPP_GYROMETER == type) return "gyrometer";
+  if (LPP_GPS == type) return "gps";
+  if (LPP_SWITCH == type) return "switch";
+  return 0;
+}
+
+uint8_t CayenneLPP::getTypeSize(uint8_t type) {
+  if (LPP_DIGITAL_INPUT == type) return LPP_DIGITAL_INPUT_SIZE;
+  if (LPP_DIGITAL_OUTPUT == type) return LPP_DIGITAL_OUTPUT_SIZE;
+  if (LPP_ANALOG_INPUT == type) return LPP_ANALOG_INPUT_SIZE;
+  if (LPP_ANALOG_OUTPUT == type) return LPP_ANALOG_OUTPUT_SIZE;
+  if (LPP_GENERIC_SENSOR == type) return LPP_GENERIC_SENSOR_SIZE;
+  if (LPP_LUMINOSITY == type) return LPP_LUMINOSITY_SIZE;
+  if (LPP_PRESENCE == type) return LPP_PRESENCE_SIZE;
+  if (LPP_TEMPERATURE == type) return LPP_TEMPERATURE_SIZE;
+  if (LPP_RELATIVE_HUMIDITY == type) return LPP_RELATIVE_HUMIDITY_SIZE;
+  if (LPP_ACCELEROMETER == type) return LPP_ACCELEROMETER_SIZE;
+  if (LPP_BAROMETRIC_PRESSURE == type) return LPP_BAROMETRIC_PRESSURE_SIZE;
+  if (LPP_VOLTAGE == type) return LPP_VOLTAGE_SIZE;
+  if (LPP_CURRENT == type) return LPP_CURRENT_SIZE;
+  if (LPP_FREQUENCY == type) return LPP_FREQUENCY_SIZE;
+  if (LPP_PERCENTAGE == type) return LPP_PERCENTAGE_SIZE;
+  if (LPP_ALTITUDE == type) return LPP_ALTITUDE_SIZE;
+  if (LPP_POWER == type) return LPP_POWER_SIZE;
+  if (LPP_DISTANCE == type) return LPP_DISTANCE_SIZE;
+  if (LPP_ENERGY == type) return LPP_ENERGY_SIZE;
+  if (LPP_DIRECTION == type) return LPP_DIRECTION_SIZE;
+  if (LPP_UNIXTIME == type) return LPP_UNIXTIME_SIZE;
+  if (LPP_GYROMETER == type) return LPP_GYROMETER_SIZE;
+  if (LPP_GPS == type) return LPP_GPS_SIZE;
+  if (LPP_SWITCH == type) return LPP_SWITCH_SIZE;
+  return 0;
+}
+
+uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
+  if (LPP_DIGITAL_INPUT == type) return LPP_DIGITAL_INPUT_MULT;
+  if (LPP_DIGITAL_OUTPUT == type) return LPP_DIGITAL_OUTPUT_MULT;
+  if (LPP_ANALOG_INPUT == type) return LPP_ANALOG_INPUT_MULT;
+  if (LPP_ANALOG_OUTPUT == type) return LPP_ANALOG_OUTPUT_MULT;
+  if (LPP_GENERIC_SENSOR == type) return LPP_GENERIC_SENSOR_MULT;
+  if (LPP_LUMINOSITY == type) return LPP_LUMINOSITY_MULT;
+  if (LPP_PRESENCE == type) return LPP_PRESENCE_MULT;
+  if (LPP_TEMPERATURE == type) return LPP_TEMPERATURE_MULT;
+  if (LPP_RELATIVE_HUMIDITY == type) return LPP_RELATIVE_HUMIDITY_MULT;
+  if (LPP_BAROMETRIC_PRESSURE == type) return LPP_BAROMETRIC_PRESSURE_MULT;
+  if (LPP_VOLTAGE == type) return LPP_VOLTAGE_MULT;
+  if (LPP_CURRENT == type) return LPP_CURRENT_MULT;
+  if (LPP_FREQUENCY == type) return LPP_FREQUENCY_MULT;
+  if (LPP_PERCENTAGE == type) return LPP_PERCENTAGE_MULT;
+  if (LPP_ALTITUDE == type) return LPP_ALTITUDE_MULT;
+  if (LPP_POWER == type) return LPP_POWER_MULT;
+  if (LPP_DISTANCE == type) return LPP_DISTANCE_MULT;
+  if (LPP_ENERGY == type) return LPP_ENERGY_MULT;
+  if (LPP_DIRECTION == type) return LPP_DIRECTION_MULT;
+  if (LPP_UNIXTIME == type) return LPP_UNIXTIME_MULT;
+  if (LPP_SWITCH == type) return LPP_SWITCH_MULT;
+  return 0;
+}
+
+bool CayenneLPP::getTypeSigned(uint8_t type) {
+  if (LPP_ANALOG_INPUT == type) return true;
+  if (LPP_ANALOG_OUTPUT == type) return true;
+  if (LPP_TEMPERATURE == type) return true;
+  if (LPP_ACCELEROMETER == type) return true;
+  if (LPP_ALTITUDE == type) return true;
+  if (LPP_GYROMETER == type) return true;
+  if (LPP_GPS == type) return true;
+  return false;
+}
+
+// ----------------------------------------------------------------------------
+
+template <typename T> uint8_t CayenneLPP::addField(uint8_t type, uint8_t channel, T value) {
+
+  // Check type
+  if (!isType(type)) return 0;
+
+  // Type definition
+  uint8_t size = getTypeSize(type);
+  uint32_t multiplier = getTypeMultiplier(type);
+  bool is_signed = getTypeSigned(type);
 
   // check buffer overflow
   if ((_cursor + size + 2) > _maxsize) return 0;
@@ -55,7 +187,7 @@ template <typename T> uint8_t CayenneLPP::addValue(uint8_t channel, uint8_t type
   // header
   _buffer[_cursor++] = channel;
   _buffer[_cursor++] = type;
-  
+
   // add bytes (MSB first)
   for (uint8_t i=1; i<=size; i++) {
     _buffer[_cursor + size - i] = (v & 0xFF);
@@ -68,90 +200,88 @@ template <typename T> uint8_t CayenneLPP::addValue(uint8_t channel, uint8_t type
 
 }
 
-// ----------------------------------------------------------------------------
-
 uint8_t CayenneLPP::addDigitalInput(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_DIGITAL_INPUT, value, LPP_DIGITAL_INPUT_MULT, LPP_DIGITAL_INPUT_SIZE);
+  return addField(LPP_DIGITAL_INPUT, channel, value);
 }
 
 uint8_t CayenneLPP::addDigitalOutput(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_DIGITAL_OUTPUT, value, LPP_DIGITAL_OUTPUT_MULT, LPP_DIGITAL_OUTPUT_SIZE);
+  return addField(LPP_DIGITAL_OUTPUT, channel, value);
 }
 
 uint8_t CayenneLPP::addAnalogInput(uint8_t channel, float value) {
-  return addValue(channel, LPP_ANALOG_INPUT, value, LPP_ANALOG_INPUT_MULT, LPP_ANALOG_INPUT_SIZE, true);
+  return addField(LPP_ANALOG_INPUT, channel, value);
 }
 
 uint8_t CayenneLPP::addAnalogOutput(uint8_t channel, float value) {
-  return addValue(channel, LPP_ANALOG_OUTPUT, value, LPP_ANALOG_OUTPUT_MULT, LPP_ANALOG_OUTPUT_SIZE, true);
+  return addField(LPP_ANALOG_OUTPUT, channel, value);
 }
 
 uint8_t CayenneLPP::addGenericSensor(uint8_t channel, float value)  {
-  return addValue(channel, LPP_GENERIC_SENSOR, value, LPP_GENERIC_SENSOR_MULT, LPP_GENERIC_SENSOR_SIZE);
+  return addField(LPP_GENERIC_SENSOR, channel, value);
 }
 
 uint8_t CayenneLPP::addLuminosity(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_LUMINOSITY, value, LPP_LUMINOSITY_MULT, LPP_LUMINOSITY_SIZE);
+  return addField(LPP_LUMINOSITY, channel, value);
 }
 
 uint8_t CayenneLPP::addPresence(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_PRESENCE, value, LPP_PRESENCE_MULT, LPP_PRESENCE_SIZE);
+  return addField(LPP_PRESENCE, channel, value);
 }
 
 uint8_t CayenneLPP::addTemperature(uint8_t channel, float value) {
-  return addValue(channel, LPP_TEMPERATURE, value, LPP_TEMPERATURE_MULT, LPP_TEMPERATURE_SIZE, true);
+  return addField(LPP_TEMPERATURE, channel, value);
 }
 
 uint8_t CayenneLPP::addRelativeHumidity(uint8_t channel, float value) {
-  return addValue(channel, LPP_RELATIVE_HUMIDITY, value, LPP_RELATIVE_HUMIDITY_MULT, LPP_RELATIVE_HUMIDITY_SIZE);
+  return addField(LPP_RELATIVE_HUMIDITY, channel, value);
 }
 
 uint8_t CayenneLPP::addVoltage(uint8_t channel, float value) {
-  return addValue(channel, LPP_VOLTAGE, value, LPP_VOLTAGE_MULT, LPP_VOLTAGE_SIZE);
+  return addField(LPP_VOLTAGE, channel, value);
 }
 
 uint8_t CayenneLPP::addCurrent(uint8_t channel, float value) {
-  return addValue(channel, LPP_CURRENT, value, LPP_CURRENT_MULT, LPP_CURRENT_SIZE);
+  return addField(LPP_CURRENT, channel, value);
 }
 
 uint8_t CayenneLPP::addFrequency(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_FREQUENCY, value, LPP_FREQUENCY_MULT, LPP_FREQUENCY_SIZE);
+  return addField(LPP_FREQUENCY, channel, value);
 }
 
 uint8_t CayenneLPP::addPercentage(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_PERCENTAGE, value, LPP_PERCENTAGE_MULT, LPP_PERCENTAGE_SIZE);
+  return addField(LPP_PERCENTAGE, channel, value);
 }
 
 uint8_t CayenneLPP::addAltitude(uint8_t channel, float value) {
-  return addValue(channel, LPP_ALTITUDE, value, LPP_ALTITUDE_MULT, LPP_ALTITUDE_SIZE, true);
+  return addField(LPP_ALTITUDE, channel, value);
 }
 
 uint8_t CayenneLPP::addPower(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_POWER, value, LPP_POWER_MULT, LPP_POWER_SIZE);
+  return addField(LPP_POWER, channel, value);
 }
 
 uint8_t CayenneLPP::addDistance(uint8_t channel, float value) {
-  return addValue(channel, LPP_DISTANCE, value, LPP_DISTANCE_MULT, LPP_DISTANCE_SIZE);
+  return addField(LPP_DISTANCE, channel, value);
 }
 
 uint8_t CayenneLPP::addEnergy(uint8_t channel, float value) {
-  return addValue(channel, LPP_ENERGY, value, LPP_ENERGY_MULT, LPP_ENERGY_SIZE);
+  return addField(LPP_ENERGY, channel, value);
 }
 
 uint8_t CayenneLPP::addBarometricPressure(uint8_t channel, float value) {
-  return addValue(channel, LPP_BAROMETRIC_PRESSURE, value, LPP_BAROMETRIC_PRESSURE_MULT, LPP_BAROMETRIC_PRESSURE_SIZE);
+  return addField(LPP_BAROMETRIC_PRESSURE, channel, value);
 }
 
 uint8_t CayenneLPP::addUnixTime(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_UNIXTIME, value, LPP_UNIXTIME_MULT, LPP_UNIXTIME_SIZE);
+  return addField(LPP_UNIXTIME, channel, value);
 }
 
 uint8_t CayenneLPP::addDirection(uint8_t channel, float value) {
-  return addValue(channel, LPP_DIRECTION, value, LPP_DIRECTION_MULT, LPP_DIRECTION_SIZE);
+  return addField(LPP_DIRECTION, channel, value);
 }
 
 uint8_t CayenneLPP::addSwitch(uint8_t channel, uint32_t value) {
-  return addValue(channel, LPP_SWITCH, value, LPP_SWITCH_MULT, LPP_SWITCH_SIZE);
+  return addField(LPP_SWITCH, channel, value);
 }
 
 uint8_t CayenneLPP::addAccelerometer(uint8_t channel, float x, float y, float z) {
@@ -217,5 +347,86 @@ uint8_t CayenneLPP::addGPS(uint8_t channel, float latitude, float longitude, flo
   _buffer[_cursor++] = alt;
 
   return _cursor;
+
+}
+
+// ----------------------------------------------------------------------------
+
+float CayenneLPP::getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, bool is_signed) {
+
+    uint32_t value = 0;
+    for (uint8_t i=0; i<size; i++) {
+      value = (value << 8) + buffer[i];
+    }
+
+    int sign = 1;
+    if (is_signed) {
+      uint32_t bit = 1ul << ((size * 8) - 1);
+      if ((value & bit) == bit) {
+        value = (bit << 1) - value;
+        sign = -1;
+      }
+    }
+
+    return sign * ((float) value / multiplier);
+
+}
+
+uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
+
+  uint8_t count = 0;
+  uint8_t index = 0;
+
+  while ((index + 2) < len) {
+
+    count++;
+
+    // Get channel #
+    uint8_t channel = buffer[index++];
+    
+    // Get data type
+    uint8_t type = buffer[index++];
+    if (!isType(type)) return 0;
+
+    // Type definition
+    uint8_t size = getTypeSize(type);
+    uint32_t multiplier = getTypeMultiplier(type);
+    bool is_signed = getTypeSigned(type);
+
+    // Check buffer size
+    if (index + size > len) return 0;
+
+    // Init object
+    JsonObject data = root.createNestedObject();
+    data["channel"] = channel;
+    data["type"] = type;
+    data["name"] = String(getTypeName(type));
+
+    // Parse types
+    if (LPP_ACCELEROMETER == type || LPP_GYROMETER == type) {
+
+      JsonObject object = data.createNestedObject("value");
+      object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
+      object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+
+    } else if (LPP_GPS == type) {
+
+      JsonObject object = data.createNestedObject("value");
+      object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
+      object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
+      object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
+
+    } else {
+
+      data["value"] = getValue(&buffer[index], size, multiplier, is_signed);
+
+    }
+
+    index += size;
+
+  }
+
+  return count;
 
 }
