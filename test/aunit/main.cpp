@@ -129,7 +129,9 @@ class DecoderCallbackTest: public TestOnce {
 
         virtual void compare(uint8_t * buffer, uint8_t len, uint8_t fields, float value = 0, float precission = 0) {
             
-            PC_SERIAL.println();
+            #if LPP_TEST_VERBOSE
+                PC_SERIAL.println();
+            #endif
 
             assertEqual(fields, lpp->decode(buffer, len, [](uint8_t channel, uint8_t type, uint8_t index, float result){
 
