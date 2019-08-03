@@ -105,9 +105,42 @@ class DecoderTest: public TestOnce {
                 PC_SERIAL.println();
             #endif
 
-            if (precission > 0) {
-                assertNear(value, root[0]["value"], precission);
-            }
+            if (precission > 0) assertNear(value, root[0]["value"], precission);
+
+        }
+
+        CayenneLPP * lpp;
+        
+
+};
+
+class DecoderCallbackTest: public TestOnce {
+
+    protected:
+
+        virtual void setup() override {
+            lpp = new CayenneLPP(10);
+            lpp->reset();
+        }
+
+        virtual void teardown() override {
+            delete lpp;
+        }
+
+        virtual void compare(uint8_t * buffer, uint8_t len, uint8_t fields, float value = 0, float precission = 0) {
+            
+            PC_SERIAL.println();
+
+            assertEqual(fields, lpp->decode(buffer, len, [](uint8_t channel, uint8_t type, uint8_t index, float result){
+
+                #if LPP_TEST_VERBOSE
+                    char buff[64];
+                    snprintf(buff, sizeof(buff), "channel %d, type %d, index %d, value ", channel, type, index);
+                    PC_SERIAL.print(buff);
+                    PC_SERIAL.println(result);
+                #endif
+
+            }));
 
         }
 

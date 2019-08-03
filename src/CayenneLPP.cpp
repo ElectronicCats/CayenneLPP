@@ -372,6 +372,57 @@ float CayenneLPP::getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, 
 
 }
 
+uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, void (*callback)(uint8_t channel, uint8_t type, uint8_t index, float value)) {
+
+  uint8_t count = 0;
+  uint8_t index = 0;
+
+  while ((index + 2) < len) {
+
+    count++;
+
+    // Get channel #
+    uint8_t channel = buffer[index++];
+    
+    // Get data type
+    uint8_t type = buffer[index++];
+    if (!isType(type)) return 0;
+
+    // Type definition
+    uint8_t size = getTypeSize(type);
+    uint32_t multiplier = getTypeMultiplier(type);
+    bool is_signed = getTypeSigned(type);
+
+    // Check buffer size
+    if (index + size > len) return 0;
+
+    // Parse types
+    if (LPP_ACCELEROMETER == type || LPP_GYROMETER == type) {
+
+      callback(channel, type, 0, getValue(&buffer[index], 2, multiplier, is_signed));
+      callback(channel, type, 1, getValue(&buffer[index+2], 2, multiplier, is_signed));
+      callback(channel, type, 2, getValue(&buffer[index+4], 2, multiplier, is_signed));
+
+    } else if (LPP_GPS == type) {
+
+      callback(channel, type, 0, getValue(&buffer[index], 3, 10000, is_signed));
+      callback(channel, type, 1, getValue(&buffer[index+3], 3, 10000, is_signed));
+      callback(channel, type, 2, getValue(&buffer[index+6], 3, 100, is_signed));
+
+    } else {
+
+      callback(channel, type, 0, getValue(&buffer[index], size, multiplier, is_signed));
+
+    }
+
+    index += size;
+
+  }
+
+  return count;
+
+}
+
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 
   uint8_t count = 0;
