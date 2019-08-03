@@ -98,13 +98,12 @@ public:
   uint8_t *getBuffer(void);
   uint8_t copy(uint8_t *buffer);
 
-  // Original LPPv1 data types
-  uint8_t addDigitalInput(uint8_t channel, uint8_t value);
-  uint8_t addDigitalOutput(uint8_t channel, uint8_t value);
+  uint8_t addDigitalInput(uint8_t channel, uint32_t value);
+  uint8_t addDigitalOutput(uint8_t channel, uint32_t value);
   uint8_t addAnalogInput(uint8_t channel, float value);
   uint8_t addAnalogOutput(uint8_t channel, float value);
-  uint8_t addLuminosity(uint8_t channel, uint16_t value);
-  uint8_t addPresence(uint8_t channel, uint8_t value);
+  uint8_t addLuminosity(uint8_t channel, uint32_t value);
+  uint8_t addPresence(uint8_t channel, uint32_t value);
   uint8_t addTemperature(uint8_t channel, float value);
   uint8_t addRelativeHumidity(uint8_t channel, float value);
   uint8_t addAccelerometer(uint8_t channel, float x, float y, float z);
@@ -112,21 +111,19 @@ public:
   uint8_t addGyrometer(uint8_t channel, float x, float y, float z);
   uint8_t addGPS(uint8_t channel, float latitude, float longitude, float altitude);
 
-  // Added by Electronic Cats
   uint8_t addUnixTime(uint8_t channel, uint32_t value);
 
-  // Added by Xose Pérez
   uint8_t addGenericSensor(uint8_t channel, float value);
   uint8_t addVoltage(uint8_t channel, float value);
   uint8_t addCurrent(uint8_t channel, float value);
   uint8_t addFrequency(uint8_t channel, uint32_t value);
-  uint8_t addPercentage(uint8_t channel, uint8_t value);
+  uint8_t addPercentage(uint8_t channel, uint32_t value);
   uint8_t addAltitude(uint8_t channel, float value);
-  uint8_t addPower(uint8_t channel, uint16_t value);
+  uint8_t addPower(uint8_t channel, uint32_t value);
   uint8_t addDistance(uint8_t channel, float value);
   uint8_t addEnergy(uint8_t channel, float value);
   uint8_t addDirection(uint8_t channel, float value);
-  uint8_t addSwitch(uint8_t channel, uint8_t value);
+  uint8_t addSwitch(uint8_t channel, uint32_t value);
 
 protected:
 

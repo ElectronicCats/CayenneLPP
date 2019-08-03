@@ -70,11 +70,11 @@ template <typename T> uint8_t CayenneLPP::addValue(uint8_t channel, uint8_t type
 
 // ----------------------------------------------------------------------------
 
-uint8_t CayenneLPP::addDigitalInput(uint8_t channel, uint8_t value) {
+uint8_t CayenneLPP::addDigitalInput(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_DIGITAL_INPUT, value, LPP_DIGITAL_INPUT_MULT, LPP_DIGITAL_INPUT_SIZE);
 }
 
-uint8_t CayenneLPP::addDigitalOutput(uint8_t channel, uint8_t value) {
+uint8_t CayenneLPP::addDigitalOutput(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_DIGITAL_OUTPUT, value, LPP_DIGITAL_OUTPUT_MULT, LPP_DIGITAL_OUTPUT_SIZE);
 }
 
@@ -90,11 +90,11 @@ uint8_t CayenneLPP::addGenericSensor(uint8_t channel, float value)  {
   return addValue(channel, LPP_GENERIC_SENSOR, value, LPP_GENERIC_SENSOR_MULT, LPP_GENERIC_SENSOR_SIZE);
 }
 
-uint8_t CayenneLPP::addLuminosity(uint8_t channel, uint16_t value) {
+uint8_t CayenneLPP::addLuminosity(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_LUMINOSITY, value, LPP_LUMINOSITY_MULT, LPP_LUMINOSITY_SIZE);
 }
 
-uint8_t CayenneLPP::addPresence(uint8_t channel, uint8_t value) {
+uint8_t CayenneLPP::addPresence(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_PRESENCE, value, LPP_PRESENCE_MULT, LPP_PRESENCE_SIZE);
 }
 
@@ -118,7 +118,7 @@ uint8_t CayenneLPP::addFrequency(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_FREQUENCY, value, LPP_FREQUENCY_MULT, LPP_FREQUENCY_SIZE);
 }
 
-uint8_t CayenneLPP::addPercentage(uint8_t channel, uint8_t value) {
+uint8_t CayenneLPP::addPercentage(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_PERCENTAGE, value, LPP_PERCENTAGE_MULT, LPP_PERCENTAGE_SIZE);
 }
 
@@ -126,7 +126,7 @@ uint8_t CayenneLPP::addAltitude(uint8_t channel, float value) {
   return addValue(channel, LPP_ALTITUDE, value, LPP_ALTITUDE_MULT, LPP_ALTITUDE_SIZE, true);
 }
 
-uint8_t CayenneLPP::addPower(uint8_t channel, uint16_t value) {
+uint8_t CayenneLPP::addPower(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_POWER, value, LPP_POWER_MULT, LPP_POWER_SIZE);
 }
 
@@ -150,7 +150,7 @@ uint8_t CayenneLPP::addDirection(uint8_t channel, float value) {
   return addValue(channel, LPP_DIRECTION, value, LPP_DIRECTION_MULT, LPP_DIRECTION_SIZE);
 }
 
-uint8_t CayenneLPP::addSwitch(uint8_t channel, uint8_t value) {
+uint8_t CayenneLPP::addSwitch(uint8_t channel, uint32_t value) {
   return addValue(channel, LPP_SWITCH, value, LPP_SWITCH_MULT, LPP_SWITCH_SIZE);
 }
 
