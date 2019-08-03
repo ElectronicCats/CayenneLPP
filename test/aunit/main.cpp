@@ -120,13 +120,6 @@ class DecoderTest: public TestOnce {
 // Tests
 // -----------------------------------------------------------------------------
 
-testF(EncoderTest, Direct) {
-    lpp->addField(LPP_TEMPERATURE, 3, (float) 27.2);
-    lpp->addField(LPP_RELATIVE_HUMIDITY, 2, (uint32_t) 54);
-    uint8_t expected[] = {0x03,0x67,0x01,0x10,0x02,0x68,0x6C};
-    compare(sizeof(expected), expected);
-}
-
 testF(EncoderTest, Multichannel) {
     lpp->addTemperature(3, 27.2);
     lpp->addRelativeHumidity(2, 54);
