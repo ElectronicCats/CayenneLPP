@@ -91,17 +91,17 @@ function lppDecode(bytes) {
 
     var sensors = [];
     var i = 0;
-	while (i < bytes.length) {
+    while (i < bytes.length) {
 
         var s_no   = bytes[i++];
         var s_type = bytes[i++];
-		if (typeof sensor_types[s_type] == 'undefined') {
+        if (typeof sensor_types[s_type] == 'undefined') {
             throw 'Sensor type error!: ' + s_type;
         }
 
         var s_value = 0;
         var type = sensor_types[s_type];
-	    switch (s_type) {
+        switch (s_type) {
 
             case 113:   // Accelerometer
             case 134:   // Gyrometer
@@ -127,24 +127,33 @@ function lppDecode(bytes) {
         
         sensors.push({
             'channel': s_no,
-            'type': type.name,
+            'type': s_type,
+            'name': type.name,
             'value': s_value
         });
 
         i += type.size;
 
-	}
+    }
 
-	return sensors;
+    return sensors;
 
 }
 
 // To use with TTN
-/*
-function Decode(fPort, bytes) {
-    return lppDecode(bytes);
+function Decoder(bytes, fPort) {
+    
+    // flat output (like original decoder):
+    var response = {};
+    lppDecode(bytes, 1).forEach(function(field) {
+        response[field['name'] + '_' + field['channel']] = field['value'];
+    });
+    return response;
+
+    // field output
+    //return {'fields': lppDecode(bytes, fPort)};
+
 }
-*/
 
 // To use with NodeRED
 // Assuming msg.payload contains the LPP-encoded byte array
