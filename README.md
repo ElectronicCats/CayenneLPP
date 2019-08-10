@@ -148,6 +148,18 @@ uint8_t addDirection(uint8_t channel, float value); // in degrees
 uint8_t addSwitch(uint8_t channel, uint32_t value); // 0 or 1
 ```
 
+### Method: `getError`
+
+Returns the last error ID, once returned the error is reset to OK. Possible error values are:
+
+* `LPP_ERROR_OK`: no error
+* `LPP_ERROR_OVERFLOW`: When encoding, the latest field would have exceeded the internal buffer size. Try increasing the buffer size in the constructor. When decoding, the payload is not long enough to hold the expected data. Probably a size mismatch.
+* `LPP_ERROR_UNKNOWN_TYPE`: When decoding, the decoded type does not match any of the supported ones.
+
+```c
+uint8_t getError(void);
+```
+
 ## References
 
 * [Cayenne Low Power Payload](https://mydevices.com/cayenne/docs/#lora-cayenne-low-power-payload)
@@ -155,8 +167,7 @@ uint8_t addSwitch(uint8_t channel, uint32_t value); // 0 or 1
 
 ## License
 
-Based in the work of [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib)
-Forked from the Electronic Cats repository (https://github.com/sabas1080/CayenneLPP)
+Based in the work of [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib).
 
 The MIT License (MIT)
 

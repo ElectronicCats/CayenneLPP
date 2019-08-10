@@ -87,6 +87,10 @@
 #define LPP_GPS_ALT_MULT                100
 #define LPP_SWITCH_MULT                 1
 
+#define LPP_ERROR_OK                    0
+#define LPP_ERROR_OVERFLOW              1
+#define LPP_ERROR_UNKOWN_TYPE           2
+
 class CayenneLPP {
 
 public:
@@ -98,7 +102,13 @@ public:
   uint8_t getSize(void);
   uint8_t *getBuffer(void);
   uint8_t copy(uint8_t *buffer);
+  uint8_t getError();
 
+  // Decoder methods
+  const char * getTypeName(uint8_t type);
+  uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray& root);
+
+  // Original LPPv1 data types
   uint8_t addDigitalInput(uint8_t channel, uint32_t value);
   uint8_t addDigitalOutput(uint8_t channel, uint32_t value);
   uint8_t addAnalogInput(uint8_t channel, float value);
@@ -112,8 +122,8 @@ public:
   uint8_t addGyrometer(uint8_t channel, float x, float y, float z);
   uint8_t addGPS(uint8_t channel, float latitude, float longitude, float altitude);
 
+  // Additional data types
   uint8_t addUnixTime(uint8_t channel, uint32_t value);
-
   uint8_t addGenericSensor(uint8_t channel, float value);
   uint8_t addVoltage(uint8_t channel, float value);
   uint8_t addCurrent(uint8_t channel, float value);
@@ -125,10 +135,6 @@ public:
   uint8_t addEnergy(uint8_t channel, float value);
   uint8_t addDirection(uint8_t channel, float value);
   uint8_t addSwitch(uint8_t channel, uint32_t value);
-
-  const char * getTypeName(uint8_t type);
-
-  uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray& root);
 
 protected:
 
@@ -143,6 +149,7 @@ protected:
   uint8_t * _buffer;
   uint8_t _maxsize;
   uint8_t _cursor;
+  uint8_t _error = LPP_ERROR_OK;
 
 };
 
