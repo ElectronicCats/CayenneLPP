@@ -23,6 +23,3 @@ install:
   - ln -s $PWD $HOME/Arduino/libraries/CayenneLPP
 script:
   - buildExampleSketch
-  branches:	
-  only:	
-    - master
