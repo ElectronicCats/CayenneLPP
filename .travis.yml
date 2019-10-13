@@ -21,8 +21,8 @@ before_install:
 install:
 install:
   - arduino --install-library "TheThingsNetwork"
-  - arduino --install-library "SparkFunMPL3115A2"
-  - arduino --install-library "SparkFunHTU21D"
+  - arduino --install-library "SSparkFun MPL3115A2 Altitude and Pressure Sensor Breakout"
+  - arduino --install-library "SparkFun HTU21D Humidity and Temperature Sensor Breakout"
   - mkdir -p $HOME/Arduino/libraries
   - ln -s $PWD $HOME/Arduino/libraries/CayenneLPP
 script:
