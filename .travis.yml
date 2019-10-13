@@ -19,6 +19,10 @@ before_install:
     fi
   - buildExampleSketch() { find $PWD -name "*.ino" | while read sketch; do arduino --verbose-build --verify --board $BOARD $sketch; done }
 install:
+install:
+  - arduino --install-library "TheThingsNetwork"
+  - arduino --install-library "SparkFunMPL3115A2"
+  - arduino --install-library "SparkFunHTU21D"
   - mkdir -p $HOME/Arduino/libraries
   - ln -s $PWD $HOME/Arduino/libraries/CayenneLPP
 script:
