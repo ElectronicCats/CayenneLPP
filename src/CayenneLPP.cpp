@@ -70,10 +70,10 @@ bool CayenneLPP::isType(uint8_t type) {
 }
 
 const char * CayenneLPP::getTypeName(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return "digital_input";
-  if (LPP_DIGITAL_OUTPUT == type) return "digital_output";
-  if (LPP_ANALOG_INPUT == type) return "analog_input";
-  if (LPP_ANALOG_OUTPUT == type) return "analog_output";
+  if (LPP_DIGITAL_INPUT == type) return "digital_in";
+  if (LPP_DIGITAL_OUTPUT == type) return "digital_out";
+  if (LPP_ANALOG_INPUT == type) return "analog_in";
+  if (LPP_ANALOG_OUTPUT == type) return "analog_out";
   if (LPP_GENERIC_SENSOR == type) return "generic";
   if (LPP_LUMINOSITY == type) return "luminosity";
   if (LPP_PRESENCE == type) return "presence";

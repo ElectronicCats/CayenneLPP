@@ -41,11 +41,10 @@
 function lppDecode(bytes) {
     
     var sensor_types = {
-        0  : {'size': 1, 'name': 'digital_input', 'signed': false, 'divisor': 1},
-        1  : {'size': 1, 'name': 'digital_output', 'signed': false, 'divisor': 1},
-        2  : {'size': 2, 'name': 'analog_input', 'signed': true , 'divisor': 100},
-        3  : {'size': 2, 'name': 'analog_output', 'signed': true , 'divisor': 100},
-        4  : {'size': 2, 'name': 'counter', 'signed': false, 'divisor': 1},
+        0  : {'size': 1, 'name': 'digital_in', 'signed': false, 'divisor': 1},
+        1  : {'size': 1, 'name': 'digital_out', 'signed': false, 'divisor': 1},
+        2  : {'size': 2, 'name': 'analog_in', 'signed': true , 'divisor': 100},
+        3  : {'size': 2, 'name': 'analog_out', 'signed': true , 'divisor': 100},
         100: {'size': 4, 'name': 'generic', 'signed': false, 'divisor': 1},
         101: {'size': 2, 'name': 'illuminance', 'signed': false, 'divisor': 1},
         102: {'size': 1, 'name': 'presence', 'signed': false, 'divisor': 1},
@@ -61,7 +60,7 @@ function lppDecode(bytes) {
         128: {'size': 2, 'name': 'power', 'signed': false, 'divisor': 1},
         130: {'size': 4, 'name': 'distance', 'signed': false, 'divisor': 1000},
         131: {'size': 4, 'name': 'energy', 'signed': false, 'divisor': 1000},
-        132: {'size': 1, 'name': 'direction', 'signed': false, 'divisor': 1},
+        132: {'size': 2, 'name': 'direction', 'signed': false, 'divisor': 1},
         133: {'size': 4, 'name': 'time', 'signed': false, 'divisor': 1},
         134: {'size': 6, 'name': 'gyrometer', 'signed': true , 'divisor': 100},
         136: {'size': 9, 'name': 'gps', 'signed': true, 'divisor': [10000,10000,100]},
