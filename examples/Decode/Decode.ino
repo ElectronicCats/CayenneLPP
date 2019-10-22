@@ -35,16 +35,16 @@ void setup()
 
   lpp.addUnixTime(1, 135005160);
   
-  lpp.addGenericSensor(1, 12345.65);
+  lpp.addGenericSensor(1, 12345);
   lpp.addVoltage(1, 3.35);
   lpp.addCurrent(1, 0.321);
   lpp.addFrequency(1, 50);
   lpp.addPercentage(1, 100);
-  lpp.addAltitude(1 , 50.1);
+  lpp.addAltitude(1 , 50);
   lpp.addPower(1 , 50000);
   lpp.addDistance(1 , 10.555);
   lpp.addEnergy(1 , 19.055);
-  lpp.addDirection(1 , 90.23);
+  lpp.addDirection(1 , 90);
   lpp.addSwitch(1 , 0);
 
   lpp.decode(lpp.getBuffer(), lpp.getSize(), root);
