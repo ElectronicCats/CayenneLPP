@@ -462,3 +462,65 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
   return count;
 
 }
+
+uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
+
+  uint8_t count = 0;
+  uint8_t index = 0;
+
+  while ((index + 2) < len) {
+
+    count++;
+
+    // Get channel #
+    uint8_t channel = buffer[index++];
+    
+    // Get data type
+    uint8_t type = buffer[index++];
+    if (!isType(type)) {
+      _error = LPP_ERROR_UNKOWN_TYPE;
+      return 0;
+    }
+
+    // Type definition
+    uint8_t size = getTypeSize(type);
+    uint32_t multiplier = getTypeMultiplier(type);
+    bool is_signed = getTypeSigned(type);
+
+    // Check buffer size
+    if (index + size > len) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    // Init object
+    String name = String(getTypeName(type)) + "_" + channel;
+
+    // Parse types
+    if (LPP_ACCELEROMETER == type || LPP_GYROMETER == type) {
+
+      JsonObject object = root.createNestedObject(name);
+      object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
+      object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+
+    } else if (LPP_GPS == type) {
+
+      JsonObject object = root.createNestedObject(name);
+      object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
+      object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
+      object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
+
+    } else {
+
+      root[name] = getValue(&buffer[index], size, multiplier, is_signed);
+
+    }
+
+    index += size;
+
+  }
+
+  return count;
+
+}

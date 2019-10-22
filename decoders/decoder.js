@@ -64,7 +64,7 @@ function lppDecode(bytes) {
         132: {'size': 1, 'name': 'direction', 'signed': false, 'divisor': 1},
         133: {'size': 4, 'name': 'time', 'signed': false, 'divisor': 1},
         134: {'size': 6, 'name': 'gyrometer', 'signed': true , 'divisor': 100},
-        136: {'size': 9, 'name': 'location', 'signed': true, 'divisor': [10000,10000,100]},
+        136: {'size': 9, 'name': 'gps', 'signed': true, 'divisor': [10000,10000,100]},
         142: {'size': 1, 'name': 'switch', 'signed': false, 'divisor': 1},
     };
 
