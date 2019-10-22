@@ -135,6 +135,7 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
   if (LPP_PRESENCE == type) return LPP_PRESENCE_MULT;
   if (LPP_TEMPERATURE == type) return LPP_TEMPERATURE_MULT;
   if (LPP_RELATIVE_HUMIDITY == type) return LPP_RELATIVE_HUMIDITY_MULT;
+  if (LPP_ACCELEROMETER == type) return LPP_ACCELEROMETER_MULT;
   if (LPP_BAROMETRIC_PRESSURE == type) return LPP_BAROMETRIC_PRESSURE_MULT;
   if (LPP_VOLTAGE == type) return LPP_VOLTAGE_MULT;
   if (LPP_CURRENT == type) return LPP_CURRENT_MULT;
@@ -146,6 +147,7 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
   if (LPP_ENERGY == type) return LPP_ENERGY_MULT;
   if (LPP_DIRECTION == type) return LPP_DIRECTION_MULT;
   if (LPP_UNIXTIME == type) return LPP_UNIXTIME_MULT;
+  if (LPP_GYROMETER == type) return LPP_GYROMETER_MULT;
   if (LPP_SWITCH == type) return LPP_SWITCH_MULT;
   return 0;
 }
