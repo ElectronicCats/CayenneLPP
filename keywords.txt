@@ -6,47 +6,47 @@
 # Class (KEYWORD1)
 #######################################
 
-CayenneLPP KEYWORD1
+CayenneLPP	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
 #######################################
 
-reset KEYWORD2
-getSize KEYWORD2
-*getBuffer KEYWORD2
-copy KEYWORD2
+reset	KEYWORD2
+getSize	KEYWORD2
+*getBuffer	KEYWORD2
+copy	KEYWORD2
 
-addDigitalInput KEYWORD2
-addDigitalOutput KEYWORD2
-addAnalogInput KEYWORD2
-addAnalogOutput KEYWORD2
-addLuminosity KEYWORD2
-addPresence KEYWORD2
-addTemperature KEYWORD2
-addRelativeHumidity KEYWORD2
-addAccelerometer KEYWORD2
-addBarometricPressure KEYWORD2
-addGyrometer KEYWORD2
-addGPS KEYWORD2
+addDigitalInput	KEYWORD2
+addDigitalOutput	KEYWORD2
+addAnalogInput	KEYWORD2
+addAnalogOutput	KEYWORD2
+addLuminosity	KEYWORD2
+addPresence	KEYWORD2
+addTemperature	KEYWORD2
+addRelativeHumidity	KEYWORD2
+addAccelerometer	KEYWORD2
+addBarometricPressure	KEYWORD2
+addGyrometer	KEYWORD2
+addGPS	KEYWORD2
 
-addUnixTime KEYWORD2
+addUnixTime	KEYWORD2
 
-addGenericSensor KEYWORD2
-addVoltage KEYWORD2
-addCurrent KEYWORD2
-addFrequency KEYWORD2
-addPercentage KEYWORD2
-addAltitude KEYWORD2
-addPower KEYWORD2
-addDistance KEYWORD2
-addEnergy KEYWORD2
-addDirection KEYWORD2
-addSwitch KEYWORD2
+addGenericSensor	KEYWORD2
+addVoltage	KEYWORD2
+addCurrent	KEYWORD2
+addFrequency	KEYWORD2
+addPercentage	KEYWORD2
+addAltitude	KEYWORD2
+addPower	KEYWORD2
+addDistance	KEYWORD2
+addEnergy	KEYWORD2
+addDirection	KEYWORD2
+addSwitch	KEYWORD2
 
-getTypeName KEYWORD2
-decode KEYWORD2
-decodeTTN KEYWORD2
+getTypeName	KEYWORD2
+decode	KEYWORD2
+decodeTTN	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)

@@ -398,6 +398,17 @@ float CayenneLPP::getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, 
 
 }
 
+uint32_t CayenneLPP::getValue32(uint8_t * buffer, uint8_t size) {
+
+    uint32_t value = 0;
+    for (uint8_t i=0; i<size; i++) {
+      value = (value << 8) + buffer[i];
+    }
+
+    return value;
+
+}
+
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 
   uint8_t count = 0;
@@ -448,6 +459,10 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
       object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
+
+    } else if (LPP_GENERIC_SENSOR == type || LPP_UNIXTIME == type) {
+
+      data["value"] = getValue32(&buffer[index], size);
 
     } else {
 
@@ -510,6 +525,10 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
       object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
+
+    } else if (LPP_GENERIC_SENSOR == type || LPP_UNIXTIME == type) {
+
+      root[name] = getValue32(&buffer[index], size);
 
     } else {
 

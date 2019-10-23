@@ -145,6 +145,7 @@ protected:
   bool getTypeSigned(uint8_t type);
 
   float getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, bool is_signed);
+  uint32_t getValue32(uint8_t * buffer, uint8_t size);
   template <typename T> uint8_t addField(uint8_t type, uint8_t channel, T value);
 
   uint8_t * _buffer;
