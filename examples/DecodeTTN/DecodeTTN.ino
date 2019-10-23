@@ -35,7 +35,7 @@ void setup()
 
   lpp.addUnixTime(1, 135005160);
   
-  lpp.addGenericSensor(1, 12345);
+  lpp.addGenericSensor(1, 4294967295);
   lpp.addVoltage(1, 3.35);
   lpp.addCurrent(1, 0.321);
   lpp.addFrequency(1, 50);
