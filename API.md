@@ -87,6 +87,27 @@ Example output:
 ]
 ```
 
+### Method: `decodeTTN`
+
+Decodes a byte array into a JsonObject (requires ArduinoJson library). The result is a json objects, each object name contain name type plus channel. The value can be a scalar or an object (for accelerometer, gyroscope and GPS data). The method call returns the number of decoded fields or 0 if error.
+
+```c
+uint8_t decodeTTN(uint8_t *buffer, uint8_t size, JsonObject& root);
+```
+
+Example output:
+
+```
+{
+  "gps_1": {
+    "latitude": 42.3518,
+    "longitude": -87.9094,
+    "altitude": 10
+  }
+}
+```
+
+
 ### Method: `getTypeName`
 
 Returns a pointer to a C-string containing the name of the requested type.
