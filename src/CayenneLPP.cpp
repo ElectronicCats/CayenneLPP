@@ -70,10 +70,10 @@ bool CayenneLPP::isType(uint8_t type) {
 }
 
 const char * CayenneLPP::getTypeName(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return "digital_input";
-  if (LPP_DIGITAL_OUTPUT == type) return "digital_output";
-  if (LPP_ANALOG_INPUT == type) return "analog_input";
-  if (LPP_ANALOG_OUTPUT == type) return "analog_output";
+  if (LPP_DIGITAL_INPUT == type) return "digital_in";
+  if (LPP_DIGITAL_OUTPUT == type) return "digital_out";
+  if (LPP_ANALOG_INPUT == type) return "analog_in";
+  if (LPP_ANALOG_OUTPUT == type) return "analog_out";
   if (LPP_GENERIC_SENSOR == type) return "generic";
   if (LPP_LUMINOSITY == type) return "luminosity";
   if (LPP_PRESENCE == type) return "presence";
@@ -398,6 +398,17 @@ float CayenneLPP::getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, 
 
 }
 
+uint32_t CayenneLPP::getValue32(uint8_t * buffer, uint8_t size) {
+
+    uint32_t value = 0;
+    for (uint8_t i=0; i<size; i++) {
+      value = (value << 8) + buffer[i];
+    }
+
+    return value;
+
+}
+
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 
   uint8_t count = 0;
@@ -449,9 +460,79 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
 
+    } else if (LPP_GENERIC_SENSOR == type || LPP_UNIXTIME == type) {
+
+      data["value"] = getValue32(&buffer[index], size);
+
     } else {
 
       data["value"] = getValue(&buffer[index], size, multiplier, is_signed);
+
+    }
+
+    index += size;
+
+  }
+
+  return count;
+
+}
+
+uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
+
+  uint8_t count = 0;
+  uint8_t index = 0;
+
+  while ((index + 2) < len) {
+
+    count++;
+
+    // Get channel #
+    uint8_t channel = buffer[index++];
+    
+    // Get data type
+    uint8_t type = buffer[index++];
+    if (!isType(type)) {
+      _error = LPP_ERROR_UNKOWN_TYPE;
+      return 0;
+    }
+
+    // Type definition
+    uint8_t size = getTypeSize(type);
+    uint32_t multiplier = getTypeMultiplier(type);
+    bool is_signed = getTypeSigned(type);
+
+    // Check buffer size
+    if (index + size > len) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    // Init object
+    String name = String(getTypeName(type)) + "_" + channel;
+
+    // Parse types
+    if (LPP_ACCELEROMETER == type || LPP_GYROMETER == type) {
+
+      JsonObject object = root.createNestedObject(name);
+      object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
+      object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+
+    } else if (LPP_GPS == type) {
+
+      JsonObject object = root.createNestedObject(name);
+      object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
+      object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
+      object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
+
+    } else if (LPP_GENERIC_SENSOR == type || LPP_UNIXTIME == type) {
+
+      root[name] = getValue32(&buffer[index], size);
+
+    } else {
+
+      root[name] = getValue(&buffer[index], size, multiplier, is_signed);
 
     }
 

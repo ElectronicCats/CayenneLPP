@@ -1,5 +1,5 @@
 /*
-  Decode.ino
+  DecodeTTN.ino
 
   This code create a CayenneLPP package and decode to Json.
 
@@ -11,10 +11,10 @@
 
 void setup()
 {
-  DynamicJsonDocument jsonBuffer(4096);
+  DynamicJsonDocument jsonBuffer(1024);
   CayenneLPP lpp(160);
 
-  JsonArray root = jsonBuffer.to<JsonArray>();
+  JsonObject root = jsonBuffer.to<JsonObject>();
 
   Serial.begin(115200);
   Serial.println();
@@ -47,7 +47,7 @@ void setup()
   lpp.addDirection(1 , 90);
   lpp.addSwitch(1 , 0);
 
-  lpp.decode(lpp.getBuffer(), lpp.getSize(), root);
+  lpp.decodeTTN(lpp.getBuffer(), lpp.getSize(), root);
   
   serializeJsonPretty(root, Serial);
   Serial.println();

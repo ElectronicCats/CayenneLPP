@@ -107,6 +107,7 @@ public:
   // Decoder methods
   const char * getTypeName(uint8_t type);
   uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray& root);
+  uint8_t decodeTTN(uint8_t *buffer, uint8_t size, JsonObject& root);
 
   // Original LPPv1 data types
   uint8_t addDigitalInput(uint8_t channel, uint32_t value);
@@ -144,6 +145,7 @@ protected:
   bool getTypeSigned(uint8_t type);
 
   float getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, bool is_signed);
+  uint32_t getValue32(uint8_t * buffer, uint8_t size);
   template <typename T> uint8_t addField(uint8_t type, uint8_t channel, T value);
 
   uint8_t * _buffer;
