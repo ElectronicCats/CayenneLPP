@@ -193,7 +193,19 @@ testF(EncoderTest, Frequency) {
 
 testF(EncoderTest, Altitude) {
     lpp->addAltitude(5, -17);
-    uint8_t expected[] = {0x05,0x79,0xFF,0XEF};
+    uint8_t expected[] = {0x05,0x79,0xFF,0xEF};
+    compare(sizeof(expected), expected);
+}
+
+testF(EncoderTest, PPM) {
+    lpp->addPPM(4, 4079);
+    uint8_t expected[] = {0x05,0x8F,0x0F,0xEF};
+    compare(sizeof(expected), expected);
+}
+
+testF(EncoderTest, RGB) {
+    lpp->addPPM(7, 24, 239, 15);
+    uint8_t expected[] = {0x07,0x90,0x0F,0xEF, 0x18};
     compare(sizeof(expected), expected);
 }
 
