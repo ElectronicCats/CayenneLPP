@@ -47,8 +47,8 @@ void setup()
   lpp.addDirection(1 , 90);
   lpp.addSwitch(1 , 0);
   
-  lpp.addPPM(1 , 512);
-  lpp.addRGB(1 , 64, 128, 255);
+  lpp.addConentration(1 , 512);
+  lpp.addColour(1 , 64, 128, 255);
 
 
   lpp.decode(lpp.getBuffer(), lpp.getSize(), root);

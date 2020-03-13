@@ -66,8 +66,8 @@ bool CayenneLPP::isType(uint8_t type) {
   if (LPP_GYROMETER == type) return true;
   if (LPP_GPS == type) return true;
   if (LPP_SWITCH == type) return true;
-  if (LPP_PPM == type) return true;
-  if (LPP_RGB == type) return true;
+  if (LPP_CONENTRATION == type) return true;
+  if (LPP_COLOUR == type) return true;
   return false;
 }
 
@@ -96,8 +96,8 @@ const char * CayenneLPP::getTypeName(uint8_t type) {
   if (LPP_GYROMETER == type) return "gyrometer";
   if (LPP_GPS == type) return "gps";
   if (LPP_SWITCH == type) return "switch";
-  if (LPP_PPM == type) return "ppm";
-  if (LPP_RGB == type) return "rgb";
+  if (LPP_CONENTRATION == type) return "conentration";
+  if (LPP_COLOUR == type) return "colour";
   return 0;
 }
 
@@ -126,8 +126,8 @@ uint8_t CayenneLPP::getTypeSize(uint8_t type) {
   if (LPP_GYROMETER == type) return LPP_GYROMETER_SIZE;
   if (LPP_GPS == type) return LPP_GPS_SIZE;
   if (LPP_SWITCH == type) return LPP_SWITCH_SIZE;
-  if (LPP_PPM == type) return LPP_PPM_SIZE;
-  if (LPP_RGB == type) return LPP_RGB_SIZE;
+  if (LPP_CONENTRATION == type) return LPP_CONENTRATION_SIZE;
+  if (LPP_COLOUR == type) return LPP_COLOUR_SIZE;
   return 0;
 }
 
@@ -155,8 +155,8 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
   if (LPP_UNIXTIME == type) return LPP_UNIXTIME_MULT;
   if (LPP_GYROMETER == type) return LPP_GYROMETER_MULT;
   if (LPP_SWITCH == type) return LPP_SWITCH_MULT;
-  if (LPP_PPM == type) return LPP_PPM_MULT;
-  if (LPP_RGB == type) return LPP_RGB_MULT;
+  if (LPP_CONENTRATION == type) return LPP_CONENTRATION_MULT;
+  if (LPP_COLOUR == type) return LPP_COLOUR_MULT;
   return 0;
 }
 
@@ -306,19 +306,19 @@ uint8_t CayenneLPP::addSwitch(uint8_t channel, uint32_t value) {
   return addField(LPP_SWITCH, channel, value);
 }
 
-uint8_t CayenneLPP::addPPM(uint8_t channel, uint32_t value) {
-  return addField(LPP_PPM, channel, value);
+uint8_t CayenneLPP::addConentration(uint8_t channel, uint32_t value) {
+  return addField(LPP_CONENTRATION, channel, value);
 }
 
-uint8_t CayenneLPP::addRGB(uint8_t channel, uint8_t r, uint8_t g, uint8_t b)
+uint8_t CayenneLPP::addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b)
 {
   // check buffer overflow
-  if ((_cursor + LPP_RGB_SIZE + 2) > _maxsize) {
+  if ((_cursor + LPP_COLOUR_SIZE + 2) > _maxsize) {
     _error = LPP_ERROR_OVERFLOW;
     return 0;
   }
   _buffer[_cursor++] = channel;
-  _buffer[_cursor++] = LPP_RGB;
+  _buffer[_cursor++] = LPP_COLOUR;
   _buffer[_cursor++] = r;
   _buffer[_cursor++] = g;
   _buffer[_cursor++] = b;
@@ -475,7 +475,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
     data["name"] = String(getTypeName(type));
 
     // Parse types
-	if (LPP_RGB == type) {
+	if (LPP_COLOUR == type) {
 
       JsonObject object = data.createNestedObject("value");
       object["r"] = getValue(&buffer[index], 1, multiplier, is_signed);
@@ -548,7 +548,7 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
     String name = String(getTypeName(type)) + "_" + channel;
 
     // Parse types
-	if (LPP_RGB == type) {
+	if (LPP_COLOUR == type) {
       JsonObject object = root.createNestedObject(name);
       object["r"] = getValue(&buffer[index], 1, multiplier, is_signed);
       object["g"] = getValue(&buffer[index+1], 1, multiplier, is_signed);

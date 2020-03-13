@@ -197,15 +197,15 @@ testF(EncoderTest, Altitude) {
     compare(sizeof(expected), expected);
 }
 
-testF(EncoderTest, PPM) {
-    lpp->addPPM(4, 4079);
-    uint8_t expected[] = {0x05,0x8F,0x0F,0xEF};
+testF(EncoderTest, Conentration) {
+    lpp->addConentration(4, 4079);
+    uint8_t expected[] = {0x05,0x7D,0x0F,0xEF};
     compare(sizeof(expected), expected);
 }
 
-testF(EncoderTest, RGB) {
-    lpp->addPPM(7, 24, 239, 15);
-    uint8_t expected[] = {0x07,0x90,0x0F,0xEF, 0x18};
+testF(EncoderTest, Colour) {
+    lpp->addColour(7, 24, 239, 15);
+    uint8_t expected[] = {0x07,0x87,0x0F,0xEF, 0x18};
     compare(sizeof(expected), expected);
 }
 
