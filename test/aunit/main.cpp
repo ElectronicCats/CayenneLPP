@@ -197,8 +197,8 @@ testF(EncoderTest, Altitude) {
     compare(sizeof(expected), expected);
 }
 
-testF(EncoderTest, Conentration) {
-    lpp->addConentration(4, 4079);
+testF(EncoderTest, Concentration) {
+    lpp->addConcentration(4, 4079);
     uint8_t expected[] = {0x05,0x7D,0x0F,0xEF};
     compare(sizeof(expected), expected);
 }

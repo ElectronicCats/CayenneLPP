@@ -28,7 +28,7 @@
  *  Frequency           3318    118     76      4           1 Hz Unsigned MSB
  *  Percentage          3320    120     78      1           1% Unsigned
  *  Altitude            3321    121     79      2           1m Signed MSB
- *  Conentration        3325    125     7D      2           1 PPM unsigned : 1pmm = 1 * 10 ^-6 = 0.000 001
+ *  Concentration       3325    125     7D      2           1 PPM unsigned : 1pmm = 1 * 10 ^-6 = 0.000 001
  *  Power               3328    128     80      2           1 W Unsigned MSB
  *  Distance            3330    130     82      4           0.001m Unsigned MSB
  *  Energy              3331    131     83      4           0.001kWh Unsigned MSB
@@ -60,7 +60,7 @@ function lppDecode(bytes) {
         118: {'size': 4, 'name': 'frequency', 'signed': false, 'divisor': 1},
         120: {'size': 1, 'name': 'percentage', 'signed': false, 'divisor': 1},
         121: {'size': 2, 'name': 'altitude', 'signed': true, 'divisor': 1},
-		125: {'size': 2, 'name': 'conentration', 'signed': false, 'divisor': 1},
+		125: {'size': 2, 'name': 'concentration', 'signed': false, 'divisor': 1},
         128: {'size': 2, 'name': 'power', 'signed': false, 'divisor': 1},
         130: {'size': 4, 'name': 'distance', 'signed': false, 'divisor': 1000},
         131: {'size': 4, 'name': 'energy', 'signed': false, 'divisor': 1000},

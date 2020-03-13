@@ -148,7 +148,7 @@ uint8_t addEnergy(uint8_t channel, float value); // in kWh (3 decimals)
 uint8_t addDirection(uint8_t channel, float value); // in degrees
 uint8_t addSwitch(uint8_t channel, uint32_t value); // 0 or 1
 
-uint8_t CayenneLPP::addConentration(uint8_t channel, uint32_t value); // 1 PPM unsigned - PPM means Parts per million 1PPM = 1 * 10 ^-6 = 0.000 001
+uint8_t CayenneLPP::addConcentration(uint8_t channel, uint32_t value); // 1 PPM unsigned - PPM means Parts per million 1PPM = 1 * 10 ^-6 = 0.000 001
 uint8_t CayenneLPP::addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b); // R: 255 G: 255 B: 255
 ```
 

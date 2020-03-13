@@ -44,7 +44,7 @@ addEnergy	KEYWORD2
 addDirection	KEYWORD2
 addSwitch	KEYWORD2
 
-addConentration 	KEYWORD2
+addConcentration 	KEYWORD2
 addColour	KEYWORD2
 
 getTypeName	KEYWORD2

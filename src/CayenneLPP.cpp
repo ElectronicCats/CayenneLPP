@@ -66,7 +66,7 @@ bool CayenneLPP::isType(uint8_t type) {
   if (LPP_GYROMETER == type) return true;
   if (LPP_GPS == type) return true;
   if (LPP_SWITCH == type) return true;
-  if (LPP_CONENTRATION == type) return true;
+  if (LPP_CONCENTRATION == type) return true;
   if (LPP_COLOUR == type) return true;
   return false;
 }
@@ -96,7 +96,7 @@ const char * CayenneLPP::getTypeName(uint8_t type) {
   if (LPP_GYROMETER == type) return "gyrometer";
   if (LPP_GPS == type) return "gps";
   if (LPP_SWITCH == type) return "switch";
-  if (LPP_CONENTRATION == type) return "conentration";
+  if (LPP_CONCENTRATION == type) return "concentration";
   if (LPP_COLOUR == type) return "colour";
   return 0;
 }
@@ -126,7 +126,7 @@ uint8_t CayenneLPP::getTypeSize(uint8_t type) {
   if (LPP_GYROMETER == type) return LPP_GYROMETER_SIZE;
   if (LPP_GPS == type) return LPP_GPS_SIZE;
   if (LPP_SWITCH == type) return LPP_SWITCH_SIZE;
-  if (LPP_CONENTRATION == type) return LPP_CONENTRATION_SIZE;
+  if (LPP_CONCENTRATION == type) return LPP_CONCENTRATION_SIZE;
   if (LPP_COLOUR == type) return LPP_COLOUR_SIZE;
   return 0;
 }
@@ -155,7 +155,7 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
   if (LPP_UNIXTIME == type) return LPP_UNIXTIME_MULT;
   if (LPP_GYROMETER == type) return LPP_GYROMETER_MULT;
   if (LPP_SWITCH == type) return LPP_SWITCH_MULT;
-  if (LPP_CONENTRATION == type) return LPP_CONENTRATION_MULT;
+  if (LPP_CONCENTRATION == type) return LPP_CONCENTRATION_MULT;
   if (LPP_COLOUR == type) return LPP_COLOUR_MULT;
   return 0;
 }
@@ -306,8 +306,8 @@ uint8_t CayenneLPP::addSwitch(uint8_t channel, uint32_t value) {
   return addField(LPP_SWITCH, channel, value);
 }
 
-uint8_t CayenneLPP::addConentration(uint8_t channel, uint32_t value) {
-  return addField(LPP_CONENTRATION, channel, value);
+uint8_t CayenneLPP::addConcentration(uint8_t channel, uint32_t value) {
+  return addField(LPP_CONCENTRATION, channel, value);
 }
 
 uint8_t CayenneLPP::addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b)
