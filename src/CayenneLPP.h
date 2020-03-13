@@ -25,12 +25,14 @@
 #define LPP_FREQUENCY                   118   // 4 bytes 1Hz unsigned
 #define LPP_PERCENTAGE                  120   // 1 byte 1-100% unsigned
 #define LPP_ALTITUDE                    121   // 2 byte 1m signed
+#define LPP_CONCENTRATION               125   // 2 bytes, 1 ppm unsigned
 #define LPP_POWER                       128   // 2 byte, 1W, unsigned
 #define LPP_DISTANCE                    130   // 4 byte, 0.001m, unsigned
 #define LPP_ENERGY                      131   // 4 byte, 0.001kWh, unsigned
 #define LPP_DIRECTION                   132   // 2 bytes, 1deg, unsigned
 #define LPP_UNIXTIME                    133   // 4 bytes, unsigned
 #define LPP_GYROMETER                   134   // 2 bytes per axis, 0.01 °/s
+#define LPP_COLOUR                      135   // 1 byte per RGB Color
 #define LPP_GPS                         136   // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01 meter
 #define LPP_SWITCH                      142   // 1 byte, 0/1
 
@@ -59,6 +61,8 @@
 #define LPP_GYROMETER_SIZE              6
 #define LPP_GPS_SIZE                    9
 #define LPP_SWITCH_SIZE                 1
+#define LPP_CONCENTRATION_SIZE          2
+#define LPP_COLOUR_SIZE                 3
 
 // Multipliers
 #define LPP_DIGITAL_INPUT_MULT          1
@@ -86,6 +90,8 @@
 #define LPP_GPS_LAT_LON_MULT            10000
 #define LPP_GPS_ALT_MULT                100
 #define LPP_SWITCH_MULT                 1
+#define LPP_CONCENTRATION_MULT          1
+#define LPP_COLOUR_MULT                 1
 
 #define LPP_ERROR_OK                    0
 #define LPP_ERROR_OVERFLOW              1
@@ -136,6 +142,8 @@ public:
   uint8_t addEnergy(uint8_t channel, float value);
   uint8_t addDirection(uint8_t channel, float value);
   uint8_t addSwitch(uint8_t channel, uint32_t value);
+  uint8_t addConcentration(uint8_t channel, uint32_t value);
+  uint8_t addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b);
 
 protected:
 
