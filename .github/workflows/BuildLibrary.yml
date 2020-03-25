@@ -34,10 +34,12 @@ jobs:
         # You may add a suffix behind the fqbn with "|" to specify one board for e.g. different compile options like arduino:avr:uno|trace 
         #############################################################################################################
         arduino-boards-fqbn:
+          - arduino:avr:uno
           - arduino:avr:leonardo
           - arduino:samd:nano_33_iot
           - arduino:mbed:nano33ble
           - esp8266:esp8266:huzzah:eesz=4M3M,xtal=80
+          - esp32:esp32:featheresp32:FlashFreq=80
           - STM32:stm32:GenF1:pnum=BLUEPILL_F103C8
 
         # Specify parameters for each board.
@@ -45,6 +47,8 @@ jobs:
         # With examples-exclude you may exclude specific examples for a board. Use a space separated list.
         #############################################################################################################
         include:
+          - arduino-boards-fqbn: arduino:avr:uno
+
           - arduino-boards-fqbn: arduino:avr:leonardo
           
           - arduino-boards-fqbn: arduino:samd:nano_33_iot
@@ -53,6 +57,9 @@ jobs:
 
           - arduino-boards-fqbn: esp8266:esp8266:huzzah:eesz=4M3M,xtal=80
             platform-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+
+          - arduino-boards-fqbn: esp32:esp32:featheresp32:FlashFreq=80
+            platform-url: https://dl.espressif.com/dl/package_esp32_index.json
 
           - arduino-boards-fqbn: STM32:stm32:GenF1:pnum=BLUEPILL_F103C8
             platform-url: https://github.com/stm32duino/BoardManagerFiles/raw/dev/STM32/package_stm_index.json
