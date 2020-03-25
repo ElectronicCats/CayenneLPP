@@ -19,7 +19,7 @@ jobs:
       # Space separated list without double quotes around the list. 
       # If you need a library with a space in its name, like Adafruit NeoPixel or Adafruit INA219, you must use double quotes
       # around the name and have at least 2 entries, where the first must be without double quotes! You may use Servo as dummy entry.
-      REQUIRED_LIBRARIES: TheThingsNetwork "SparkFun MPL3115A2 Altitude and Pressure Sensor Breakout" "SparkFun HTU21D Humidity and Temperature Sensor Breakout" ArduinoJson
+      REQUIRED_LIBRARIES: ArduinoJson "Beelan LoRaWAN" "SparkFun MPL3115A2 Altitude and Pressure Sensor Breakout" "SparkFun HTU21D Humidity and Temperature Sensor Breakout"
 
     strategy:
       matrix:
@@ -34,7 +34,6 @@ jobs:
         # You may add a suffix behind the fqbn with "|" to specify one board for e.g. different compile options like arduino:avr:uno|trace 
         #############################################################################################################
         arduino-boards-fqbn:
-          - arduino:avr:uno
           - arduino:avr:leonardo
           - arduino:samd:nano_33_iot
           - arduino:mbed:nano33ble
@@ -46,8 +45,6 @@ jobs:
         # With examples-exclude you may exclude specific examples for a board. Use a space separated list.
         #############################################################################################################
         include:
-          - arduino-boards-fqbn: arduino:avr:uno
-
           - arduino-boards-fqbn: arduino:avr:leonardo
           
           - arduino-boards-fqbn: arduino:samd:nano_33_iot
