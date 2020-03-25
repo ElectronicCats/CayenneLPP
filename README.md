@@ -1,3 +1,5 @@
+![LibraryBuild](https://github.com/ElectronicCats/CayenneLPP/workflows/LibraryBuild/badge.svg?branch=master)
+
 # CayenneLPP
 
 This is an Arduino Library for Arduino Compatible with Cayenne Low Power Payload with Extended Data Types.
