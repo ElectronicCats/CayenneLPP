@@ -4,6 +4,14 @@
 
 This is an Arduino Library for Arduino Compatible with Cayenne Low Power Payload with Extended Data Types.
 
+
+<a href="https://electroniccats.com/store/">
+  <img src="https://electroniccats.com/wp-content/uploads/badge_store.png" height="104" />
+</a>
+<a href="https://electroniccats.com/blog/apoya-el-hardware-libre-con-github-sponsors/">
+  <img src="https://electroniccats.com/wp-content/uploads/2020/07/Badge_GHS.png" height="104" />
+</a>
+
 ## Introduction
 
 CayenneLPP is a format designed by [myDevices](https://mydevices.com/about/) to integrate LoRaWan nodes into their IoT platform [Cayenne](https://mydevices.com/cayenne/features/). It is used to send sensor data in a packed way to [The Things Network platform](https://www.thethingsnetwork.org). You can read more on https://mydevices.com/cayenne/docs/lora/#lora-cayenne-low-power-payload
