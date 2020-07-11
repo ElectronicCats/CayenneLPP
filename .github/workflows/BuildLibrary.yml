@@ -80,5 +80,5 @@ jobs:
         with:
           arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
           platform-url: ${{ matrix.platform-url }}
-          libraries: ${{ env.REQUIRED_LIBRARIES }}
+          required-libraries: ${{ env.REQUIRED_LIBRARIES }}
           examples-exclude: ${{ matrix.examples-exclude }}
