@@ -16,10 +16,7 @@ jobs:
     runs-on: ubuntu-latest # I picked Ubuntu to use shell scripts.
 
     env:
-      # Space separated list without double quotes around the list. 
-      # If you need a library with a space in its name, like Adafruit NeoPixel or Adafruit INA219, you must use double quotes
-      # around the name and have at least 2 entries, where the first must be without double quotes! You may use Servo as dummy entry.
-      REQUIRED_LIBRARIES: ArduinoJson "Beelan LoRaWAN" "SparkFun MPL3115A2 Altitude and Pressure Sensor Breakout" "SparkFun HTU21D Humidity and Temperature Sensor Breakout"
+      REQUIRED_LIBRARIES: ArduinoJson,Beelan LoRaWAN,SparkFun MPL3115A2 Altitude and Pressure Sensor Breakout,SparkFun HTU21D Humidity and Temperature Sensor Breakout
 
     strategy:
       matrix:
