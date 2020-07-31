@@ -1,7 +1,3 @@
-<a href="https://github.com/sponsors/ElectronicCats">
-  <img src="https://electroniccats.com/wp-content/uploads/2020/07/Badge_GHS.png" height="104" />
-</a>
-
 ![LibraryBuild](https://github.com/ElectronicCats/CayenneLPP/workflows/LibraryBuild/badge.svg?branch=master)
 
 # CayenneLPP
@@ -18,7 +14,7 @@ CayenneLPP format is a quite well optimized way to send sensor data over low bit
 
 It supports multichannel data, which means that you can use it on multisensor devices.
 
-This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people. In addition it includes fully backwards compatibly decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance.
+This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people, **these additional data types are not supported by myDevices Cayenne**. In addition it includes fully backwards compatibly decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance. 
 
 ## Dependencies
 
@@ -36,6 +32,10 @@ See [API.md](API.md).
 ### Maintainer
 
 Electronic Cats invests time and resources providing this open source design, please support Electronic Cats and open-source hardware by purchasing products from Electronic Cats!
+
+<a href="https://github.com/sponsors/ElectronicCats">
+  <img src="https://electroniccats.com/wp-content/uploads/2020/07/Badge_GHS.png" height="104" />
+</a>
 
 ## License
 
