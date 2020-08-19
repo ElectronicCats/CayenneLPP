@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest # I picked Ubuntu to use shell scripts.
 
     env:
-      REQUIRED_LIBRARIES: ArduinoJson,Beelan LoRaWAN,SparkFun MPL3115A2 Altitude and Pressure Sensor Breakout,SparkFun HTU21D Humidity and Temperature Sensor Breakout
+      REQUIRED_LIBRARIES: ArduinoJson,Beelan LoRaWAN
 
     strategy:
       matrix:
