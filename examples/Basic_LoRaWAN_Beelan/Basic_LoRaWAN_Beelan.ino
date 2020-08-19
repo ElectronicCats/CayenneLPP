@@ -11,6 +11,9 @@
  * Distributed as-is; no warranty is given.
  */
 #include <lorawan.h>
+#include<CayenneLPP.h>
+
+CayenneLPP lpp(51);
 
 //ABP Credentials 
 const char *devAddr = "00000000";
@@ -64,13 +67,10 @@ void loop() {
   if(millis() - previousMillis > interval) {
     previousMillis = millis(); 
 
-    sprintf(myStr, "Counter-%d", counter); 
+    printVariables();
 
     Serial.print("Sending: ");
-    Serial.println(myStr);
-    
-    lora.sendUplink(myStr, strlen(myStr), 0);
-    counter++;
+    lora.sendUplink((char *)lpp.getBuffer(), lpp.getSize(), 0, 1);
   }
 
   recvStatus = lora.readData(outStr);
@@ -80,4 +80,29 @@ void loop() {
   
   // Check Lora RX
   lora.update();
+}
+
+void printVariables()
+{
+  lpp.reset();
+
+  int humidity = random(0,300);
+  Serial.print(F(",humidity="));
+  Serial.print(humidity, 1);
+  lpp.addRelativeHumidity(3, humidity);
+
+  int temp = random(0,200);
+  Serial.print(F(",tempf="));
+  Serial.print(temp, 1);
+  lpp.addTemperature(4, temp);
+
+  int pressure = random(0,2000);
+  Serial.print(F(",pressure="));
+  Serial.print((pressure/100.0), 2);
+  lpp.addBarometricPressure(7,(pressure/100.0));
+
+  int batt_lvl = random(0,3.3);
+  Serial.print(F(",batt_lvl="));
+  Serial.print(batt_lvl, 2);
+  lpp.addAnalogInput(8, batt_lvl);
 }
