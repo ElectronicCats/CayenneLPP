@@ -70,7 +70,7 @@ void loop() {
     printVariables();
 
     Serial.print("Sending: ");
-    lora.sendUplink(lpp.getBuffer(), lpp.getSize(), 0, 1);
+    lora.sendUplink((char *)lpp.getBuffer(), lpp.getSize(), 0, 1);
   }
 
   recvStatus = lora.readData(outStr);
