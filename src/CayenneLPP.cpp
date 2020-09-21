@@ -42,32 +42,37 @@ uint8_t CayenneLPP::getError() {
 // ----------------------------------------------------------------------------
 
 bool CayenneLPP::isType(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return true;
-  if (LPP_DIGITAL_OUTPUT == type) return true;
-  if (LPP_ANALOG_INPUT == type) return true;
-  if (LPP_ANALOG_OUTPUT == type) return true;
-  if (LPP_GENERIC_SENSOR == type) return true;
-  if (LPP_LUMINOSITY == type) return true;
-  if (LPP_PRESENCE == type) return true;
-  if (LPP_TEMPERATURE == type) return true;
-  if (LPP_RELATIVE_HUMIDITY == type) return true;
-  if (LPP_ACCELEROMETER == type) return true;
-  if (LPP_BAROMETRIC_PRESSURE == type) return true;
-  if (LPP_VOLTAGE == type) return true;
-  if (LPP_CURRENT == type) return true;
-  if (LPP_FREQUENCY == type) return true;
-  if (LPP_PERCENTAGE == type) return true;
-  if (LPP_ALTITUDE == type) return true;
-  if (LPP_POWER == type) return true;
-  if (LPP_DISTANCE == type) return true;
-  if (LPP_ENERGY == type) return true;
-  if (LPP_DIRECTION == type) return true;
-  if (LPP_UNIXTIME == type) return true;
-  if (LPP_GYROMETER == type) return true;
-  if (LPP_GPS == type) return true;
-  if (LPP_SWITCH == type) return true;
-  if (LPP_CONCENTRATION == type) return true;
-  if (LPP_COLOUR == type) return true;
+
+  case (type) { 
+    LPP_DIGITAL_INPUT:
+    LPP_DIGITAL_OUTPUT:
+    LPP_ANALOG_INPUT:
+    LPP_ANALOG_OUTPUT:
+    LPP_GENERIC_SENSOR:
+    LPP_LUMINOSITY:
+    LPP_PRESENCE:
+    LPP_TEMPERATURE:
+    LPP_RELATIVE_HUMIDITY:
+    LPP_ACCELEROMETER:
+    LPP_BAROMETRIC_PRESSURE:
+    LPP_VOLTAGE:
+    LPP_CURRENT:
+    LPP_FREQUENCY:
+    LPP_PERCENTAGE:
+    LPP_ALTITUDE:
+    LPP_POWER:
+    LPP_DISTANCE:
+    LPP_ENERGY:
+    LPP_DIRECTION:
+    LPP_UNIXTIME:
+    LPP_GYROMETER:
+    LPP_GPS:
+    LPP_SWITCH:
+    LPP_CONCENTRATION:
+    LPP_COLOUR:
+      return true;
+  }
+
   return false;
 }
 
@@ -161,13 +166,16 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
 }
 
 bool CayenneLPP::getTypeSigned(uint8_t type) {
-  if (LPP_ANALOG_INPUT == type) return true;
-  if (LPP_ANALOG_OUTPUT == type) return true;
-  if (LPP_TEMPERATURE == type) return true;
-  if (LPP_ACCELEROMETER == type) return true;
-  if (LPP_ALTITUDE == type) return true;
-  if (LPP_GYROMETER == type) return true;
-  if (LPP_GPS == type) return true;
+  switch (type) {
+    LPP_ANALOG_INPUT:
+    LPP_ANALOG_OUTPUT:
+    LPP_TEMPERATURE:
+    LPP_ACCELEROMETER:
+    LPP_ALTITUDE:
+    LPP_GYROMETER:
+    LPP_GPS:
+      return true;
+  }
   return false;
 }
 
