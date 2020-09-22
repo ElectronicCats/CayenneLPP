@@ -44,32 +44,32 @@ uint8_t CayenneLPP::getError() {
 bool CayenneLPP::isType(uint8_t type) {
 
   case (type) { 
-    LPP_DIGITAL_INPUT:
-    LPP_DIGITAL_OUTPUT:
-    LPP_ANALOG_INPUT:
-    LPP_ANALOG_OUTPUT:
-    LPP_GENERIC_SENSOR:
-    LPP_LUMINOSITY:
-    LPP_PRESENCE:
-    LPP_TEMPERATURE:
-    LPP_RELATIVE_HUMIDITY:
-    LPP_ACCELEROMETER:
-    LPP_BAROMETRIC_PRESSURE:
-    LPP_VOLTAGE:
-    LPP_CURRENT:
-    LPP_FREQUENCY:
-    LPP_PERCENTAGE:
-    LPP_ALTITUDE:
-    LPP_POWER:
-    LPP_DISTANCE:
-    LPP_ENERGY:
-    LPP_DIRECTION:
-    LPP_UNIXTIME:
-    LPP_GYROMETER:
-    LPP_GPS:
-    LPP_SWITCH:
-    LPP_CONCENTRATION:
-    LPP_COLOUR:
+    case LPP_DIGITAL_INPUT:
+    case LPP_DIGITAL_OUTPUT:
+    case LPP_ANALOG_INPUT:
+    case LPP_ANALOG_OUTPUT:
+    case LPP_GENERIC_SENSOR:
+    case LPP_LUMINOSITY:
+    case LPP_PRESENCE:
+    case LPP_TEMPERATURE:
+    case LPP_RELATIVE_HUMIDITY:
+    case LPP_ACCELEROMETER:
+    case LPP_BAROMETRIC_PRESSURE:
+    case LPP_VOLTAGE:
+    case LPP_CURRENT:
+    case LPP_FREQUENCY:
+    case LPP_PERCENTAGE:
+    case LPP_ALTITUDE:
+    case LPP_POWER:
+    case LPP_DISTANCE:
+    case LPP_ENERGY:
+    case LPP_DIRECTION:
+    case LPP_UNIXTIME:
+    case LPP_GYROMETER:
+    case LPP_GPS:
+    case LPP_SWITCH:
+    case LPP_CONCENTRATION:
+    case LPP_COLOUR:
       return true;
   }
 
@@ -167,13 +167,13 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
 
 bool CayenneLPP::getTypeSigned(uint8_t type) {
   switch (type) {
-    LPP_ANALOG_INPUT:
-    LPP_ANALOG_OUTPUT:
-    LPP_TEMPERATURE:
-    LPP_ACCELEROMETER:
-    LPP_ALTITUDE:
-    LPP_GYROMETER:
-    LPP_GPS:
+    case LPP_ANALOG_INPUT:
+    case LPP_ANALOG_OUTPUT:
+    case LPP_TEMPERATURE:
+    case LPP_ACCELEROMETER:
+    case LPP_ALTITUDE:
+    case LPP_GYROMETER:
+    case LPP_GPS:
       return true;
   }
   return false;
