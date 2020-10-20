@@ -42,132 +42,312 @@ uint8_t CayenneLPP::getError() {
 // ----------------------------------------------------------------------------
 
 bool CayenneLPP::isType(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return true;
-  if (LPP_DIGITAL_OUTPUT == type) return true;
-  if (LPP_ANALOG_INPUT == type) return true;
-  if (LPP_ANALOG_OUTPUT == type) return true;
-  if (LPP_GENERIC_SENSOR == type) return true;
-  if (LPP_LUMINOSITY == type) return true;
-  if (LPP_PRESENCE == type) return true;
-  if (LPP_TEMPERATURE == type) return true;
-  if (LPP_RELATIVE_HUMIDITY == type) return true;
-  if (LPP_ACCELEROMETER == type) return true;
-  if (LPP_BAROMETRIC_PRESSURE == type) return true;
-  if (LPP_VOLTAGE == type) return true;
-  if (LPP_CURRENT == type) return true;
-  if (LPP_FREQUENCY == type) return true;
-  if (LPP_PERCENTAGE == type) return true;
-  if (LPP_ALTITUDE == type) return true;
-  if (LPP_POWER == type) return true;
-  if (LPP_DISTANCE == type) return true;
-  if (LPP_ENERGY == type) return true;
-  if (LPP_DIRECTION == type) return true;
-  if (LPP_UNIXTIME == type) return true;
-  if (LPP_GYROMETER == type) return true;
-  if (LPP_GPS == type) return true;
-  if (LPP_SWITCH == type) return true;
-  if (LPP_CONCENTRATION == type) return true;
-  if (LPP_COLOUR == type) return true;
+
+  switch (type) { 
+    case LPP_DIGITAL_INPUT:
+    case LPP_DIGITAL_OUTPUT:
+    case LPP_ANALOG_INPUT:
+    case LPP_ANALOG_OUTPUT:
+    case LPP_GENERIC_SENSOR:
+    case LPP_LUMINOSITY:
+    case LPP_PRESENCE:
+    case LPP_TEMPERATURE:
+    case LPP_RELATIVE_HUMIDITY:
+    case LPP_ACCELEROMETER:
+    case LPP_BAROMETRIC_PRESSURE:
+    case LPP_VOLTAGE:
+    case LPP_CURRENT:
+    case LPP_FREQUENCY:
+    case LPP_PERCENTAGE:
+    case LPP_ALTITUDE:
+    case LPP_POWER:
+    case LPP_DISTANCE:
+    case LPP_ENERGY:
+    case LPP_DIRECTION:
+    case LPP_UNIXTIME:
+    case LPP_GYROMETER:
+    case LPP_GPS:
+    case LPP_SWITCH:
+    case LPP_CONCENTRATION:
+    case LPP_COLOUR:
+      return true;
+  }
+
   return false;
 }
 
 const char * CayenneLPP::getTypeName(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return "digital_in";
-  if (LPP_DIGITAL_OUTPUT == type) return "digital_out";
-  if (LPP_ANALOG_INPUT == type) return "analog_in";
-  if (LPP_ANALOG_OUTPUT == type) return "analog_out";
-  if (LPP_GENERIC_SENSOR == type) return "generic";
-  if (LPP_LUMINOSITY == type) return "luminosity";
-  if (LPP_PRESENCE == type) return "presence";
-  if (LPP_TEMPERATURE == type) return "temperature";
-  if (LPP_RELATIVE_HUMIDITY == type) return "humidity";
-  if (LPP_ACCELEROMETER == type) return "accelerometer";
-  if (LPP_BAROMETRIC_PRESSURE == type) return "pressure";
-  if (LPP_VOLTAGE == type) return "voltage";
-  if (LPP_CURRENT == type) return "current";
-  if (LPP_FREQUENCY == type) return "frequency";
-  if (LPP_PERCENTAGE == type) return "percentage";
-  if (LPP_ALTITUDE == type) return "altitude";
-  if (LPP_POWER == type) return "power";
-  if (LPP_DISTANCE == type) return "distance";
-  if (LPP_ENERGY == type) return "energy";
-  if (LPP_DIRECTION == type) return "direction";
-  if (LPP_UNIXTIME == type) return "time";
-  if (LPP_GYROMETER == type) return "gyrometer";
-  if (LPP_GPS == type) return "gps";
-  if (LPP_SWITCH == type) return "switch";
-  if (LPP_CONCENTRATION == type) return "concentration";
-  if (LPP_COLOUR == type) return "colour";
-  return 0;
+
+    switch (type) {
+
+        case LPP_DIGITAL_INPUT:
+          return "digital_in";
+
+        case LPP_DIGITAL_OUTPUT:
+          return "digital_out";
+
+        case LPP_ANALOG_INPUT:
+          return "analog_in";
+
+        case LPP_ANALOG_OUTPUT:
+          return "analog_out";
+
+        case LPP_GENERIC_SENSOR:
+          return "generic";
+
+        case LPP_LUMINOSITY:
+          return "luminosity";
+
+        case LPP_PRESENCE:
+          return "presence";
+
+        case LPP_TEMPERATURE:
+          return "temperature";
+
+        case LPP_RELATIVE_HUMIDITY:
+          return "humidity";
+
+        case LPP_ACCELEROMETER:
+          return "accelerometer";
+
+        case LPP_BAROMETRIC_PRESSURE:
+          return "pressure";
+
+        case LPP_VOLTAGE:
+          return "voltage";
+
+        case LPP_CURRENT:
+          return "current";
+
+        case LPP_FREQUENCY:
+          return "frequency";
+
+        case LPP_PERCENTAGE:
+          return "percentage";
+
+        case LPP_ALTITUDE:
+          return "altitude";
+
+        case LPP_POWER:
+          return "power";
+
+        case LPP_DISTANCE:
+          return "distance";
+
+        case LPP_ENERGY:
+          return "energy";
+
+        case LPP_DIRECTION:
+          return "direction";
+
+        case LPP_UNIXTIME:
+          return "time";
+
+        case LPP_GYROMETER:
+          return "gyrometer";
+
+        case LPP_GPS:
+          return "gps";
+
+        case LPP_SWITCH:
+          return "switch";
+
+        case LPP_CONCENTRATION:
+          return "concentration";
+
+        case LPP_COLOUR:
+          return "colour";
+
+        default:
+          return nullptr;
+    }
+
 }
 
 uint8_t CayenneLPP::getTypeSize(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return LPP_DIGITAL_INPUT_SIZE;
-  if (LPP_DIGITAL_OUTPUT == type) return LPP_DIGITAL_OUTPUT_SIZE;
-  if (LPP_ANALOG_INPUT == type) return LPP_ANALOG_INPUT_SIZE;
-  if (LPP_ANALOG_OUTPUT == type) return LPP_ANALOG_OUTPUT_SIZE;
-  if (LPP_GENERIC_SENSOR == type) return LPP_GENERIC_SENSOR_SIZE;
-  if (LPP_LUMINOSITY == type) return LPP_LUMINOSITY_SIZE;
-  if (LPP_PRESENCE == type) return LPP_PRESENCE_SIZE;
-  if (LPP_TEMPERATURE == type) return LPP_TEMPERATURE_SIZE;
-  if (LPP_RELATIVE_HUMIDITY == type) return LPP_RELATIVE_HUMIDITY_SIZE;
-  if (LPP_ACCELEROMETER == type) return LPP_ACCELEROMETER_SIZE;
-  if (LPP_BAROMETRIC_PRESSURE == type) return LPP_BAROMETRIC_PRESSURE_SIZE;
-  if (LPP_VOLTAGE == type) return LPP_VOLTAGE_SIZE;
-  if (LPP_CURRENT == type) return LPP_CURRENT_SIZE;
-  if (LPP_FREQUENCY == type) return LPP_FREQUENCY_SIZE;
-  if (LPP_PERCENTAGE == type) return LPP_PERCENTAGE_SIZE;
-  if (LPP_ALTITUDE == type) return LPP_ALTITUDE_SIZE;
-  if (LPP_POWER == type) return LPP_POWER_SIZE;
-  if (LPP_DISTANCE == type) return LPP_DISTANCE_SIZE;
-  if (LPP_ENERGY == type) return LPP_ENERGY_SIZE;
-  if (LPP_DIRECTION == type) return LPP_DIRECTION_SIZE;
-  if (LPP_UNIXTIME == type) return LPP_UNIXTIME_SIZE;
-  if (LPP_GYROMETER == type) return LPP_GYROMETER_SIZE;
-  if (LPP_GPS == type) return LPP_GPS_SIZE;
-  if (LPP_SWITCH == type) return LPP_SWITCH_SIZE;
-  if (LPP_CONCENTRATION == type) return LPP_CONCENTRATION_SIZE;
-  if (LPP_COLOUR == type) return LPP_COLOUR_SIZE;
-  return 0;
+
+  switch (type) {
+
+    case LPP_DIGITAL_INPUT:
+      return LPP_DIGITAL_INPUT_SIZE;
+
+    case LPP_DIGITAL_OUTPUT:
+      return LPP_DIGITAL_OUTPUT_SIZE;
+
+    case LPP_ANALOG_INPUT:
+      return LPP_ANALOG_INPUT_SIZE;
+
+    case LPP_ANALOG_OUTPUT:
+      return LPP_ANALOG_OUTPUT_SIZE;
+
+    case LPP_GENERIC_SENSOR:
+      return LPP_GENERIC_SENSOR_SIZE;
+
+    case LPP_LUMINOSITY:
+      return LPP_LUMINOSITY_SIZE;
+
+    case LPP_PRESENCE:
+      return LPP_PRESENCE_SIZE;
+
+    case LPP_TEMPERATURE:
+      return LPP_TEMPERATURE_SIZE;
+
+    case LPP_RELATIVE_HUMIDITY:
+      return LPP_RELATIVE_HUMIDITY_SIZE;
+
+    case LPP_ACCELEROMETER:
+      return LPP_ACCELEROMETER_SIZE;
+
+    case LPP_BAROMETRIC_PRESSURE:
+      return LPP_BAROMETRIC_PRESSURE_SIZE;
+
+    case LPP_VOLTAGE:
+      return LPP_VOLTAGE_SIZE;
+
+    case LPP_CURRENT:
+      return LPP_CURRENT_SIZE;
+
+    case LPP_FREQUENCY:
+      return LPP_FREQUENCY_SIZE;
+
+    case LPP_PERCENTAGE:
+      return LPP_PERCENTAGE_SIZE;
+
+    case LPP_ALTITUDE:
+      return LPP_ALTITUDE_SIZE;
+
+    case LPP_POWER:
+      return LPP_POWER_SIZE;
+
+    case LPP_DISTANCE:
+      return LPP_DISTANCE_SIZE;
+
+    case LPP_ENERGY:
+      return LPP_ENERGY_SIZE;
+
+    case LPP_DIRECTION:
+      return LPP_DIRECTION_SIZE;
+
+    case LPP_UNIXTIME:
+      return LPP_UNIXTIME_SIZE;
+
+    case LPP_GYROMETER:
+      return LPP_GYROMETER_SIZE;
+
+    case LPP_GPS:
+      return LPP_GPS_SIZE;
+
+    case LPP_SWITCH:
+      return LPP_SWITCH_SIZE;
+
+    case LPP_CONCENTRATION:
+      return LPP_CONCENTRATION_SIZE;
+
+    case LPP_COLOUR:
+      return LPP_COLOUR_SIZE;
+
+    default:
+      return 0;
+  }
 }
 
 uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
-  if (LPP_DIGITAL_INPUT == type) return LPP_DIGITAL_INPUT_MULT;
-  if (LPP_DIGITAL_OUTPUT == type) return LPP_DIGITAL_OUTPUT_MULT;
-  if (LPP_ANALOG_INPUT == type) return LPP_ANALOG_INPUT_MULT;
-  if (LPP_ANALOG_OUTPUT == type) return LPP_ANALOG_OUTPUT_MULT;
-  if (LPP_GENERIC_SENSOR == type) return LPP_GENERIC_SENSOR_MULT;
-  if (LPP_LUMINOSITY == type) return LPP_LUMINOSITY_MULT;
-  if (LPP_PRESENCE == type) return LPP_PRESENCE_MULT;
-  if (LPP_TEMPERATURE == type) return LPP_TEMPERATURE_MULT;
-  if (LPP_RELATIVE_HUMIDITY == type) return LPP_RELATIVE_HUMIDITY_MULT;
-  if (LPP_ACCELEROMETER == type) return LPP_ACCELEROMETER_MULT;
-  if (LPP_BAROMETRIC_PRESSURE == type) return LPP_BAROMETRIC_PRESSURE_MULT;
-  if (LPP_VOLTAGE == type) return LPP_VOLTAGE_MULT;
-  if (LPP_CURRENT == type) return LPP_CURRENT_MULT;
-  if (LPP_FREQUENCY == type) return LPP_FREQUENCY_MULT;
-  if (LPP_PERCENTAGE == type) return LPP_PERCENTAGE_MULT;
-  if (LPP_ALTITUDE == type) return LPP_ALTITUDE_MULT;
-  if (LPP_POWER == type) return LPP_POWER_MULT;
-  if (LPP_DISTANCE == type) return LPP_DISTANCE_MULT;
-  if (LPP_ENERGY == type) return LPP_ENERGY_MULT;
-  if (LPP_DIRECTION == type) return LPP_DIRECTION_MULT;
-  if (LPP_UNIXTIME == type) return LPP_UNIXTIME_MULT;
-  if (LPP_GYROMETER == type) return LPP_GYROMETER_MULT;
-  if (LPP_SWITCH == type) return LPP_SWITCH_MULT;
-  if (LPP_CONCENTRATION == type) return LPP_CONCENTRATION_MULT;
-  if (LPP_COLOUR == type) return LPP_COLOUR_MULT;
-  return 0;
+
+  switch (type) {
+
+    case LPP_DIGITAL_INPUT:
+      return LPP_DIGITAL_INPUT_MULT;
+
+    case LPP_DIGITAL_OUTPUT:
+      return LPP_DIGITAL_OUTPUT_MULT;
+
+    case LPP_ANALOG_INPUT:
+      return LPP_ANALOG_INPUT_MULT;
+
+    case LPP_ANALOG_OUTPUT:
+      return LPP_ANALOG_OUTPUT_MULT;
+
+    case LPP_GENERIC_SENSOR:
+      return LPP_GENERIC_SENSOR_MULT;
+
+    case LPP_LUMINOSITY:
+      return LPP_LUMINOSITY_MULT;
+
+    case LPP_PRESENCE:
+      return LPP_PRESENCE_MULT;
+
+    case LPP_TEMPERATURE:
+      return LPP_TEMPERATURE_MULT;
+
+    case LPP_RELATIVE_HUMIDITY:
+      return LPP_RELATIVE_HUMIDITY_MULT;
+
+    case LPP_ACCELEROMETER:
+      return LPP_ACCELEROMETER_MULT;
+
+    case LPP_BAROMETRIC_PRESSURE:
+      return LPP_BAROMETRIC_PRESSURE_MULT;
+
+    case LPP_VOLTAGE:
+      return LPP_VOLTAGE_MULT;
+
+    case LPP_CURRENT:
+      return LPP_CURRENT_MULT;
+
+    case LPP_FREQUENCY:
+      return LPP_FREQUENCY_MULT;
+
+    case LPP_PERCENTAGE:
+      return LPP_PERCENTAGE_MULT;
+
+    case LPP_ALTITUDE:
+      return LPP_ALTITUDE_MULT;
+
+    case LPP_POWER:
+      return LPP_POWER_MULT;
+
+    case LPP_DISTANCE:
+      return LPP_DISTANCE_MULT;
+
+    case LPP_ENERGY:
+      return LPP_ENERGY_MULT;
+
+    case LPP_DIRECTION:
+      return LPP_DIRECTION_MULT;
+
+    case LPP_UNIXTIME:
+      return LPP_UNIXTIME_MULT;
+
+    case LPP_GYROMETER:
+      return LPP_GYROMETER_MULT;
+
+    case LPP_SWITCH:
+      return LPP_SWITCH_MULT;
+
+    case LPP_CONCENTRATION:
+      return LPP_CONCENTRATION_MULT;
+
+    case LPP_COLOUR:
+      return LPP_COLOUR_MULT;
+
+    default:
+      return 0;
+  }
 }
 
 bool CayenneLPP::getTypeSigned(uint8_t type) {
-  if (LPP_ANALOG_INPUT == type) return true;
-  if (LPP_ANALOG_OUTPUT == type) return true;
-  if (LPP_TEMPERATURE == type) return true;
-  if (LPP_ACCELEROMETER == type) return true;
-  if (LPP_ALTITUDE == type) return true;
-  if (LPP_GYROMETER == type) return true;
-  if (LPP_GPS == type) return true;
+	
+  switch (type) {
+		  
+    case LPP_ANALOG_INPUT:
+    case LPP_ANALOG_OUTPUT:
+    case LPP_TEMPERATURE:
+    case LPP_ACCELEROMETER:
+    case LPP_ALTITUDE:
+    case LPP_GYROMETER:
+    case LPP_GPS:
+      return true;
+  }
   return false;
 }
 
