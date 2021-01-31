@@ -14,5 +14,5 @@ jobs:
           project-type: library
           recursive: true
           # report-file:
-          verbose: true
+          verbose: false
           token: GITHUB_TOKEN
