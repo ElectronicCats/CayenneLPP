@@ -56,7 +56,7 @@ jobs:
 
           - arduino-boards-fqbn: esp32:esp32:featheresp32:FlashFreq=80
             platform-url: https://dl.espressif.com/dl/package_esp32_index.json
-            examples-exclude: Basic_LoRaWAN_Beelan
+            sketches-exclude: Basic_LoRaWAN_Beelan
 
       # Do not cancel all jobs / architectures if one job fails
       fail-fast: false
@@ -74,4 +74,4 @@ jobs:
           arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
           platform-url: ${{ matrix.platform-url }}
           required-libraries: ${{ env.REQUIRED_LIBRARIES }}
-          examples-exclude: ${{ matrix.examples-exclude }}
+          sketches-exclude: ${{ matrix.sketches-exclude }}
