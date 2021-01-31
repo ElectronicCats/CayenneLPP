@@ -10,7 +10,7 @@ jobs:
           # path: ./
           version: 1.x
           compliance: strict
-          library-manager: submit
+          library-manager: update
           project-type: library
           recursive: false
           # report-file:
