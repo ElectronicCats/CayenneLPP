@@ -69,7 +69,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Compile all examples
-        uses: ArminJo/arduino-test-compile@master
+        uses: ArminJo/arduino-test-compile@v3
         with:
           arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
           platform-url: ${{ matrix.platform-url }}
