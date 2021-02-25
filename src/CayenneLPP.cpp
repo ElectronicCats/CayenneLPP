@@ -43,34 +43,86 @@ uint8_t CayenneLPP::getError() {
 
 bool CayenneLPP::isType(uint8_t type) {
 
-  switch (type) { 
+  switch (type) {
+#ifndef CAYENNE_DISABLE_DIGITAL_INPUT
     case LPP_DIGITAL_INPUT:
+#endif
+#ifndef CAYENNE_DISABLE_DIGITAL_OUTPUT
     case LPP_DIGITAL_OUTPUT:
+#endif
+#ifndef CAYENNE_DISABLE_ANALOG_INPUT
     case LPP_ANALOG_INPUT:
+#endif
+#ifndef CAYENNE_DISABLE_ANALOG_OUTPUT
     case LPP_ANALOG_OUTPUT:
+#endif
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
     case LPP_GENERIC_SENSOR:
+#endif
+#ifndef CAYENNE_DISABLE_LUMINOSITY
     case LPP_LUMINOSITY:
+#endif
+#ifndef CAYENNE_DISABLE_PRESENCE
     case LPP_PRESENCE:
+#endif
+#ifndef CAYENNE_DISABLE_TEMPERATURE
     case LPP_TEMPERATURE:
+#endif
+#ifndef CAYENNE_DISABLE_RELATIVE_HUMIDITY
     case LPP_RELATIVE_HUMIDITY:
+#endif
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
     case LPP_ACCELEROMETER:
+#endif
+#ifndef CAYENNE_DISABLE_BAROMETRIC_PRESSUE
     case LPP_BAROMETRIC_PRESSURE:
+#endif
+#ifndef CAYENNE_DISABLE_VOLTAGE
     case LPP_VOLTAGE:
+#endif
+#ifndef CAYENNE_DISABLE_CURRENT
     case LPP_CURRENT:
+#endif
+#ifndef CAYENNE_DISABLE_FREQUENCY
     case LPP_FREQUENCY:
+#endif
+#ifndef CAYENNE_DISABLE_PERCENTAGE
     case LPP_PERCENTAGE:
+#endif
+#ifndef CAYENNE_DISABLE_ALTITUDE
     case LPP_ALTITUDE:
+#endif
+#ifndef CAYENNE_DISABLE_POWER
     case LPP_POWER:
+#endif
+#ifndef CAYENNE_DISABLE_DISTANCE
     case LPP_DISTANCE:
+#endif
+#ifndef CAYENNE_DISABLE_ENERGY
     case LPP_ENERGY:
+#endif
+#ifndef CAYENNE_DISABLE_DIRECTION
     case LPP_DIRECTION:
+#endif
+#ifndef CAYENNE_DISABLE_UNIX_TIME
     case LPP_UNIXTIME:
+#endif
+#ifndef CAYENNE_DISABLE_GYROMETER
     case LPP_GYROMETER:
+#endif
+#ifndef CAYENNE_DISABLE_GPS
     case LPP_GPS:
+#endif
+#ifndef CAYENNE_DISABLE_SWITCH
     case LPP_SWITCH:
+#endif
+#ifndef CAYENNE_DISABLE_CONCENTRATION
     case LPP_CONCENTRATION:
+#endif
+#ifndef CAYENNE_DISABLE_COLOUR
     case LPP_COLOUR:
       return true;
+#endif
   }
 
   return false;
@@ -80,83 +132,135 @@ const char * CayenneLPP::getTypeName(uint8_t type) {
 
     switch (type) {
 
+#ifndef CAYENNE_DISABLE_DIGITAL_INPUT
         case LPP_DIGITAL_INPUT:
           return "digital_in";
+#endif
 
+#ifndef CAYENNE_DISABLE_DIGITAL_OUTPUT
         case LPP_DIGITAL_OUTPUT:
           return "digital_out";
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_INPUT
         case LPP_ANALOG_INPUT:
           return "analog_in";
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_OUTPUT
         case LPP_ANALOG_OUTPUT:
           return "analog_out";
+#endif
 
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
         case LPP_GENERIC_SENSOR:
           return "generic";
+#endif
 
+#ifndef CAYENNE_DISABLE_LUMINOSITY
         case LPP_LUMINOSITY:
           return "luminosity";
+#endif
 
+#ifndef CAYENNE_DISABLE_PRESENCE
         case LPP_PRESENCE:
           return "presence";
+#endif
 
+#ifndef CAYENNE_DISABLE_TEMPERATURE
         case LPP_TEMPERATURE:
           return "temperature";
+#endif
 
+#ifndef CAYENNE_DISABLE_RELATIVE_HUMIDITY
         case LPP_RELATIVE_HUMIDITY:
           return "humidity";
+#endif
 
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
         case LPP_ACCELEROMETER:
           return "accelerometer";
+#endif
 
+#ifndef CAYENNE_DISABLE_BAROMETRIC_PRESSUE
         case LPP_BAROMETRIC_PRESSURE:
           return "pressure";
+#endif
 
+#ifndef CAYENNE_DISABLE_VOLTAGE
         case LPP_VOLTAGE:
           return "voltage";
+#endif
 
+#ifndef CAYENNE_DISABLE_CURRENT
         case LPP_CURRENT:
           return "current";
+#endif
 
+#ifndef CAYENNE_DISABLE_FREQUENCY
         case LPP_FREQUENCY:
           return "frequency";
+#endif
 
+#ifndef CAYENNE_DISABLE_PERCENTAGE
         case LPP_PERCENTAGE:
           return "percentage";
+#endif
 
+#ifndef CAYENNE_DISABLE_ALTITUDE
         case LPP_ALTITUDE:
           return "altitude";
+#endif
 
+#ifndef CAYENNE_DISABLE_POWER
         case LPP_POWER:
           return "power";
+#endif
 
+#ifndef CAYENNE_DISABLE_DISTANCE
         case LPP_DISTANCE:
           return "distance";
+#endif
 
+#ifndef CAYENNE_DISABLE_ENERGY
         case LPP_ENERGY:
           return "energy";
+#endif
 
+#ifndef CAYENNE_DISABLE_DIRECTION
         case LPP_DIRECTION:
           return "direction";
+#endif
 
+#ifndef CAYENNE_DISABLE_UNIX_TIME
         case LPP_UNIXTIME:
           return "time";
+#endif
 
+#ifndef CAYENNE_DISABLE_GYROMETER
         case LPP_GYROMETER:
           return "gyrometer";
+#endif
 
+#ifndef CAYENNE_DISABLE_GPS
         case LPP_GPS:
           return "gps";
+#endif
 
+#ifndef CAYENNE_DISABLE_SWITCH
         case LPP_SWITCH:
           return "switch";
+#endif
 
+#ifndef CAYENNE_DISABLE_CONCENTRATION
         case LPP_CONCENTRATION:
           return "concentration";
+#endif
 
+#ifndef CAYENNE_DISABLE_COLOUR
         case LPP_COLOUR:
           return "colour";
+#endif
 
         default:
           return nullptr;
@@ -168,83 +272,135 @@ uint8_t CayenneLPP::getTypeSize(uint8_t type) {
 
   switch (type) {
 
+#ifndef CAYENNE_DISABLE_DIGITAL_INPUT
     case LPP_DIGITAL_INPUT:
       return LPP_DIGITAL_INPUT_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_DIGITAL_OUTPUT
     case LPP_DIGITAL_OUTPUT:
       return LPP_DIGITAL_OUTPUT_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_INPUT
     case LPP_ANALOG_INPUT:
       return LPP_ANALOG_INPUT_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_OUTPUT
     case LPP_ANALOG_OUTPUT:
       return LPP_ANALOG_OUTPUT_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
     case LPP_GENERIC_SENSOR:
       return LPP_GENERIC_SENSOR_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_LUMINOSITY
     case LPP_LUMINOSITY:
       return LPP_LUMINOSITY_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_PRESENCE
     case LPP_PRESENCE:
       return LPP_PRESENCE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_TEMPERATURE
     case LPP_TEMPERATURE:
       return LPP_TEMPERATURE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_RELATIVE_HUMIDITY
     case LPP_RELATIVE_HUMIDITY:
       return LPP_RELATIVE_HUMIDITY_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
     case LPP_ACCELEROMETER:
       return LPP_ACCELEROMETER_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_BAROMETRIC_PRESSUE
     case LPP_BAROMETRIC_PRESSURE:
       return LPP_BAROMETRIC_PRESSURE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_VOLTAGE
     case LPP_VOLTAGE:
       return LPP_VOLTAGE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_CURRENT
     case LPP_CURRENT:
       return LPP_CURRENT_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_FREQUENCY
     case LPP_FREQUENCY:
       return LPP_FREQUENCY_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_PERCENTAGE
     case LPP_PERCENTAGE:
       return LPP_PERCENTAGE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_ALTITUDE
     case LPP_ALTITUDE:
       return LPP_ALTITUDE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_POWER
     case LPP_POWER:
       return LPP_POWER_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_DISTANCE
     case LPP_DISTANCE:
       return LPP_DISTANCE_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_ENERGY
     case LPP_ENERGY:
       return LPP_ENERGY_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_DIRECTION
     case LPP_DIRECTION:
       return LPP_DIRECTION_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_UNIX_TIME
     case LPP_UNIXTIME:
       return LPP_UNIXTIME_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_GYROMETER
     case LPP_GYROMETER:
       return LPP_GYROMETER_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_GPS
     case LPP_GPS:
       return LPP_GPS_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_SWITCH
     case LPP_SWITCH:
       return LPP_SWITCH_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_CONCENTRATION
     case LPP_CONCENTRATION:
       return LPP_CONCENTRATION_SIZE;
+#endif
 
+#ifndef CAYENNE_DISABLE_COLOUR
     case LPP_COLOUR:
       return LPP_COLOUR_SIZE;
+#endif
 
     default:
       return 0;
@@ -255,80 +411,130 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
 
   switch (type) {
 
+#ifndef CAYENNE_DISABLE_DIGITAL_INPUT
     case LPP_DIGITAL_INPUT:
       return LPP_DIGITAL_INPUT_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_DIGITAL_OUTPUT
     case LPP_DIGITAL_OUTPUT:
       return LPP_DIGITAL_OUTPUT_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_INPUT
     case LPP_ANALOG_INPUT:
       return LPP_ANALOG_INPUT_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_OUTPUT
     case LPP_ANALOG_OUTPUT:
       return LPP_ANALOG_OUTPUT_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
     case LPP_GENERIC_SENSOR:
       return LPP_GENERIC_SENSOR_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_LUMINOSITY
     case LPP_LUMINOSITY:
       return LPP_LUMINOSITY_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_PRESENCE
     case LPP_PRESENCE:
       return LPP_PRESENCE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_TEMPERATURE
     case LPP_TEMPERATURE:
       return LPP_TEMPERATURE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
     case LPP_RELATIVE_HUMIDITY:
       return LPP_RELATIVE_HUMIDITY_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
     case LPP_ACCELEROMETER:
       return LPP_ACCELEROMETER_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_BAROMETRIC_PRESSUE
     case LPP_BAROMETRIC_PRESSURE:
       return LPP_BAROMETRIC_PRESSURE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_VOLTAGE
     case LPP_VOLTAGE:
       return LPP_VOLTAGE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_CURRENT
     case LPP_CURRENT:
       return LPP_CURRENT_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_FREQUENCY
     case LPP_FREQUENCY:
       return LPP_FREQUENCY_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_PERCENTAGE
     case LPP_PERCENTAGE:
       return LPP_PERCENTAGE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_ALTITUDE
     case LPP_ALTITUDE:
       return LPP_ALTITUDE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_POWER
     case LPP_POWER:
       return LPP_POWER_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_DISTANCE
     case LPP_DISTANCE:
       return LPP_DISTANCE_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_ENERGY
     case LPP_ENERGY:
       return LPP_ENERGY_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_DIRECTION
     case LPP_DIRECTION:
       return LPP_DIRECTION_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_UNIX_TIME
     case LPP_UNIXTIME:
       return LPP_UNIXTIME_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_GYROMETER
     case LPP_GYROMETER:
       return LPP_GYROMETER_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_SWITCH
     case LPP_SWITCH:
       return LPP_SWITCH_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_CONCENTRATION
     case LPP_CONCENTRATION:
       return LPP_CONCENTRATION_MULT;
+#endif
 
+#ifndef CAYENNE_DISABLE_COLOUR
     case LPP_COLOUR:
       return LPP_COLOUR_MULT;
+#endif
 
     default:
       return 0;
@@ -336,16 +542,30 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
 }
 
 bool CayenneLPP::getTypeSigned(uint8_t type) {
-	
+
   switch (type) {
-		  
+
+#ifndef CAYENNE_DISABLE_ANALOG_INPUT
     case LPP_ANALOG_INPUT:
+#endif
+#ifndef CAYENNE_DISABLE_ANALOG_OUTPUT
     case LPP_ANALOG_OUTPUT:
+#endif
+#ifndef CAYENNE_DISABLE_TEMPERATURE
     case LPP_TEMPERATURE:
+#endif
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
     case LPP_ACCELEROMETER:
+#endif
+#ifndef CAYENNE_DISABLE_ALTITUDE
     case LPP_ALTITUDE:
+#endif
+#ifndef CAYENNE_DISABLE_GYROMETER
     case LPP_GYROMETER:
+#endif
+#ifndef CAYENNE_DISABLE_GPS
     case LPP_GPS:
+#endif
       return true;
   }
   return false;
@@ -372,7 +592,7 @@ template <typename T> uint8_t CayenneLPP::addField(uint8_t type, uint8_t channel
     return 0;
   }
 
-  // check sign  
+  // check sign
   bool sign = value < 0;
   if (sign) value = -value;
 
@@ -402,94 +622,139 @@ template <typename T> uint8_t CayenneLPP::addField(uint8_t type, uint8_t channel
 
 }
 
+#ifndef CAYENNE_DISABLE_DIGITAL_INPUT
 uint8_t CayenneLPP::addDigitalInput(uint8_t channel, uint32_t value) {
   return addField(LPP_DIGITAL_INPUT, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_DIGITAL_OUTPUT
 uint8_t CayenneLPP::addDigitalOutput(uint8_t channel, uint32_t value) {
   return addField(LPP_DIGITAL_OUTPUT, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_INPUT
 uint8_t CayenneLPP::addAnalogInput(uint8_t channel, float value) {
   return addField(LPP_ANALOG_INPUT, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_ANALOG_OUTPUT
 uint8_t CayenneLPP::addAnalogOutput(uint8_t channel, float value) {
   return addField(LPP_ANALOG_OUTPUT, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
 uint8_t CayenneLPP::addGenericSensor(uint8_t channel, float value)  {
   return addField(LPP_GENERIC_SENSOR, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_LUMINOSITY
 uint8_t CayenneLPP::addLuminosity(uint8_t channel, uint32_t value) {
   return addField(LPP_LUMINOSITY, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_PRESENCE
 uint8_t CayenneLPP::addPresence(uint8_t channel, uint32_t value) {
   return addField(LPP_PRESENCE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_TEMPERATURE
 uint8_t CayenneLPP::addTemperature(uint8_t channel, float value) {
   return addField(LPP_TEMPERATURE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_RELATIVE_HUMIDITY
 uint8_t CayenneLPP::addRelativeHumidity(uint8_t channel, float value) {
   return addField(LPP_RELATIVE_HUMIDITY, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_VOLTAGE
 uint8_t CayenneLPP::addVoltage(uint8_t channel, float value) {
   return addField(LPP_VOLTAGE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_CURRENT
 uint8_t CayenneLPP::addCurrent(uint8_t channel, float value) {
   return addField(LPP_CURRENT, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_FREQUENCY
 uint8_t CayenneLPP::addFrequency(uint8_t channel, uint32_t value) {
   return addField(LPP_FREQUENCY, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_PERCENTAGE
 uint8_t CayenneLPP::addPercentage(uint8_t channel, uint32_t value) {
   return addField(LPP_PERCENTAGE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_ALTITUDE
 uint8_t CayenneLPP::addAltitude(uint8_t channel, float value) {
   return addField(LPP_ALTITUDE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_POWER
 uint8_t CayenneLPP::addPower(uint8_t channel, uint32_t value) {
   return addField(LPP_POWER, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_DISTANCE
 uint8_t CayenneLPP::addDistance(uint8_t channel, float value) {
   return addField(LPP_DISTANCE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_ENERGY
 uint8_t CayenneLPP::addEnergy(uint8_t channel, float value) {
   return addField(LPP_ENERGY, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_BAROMETRIC_PRESSUE
 uint8_t CayenneLPP::addBarometricPressure(uint8_t channel, float value) {
   return addField(LPP_BAROMETRIC_PRESSURE, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_UNIX_TIME
 uint8_t CayenneLPP::addUnixTime(uint8_t channel, uint32_t value) {
   return addField(LPP_UNIXTIME, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_DIRECTION
 uint8_t CayenneLPP::addDirection(uint8_t channel, float value) {
   return addField(LPP_DIRECTION, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_SWITCH
 uint8_t CayenneLPP::addSwitch(uint8_t channel, uint32_t value) {
   return addField(LPP_SWITCH, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_CONCENTRATION
 uint8_t CayenneLPP::addConcentration(uint8_t channel, uint32_t value) {
   return addField(LPP_CONCENTRATION, channel, value);
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_COLOUR
 uint8_t CayenneLPP::addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b)
 {
   // check buffer overflow
@@ -502,13 +767,15 @@ uint8_t CayenneLPP::addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b)
   _buffer[_cursor++] = r;
   _buffer[_cursor++] = g;
   _buffer[_cursor++] = b;
- 
+
 
   return _cursor;
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
 uint8_t CayenneLPP::addAccelerometer(uint8_t channel, float x, float y, float z) {
-  
+
   // check buffer overflow
   if ((_cursor + LPP_ACCELEROMETER_SIZE + 2) > _maxsize) {
     _error = LPP_ERROR_OVERFLOW;
@@ -531,7 +798,9 @@ uint8_t CayenneLPP::addAccelerometer(uint8_t channel, float x, float y, float z)
   return _cursor;
 
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_GYROMETER
 uint8_t CayenneLPP::addGyrometer(uint8_t channel, float x, float y, float z) {
 
   // check buffer overflow
@@ -554,11 +823,12 @@ uint8_t CayenneLPP::addGyrometer(uint8_t channel, float x, float y, float z) {
   _buffer[_cursor++] = vz;
 
   return _cursor;
-
 }
+#endif
 
+#ifndef CAYENNE_DISABLE_GPS
 uint8_t CayenneLPP::addGPS(uint8_t channel, float latitude, float longitude, float altitude) {
-  
+
   // check buffer overflow
   if ((_cursor + LPP_GPS_SIZE + 2) > _maxsize) {
     _error = LPP_ERROR_OVERFLOW;
@@ -584,6 +854,7 @@ uint8_t CayenneLPP::addGPS(uint8_t channel, float latitude, float longitude, flo
   return _cursor;
 
 }
+#endif
 
 // ----------------------------------------------------------------------------
 
@@ -629,7 +900,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 
     // Get channel #
     uint8_t channel = buffer[index++];
-    
+
     // Get data type
     uint8_t type = buffer[index++];
     if (!isType(type)) {
@@ -655,35 +926,54 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
     data["name"] = String(getTypeName(type));
 
     // Parse types
-	if (LPP_COLOUR == type) {
+	if (false) {
+	}
+#ifndef CAYENNE_DISABLE_COLOUR
+	else if (LPP_COLOUR == type) {
 
       JsonObject object = data.createNestedObject("value");
       object["r"] = getValue(&buffer[index], 1, multiplier, is_signed);
       object["g"] = getValue(&buffer[index+1], 1, multiplier, is_signed);
       object["b"] = getValue(&buffer[index+2], 1, multiplier, is_signed);
 
-    } else if (LPP_ACCELEROMETER == type || LPP_GYROMETER == type) {
-
+    }
+#endif
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
+	else if (LPP_ACCELEROMETER == type) {
       JsonObject object = data.createNestedObject("value");
       object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
       object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
-
-    } else if (LPP_GPS == type) {
-
+    }
+#endif
+#ifndef CAYENNE_DISABLE_GYROMETER
+	else if (LPP_GYROMETER == type) {
+      JsonObject object = data.createNestedObject("value");
+      object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
+      object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+    }
+#endif
+#ifndef CAYENNE_DISABLE_GPS
+	else if (LPP_GPS == type) {
       JsonObject object = data.createNestedObject("value");
       object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
-
-    } else if (LPP_GENERIC_SENSOR == type || LPP_UNIXTIME == type) {
-
+    }
+#endif
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
+	else if (LPP_GENERIC_SENSOR == type) {
       data["value"] = getValue32(&buffer[index], size);
-
-    } else {
-
+    }
+#endif
+#ifndef CAYENNE_DISABLE_UNIX_TIME
+	else if (LPP_UNIXTIME == type) {
+      data["value"] = getValue32(&buffer[index], size);
+    }
+#endif
+	else {
       data["value"] = getValue(&buffer[index], size, multiplier, is_signed);
-
     }
 
     index += size;
@@ -705,7 +995,7 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
 
     // Get channel #
     uint8_t channel = buffer[index++];
-    
+
     // Get data type
     uint8_t type = buffer[index++];
     if (!isType(type)) {
@@ -728,31 +1018,58 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
     String name = String(getTypeName(type)) + "_" + channel;
 
     // Parse types
-	if (LPP_COLOUR == type) {
+	if (false) {
+	}
+#ifndef CAYENNE_DISABLE_COLOUR
+	else if (LPP_COLOUR == type) {
       JsonObject object = root.createNestedObject(name);
       object["r"] = getValue(&buffer[index], 1, multiplier, is_signed);
       object["g"] = getValue(&buffer[index+1], 1, multiplier, is_signed);
       object["b"] = getValue(&buffer[index+2], 1, multiplier, is_signed);
 
-    } else if (LPP_ACCELEROMETER == type || LPP_GYROMETER == type) {
+    }
+#endif
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
+	else if (LPP_ACCELEROMETER == type) {
 
       JsonObject object = root.createNestedObject(name);
       object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
       object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
 
-    } else if (LPP_GPS == type) {
+    }
+#endif
+#ifndef CAYENNE_DISABLE_GYROMETER
+	else if (LPP_GYROMETER == type) {
+
+      JsonObject object = root.createNestedObject(name);
+      object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
+      object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+
+    }
+#endif
+#ifndef CAYENNE_DISABLE_GPS
+	else if (LPP_GPS == type) {
 
       JsonObject object = root.createNestedObject(name);
       object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
 
-    } else if (LPP_GENERIC_SENSOR == type || LPP_UNIXTIME == type) {
-
+    }
+#endif
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
+	else if (LPP_GENERIC_SENSOR == type) {
       root[name] = getValue32(&buffer[index], size);
-
-    } else {
+    }
+#endif
+#ifndef CAYENNE_DISABLE_UNIX_TIME
+	else if (LPP_UNIXTIME == type) {
+      root[name] = getValue32(&buffer[index], size);
+    }
+#endif
+	else {
 
       root[name] = getValue(&buffer[index], size, multiplier, is_signed);
 
