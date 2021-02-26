@@ -121,8 +121,8 @@ bool CayenneLPP::isType(uint8_t type) {
 #endif
 #ifndef CAYENNE_DISABLE_COLOUR
     case LPP_COLOUR:
-      return true;
 #endif
+      return true;
   }
 
   return false;
