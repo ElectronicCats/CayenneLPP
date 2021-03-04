@@ -451,7 +451,7 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
       return LPP_TEMPERATURE_MULT;
 #endif
 
-#ifndef CAYENNE_DISABLE_ACCELEROMETER
+#ifndef CAYENNE_DISABLE_RELATIVE_HUMIDITY
     case LPP_RELATIVE_HUMIDITY:
       return LPP_RELATIVE_HUMIDITY_MULT;
 #endif
