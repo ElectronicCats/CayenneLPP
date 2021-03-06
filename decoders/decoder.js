@@ -152,14 +152,19 @@ function lppDecode(bytes) {
 }
 
 // To use with TTN
-function Decoder(bytes, fPort) {
-    
+function decodeUplink(input) {
+
+    bytes = input.bytes;
+    fPort = input.fPort;
+
     // flat output (like original decoder):
     var response = {};
     lppDecode(bytes, 1).forEach(function(field) {
         response[field['name'] + '_' + field['channel']] = field['value'];
     });
-    return response;
+    return {
+￼      data: response
+￼   };
 
     // field output
     //return {'fields': lppDecode(bytes, fPort)};
