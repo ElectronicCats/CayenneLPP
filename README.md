@@ -6,7 +6,7 @@ This is an Arduino Library for Arduino Compatible with Cayenne Low Power Payload
 
 ## Introduction
 
-CayenneLPP is a format designed by [myDevices](https://mydevices.com/about/) to integrate LoRaWan nodes into their IoT platform [Cayenne](https://mydevices.com/cayenne/features/). It is used to send sensor data in a packed way to [The Things Network platform](https://www.thethingsnetwork.org). You can read more on https://mydevices.com/cayenne/docs/lora/#lora-cayenne-low-power-payload
+CayenneLPP is a format designed by [myDevices](https://mydevices.com) to integrate LoRaWan nodes into their [IoT Platform](https://mydevices.com/capabilities). It is used to send sensor data in a packed way to [The Things Network platform](https://www.thethingsnetwork.org). You can read more on [myDevices CayenneLPP](https://docs.mydevices.com/docs/lorawan/cayenne-lpp)
 
 ## Description
 
