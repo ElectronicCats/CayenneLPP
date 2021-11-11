@@ -12,6 +12,8 @@
 #include <ArduinoJson.h>
 #else
 #include <cstdint>
+#include <map>
+#include "CayenneLPPMessage.h"
 #endif
 
 #define LPP_DIGITAL_INPUT 0         // 1 byte
@@ -119,6 +121,8 @@ public:
 #ifdef ARDUINO
   uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray &root);
   uint8_t decodeTTN(uint8_t *buffer, uint8_t size, JsonObject &root);
+#else
+  uint8_t decode(uint8_t *buffer, uint8_t size, std::map<uint8_t, CayenneLPPMessage> &messageMap);
 #endif
 
   // Original LPPv1 data types
