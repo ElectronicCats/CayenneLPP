@@ -7,8 +7,12 @@
 #ifndef CAYENNE_LPP_H
 #define CAYENNE_LPP_H
 
+#ifdef ARDUINO
 #include <Arduino.h>
 #include <ArduinoJson.h>
+#else
+#include <cstdint>
+#endif
 
 #define LPP_DIGITAL_INPUT 0         // 1 byte
 #define LPP_DIGITAL_OUTPUT 1        // 1 byte
@@ -112,8 +116,10 @@ public:
 
   // Decoder methods
   const char *getTypeName(uint8_t type);
+#ifdef ARDUINO
   uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray &root);
   uint8_t decodeTTN(uint8_t *buffer, uint8_t size, JsonObject &root);
+#endif
 
   // Original LPPv1 data types
 #ifndef CAYENNE_DISABLE_DIGITAL_INPUT

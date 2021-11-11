@@ -5,6 +5,11 @@
 
 #include "CayenneLPP.h"
 
+#ifndef ARDUINO
+#include <cstdlib>
+#include <cstring>
+#endif
+
 // ----------------------------------------------------------------------------
 
 CayenneLPP::CayenneLPP(uint8_t size) : _maxsize(size) {
@@ -889,6 +894,7 @@ uint32_t CayenneLPP::getValue32(uint8_t * buffer, uint8_t size) {
 
 }
 
+#ifdef ARDUINO
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 
   uint8_t count = 0;
@@ -1082,3 +1088,4 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
   return count;
 
 }
+#endif
