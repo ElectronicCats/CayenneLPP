@@ -1088,4 +1088,148 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
   return count;
 
 }
+#else
+uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, CayenneLPPMessage> &messageMap) {
+
+  uint8_t count = 0;
+  uint8_t index = 0;
+
+  while ((index + 2) < len) {
+
+    count++;
+
+    // Get channel #
+    uint8_t channel = buffer[index++];
+
+    // Get data type
+    uint8_t type = buffer[index++];
+    if (!isType(type)) {
+      _error = LPP_ERROR_UNKOWN_TYPE;
+      return 0;
+    }
+
+    // Type definition
+    uint8_t size = getTypeSize(type);
+    uint32_t multiplier = getTypeMultiplier(type);
+    bool is_signed = getTypeSigned(type);
+
+    // Check buffer size
+    if (index + size > len) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    // Parse types
+    switch (type) {
+    case LPP_DIGITAL_INPUT:
+      messageMap[channel].digitalInput = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_DIGITAL_OUTPUT:
+      messageMap[channel].digitalOutput = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_ANALOG_INPUT:
+      messageMap[channel].analogInput = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_ANALOG_OUTPUT:
+      messageMap[channel].analogOutput = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_LUMINOSITY:
+      messageMap[channel].luminosity = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_PRESENCE:
+      messageMap[channel].presence = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_TEMPERATURE:
+      messageMap[channel].temperature = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_RELATIVE_HUMIDITY:
+      messageMap[channel].relativeHumidity = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_BAROMETRIC_PRESSURE:
+      messageMap[channel].barometricPressure = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_VOLTAGE:
+      messageMap[channel].voltage = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_CURRENT:
+      messageMap[channel].current = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_FREQUENCY:
+      messageMap[channel].frequency = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_PERCENTAGE:
+      messageMap[channel].percentage = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_ALTITUDE:
+      messageMap[channel].altitude = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_CONCENTRATION:
+      messageMap[channel].concentration = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_POWER:
+      messageMap[channel].power = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_DISTANCE:
+      messageMap[channel].distance = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_ENERGY:
+      messageMap[channel].energy = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_DIRECTION:
+      messageMap[channel].direction = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+    case LPP_SWITCH:
+      messageMap[channel].onOffSwitch = getValue(&buffer[index], size, multiplier, is_signed);
+      break;
+
+#ifndef CAYENNE_DISABLE_COLOUR
+    case LPP_COLOUR:
+      messageMap[channel].colour[0] = getValue(&buffer[index], 1, multiplier, is_signed);
+      messageMap[channel].colour[1] = getValue(&buffer[index+1], 1, multiplier, is_signed);
+      messageMap[channel].colour[2] = getValue(&buffer[index+2], 1, multiplier, is_signed);
+      break;
+#endif
+#ifndef CAYENNE_DISABLE_ACCELEROMETER
+    case LPP_ACCELEROMETER:
+      messageMap[channel].accelerometer[0] = getValue(&buffer[index], 2, multiplier, is_signed);
+      messageMap[channel].accelerometer[1] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      messageMap[channel].accelerometer[2] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+      break;
+#endif
+#ifndef CAYENNE_DISABLE_GYROMETER
+    case LPP_GYROMETER:
+      messageMap[channel].gyrometer[0] = getValue(&buffer[index], 2, multiplier, is_signed);
+      messageMap[channel].gyrometer[1] = getValue(&buffer[index+2], 2, multiplier, is_signed);
+      messageMap[channel].gyrometer[2] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+      break;
+#endif
+#ifndef CAYENNE_DISABLE_GPS
+    case LPP_GPS:
+      messageMap[channel].gps[0] = getValue(&buffer[index], 3, 10000, is_signed);
+      messageMap[channel].gps[1] = getValue(&buffer[index+3], 3, 10000, is_signed);
+      messageMap[channel].gps[2] = getValue(&buffer[index+6], 3, 100, is_signed);
+      break;
+#endif
+#ifndef CAYENNE_DISABLE_GENERIC_SENSOR
+    case LPP_GENERIC_SENSOR:
+      messageMap[channel].genericSensor = getValue32(&buffer[index], size);
+      break;
+#endif
+#ifndef CAYENNE_DISABLE_UNIX_TIME
+    case LPP_UNIXTIME:
+      messageMap[channel].unixTime = getValue32(&buffer[index], size);
+      break;
+#endif
+    default:
+      return 0;
+      break;
+    }
+
+    index += size;
+
+  }
+
+  return count;
+
+}
 #endif
