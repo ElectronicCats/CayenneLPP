@@ -1,3 +1,5 @@
+cmake_minimum_required(VERSION 3.12)
+
 Include(FetchContent)
 
 FetchContent_Declare(
@@ -9,8 +11,10 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Catch2)
 
 add_executable(clpp_test
-  main.cpp
+  LppMessageTest.cpp
+  LppPolylineTest.cpp
   ../../src/CayenneLPP.cpp
+  ../../src/CayenneLPPPolyline.cpp
 )
 
 target_include_directories(clpp_test

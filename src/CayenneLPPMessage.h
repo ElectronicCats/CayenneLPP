@@ -12,6 +12,7 @@
 
 #include <array>
 #include <cstdint>
+#include <vector>
 
 struct CayenneLPPMessage {
 
@@ -44,6 +45,9 @@ struct CayenneLPPMessage {
   uint32_t onOffSwitch = 0;
   uint32_t concentration = 0;
   std::array<uint8_t, 3> colour;
+
+  // Non-IPSO data types
+  std::vector<std::pair<double, double>> polyline;
 };
 
 #endif

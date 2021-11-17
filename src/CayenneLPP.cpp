@@ -12,7 +12,11 @@
 
 // ----------------------------------------------------------------------------
 
-CayenneLPP::CayenneLPP(uint8_t size) : _maxsize(size) {
+CayenneLPP::CayenneLPP(uint8_t size) : _maxsize(size)
+#ifndef ARDUINO
+  , _polyline(size - 2)
+#endif
+{
   _buffer = (uint8_t *)malloc(size);
   _cursor = 0;
 }
@@ -126,6 +130,9 @@ bool CayenneLPP::isType(uint8_t type) {
 #endif
 #ifndef CAYENNE_DISABLE_COLOUR
     case LPP_COLOUR:
+#endif
+#ifndef ARDUINO
+    case LPP_POLYLINE:
 #endif
       return true;
   }
@@ -861,6 +868,37 @@ uint8_t CayenneLPP::addGPS(uint8_t channel, float latitude, float longitude, flo
 }
 #endif
 
+
+#ifndef ARDUINO
+uint8_t CayenneLPP::addPolyline(uint8_t channel,
+                                const std::vector<std::pair<double, double>>& coords,
+                                CayenneLPPPolyline::Precision precision,
+                                CayenneLPPPolyline::Simplification simplification) {
+
+    // check buffer overflow for minimum size
+    if ((_cursor + LPP_MIN_POLYLINE_SIZE + 2) > _maxsize) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    // encode coordinates
+    auto buffer = _polyline.encode(coords, precision, simplification);
+
+    // check buffer overflow for encoded size
+    if ((_cursor + buffer.size() + 2) > _maxsize) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    _buffer[_cursor++] = channel;
+    _buffer[_cursor++] = LPP_POLYLINE;
+    std::memcpy(_buffer+_cursor, buffer.data(), buffer.size());
+    _cursor += buffer.size();
+
+    return _cursor;
+}
+#endif
+
 // ----------------------------------------------------------------------------
 
 float CayenneLPP::getValue(uint8_t * buffer, uint8_t size, uint32_t multiplier, bool is_signed) {
@@ -1219,6 +1257,14 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
     case LPP_UNIXTIME:
       messageMap[channel].unixTime = getValue32(&buffer[index], size);
       break;
+#endif
+#ifndef ARDUINO
+    case LPP_POLYLINE: {
+      size = buffer[index];
+      const std::vector<uint8_t> buffer2(&buffer[index], &buffer[index] + size);
+      messageMap[channel].polyline = _polyline.decode(buffer2);
+      break;
+    }
 #endif
     default:
       return 0;
