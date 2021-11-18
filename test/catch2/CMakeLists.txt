@@ -17,6 +17,10 @@ add_executable(clpp_test
   ../../src/CayenneLPPPolyline.cpp
 )
 
+set_property(TARGET clpp_test
+  PROPERTY CXX_STANDARD 17
+)
+
 target_include_directories(clpp_test
 PRIVATE
   ../../src

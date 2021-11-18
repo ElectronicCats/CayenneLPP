@@ -26,6 +26,7 @@
 #define LPP_PRESENCE 102            // 1 byte, bool
 #define LPP_TEMPERATURE 103         // 2 bytes, 0.1°C signed
 #define LPP_RELATIVE_HUMIDITY 104   // 1 byte, 0.5% unsigned
+#define LPP_POWER_MEASUREMENT 105   // 1 byte flags, 2 byte power, n * 2 bytes for optional fields
 #define LPP_ACCELEROMETER 113       // 2 bytes per axis, 0.001G
 #define LPP_BAROMETRIC_PRESSURE 115 // 2 bytes 0.1hPa unsigned
 #define LPP_VOLTAGE 116             // 2 bytes 0.01V unsigned

@@ -12,17 +12,23 @@
 
 #include <array>
 #include <cstdint>
+#include <map>
+#include <optional>
+#include <variant>
 #include <vector>
 
-struct CayenneLPPMessage {
+class CayenneLPPMessage {
+public:
+  template <typename T>
+  std::optional<T> getValue(uint8_t objectId) const;
 
   // Original LPPv1 data types
-  uint32_t digitalInput = 0;
-  uint32_t digitalOutput = 0;
+  float digitalInput = 0;
+  float digitalOutput = 0;
   float analogInput = 0.0f;
   float analogOutput = 0.0f;
-  uint32_t luminosity = 0;
-  uint32_t presence = 0;
+  float luminosity = 0;
+  float presence = 0;
   float temperature = 0.0f;
   float relativeHumidity = 0.0f;
   std::array<float, 3> accelerometer;
@@ -32,22 +38,27 @@ struct CayenneLPPMessage {
 
   // Additional data types
   uint32_t unixTime = 0;
-  float genericSensor = 0.0f;
+  uint32_t genericSensor = 0;
   float voltage = 0.0f;
   float current = 0.0f;
-  uint32_t frequency = 0;
-  uint32_t percentage = 0;
+  float frequency = 0;
+  float percentage = 0;
   float altitude = 0.0f;
-  uint32_t power = 0;
+  float power = 0;
   float distance = 0.0f;
   float energy = 0.0f;
   float direction = 0.0f;
-  uint32_t onOffSwitch = 0;
-  uint32_t concentration = 0;
+  float onOffSwitch = 0;
+  float concentration = 0;
   std::array<uint8_t, 3> colour;
 
   // Non-IPSO data types
   std::vector<std::pair<double, double>> polyline;
+
+private:
+  std::map<uint8_t, std::variant<float, uint32_t, std::array<float, 3>, std::array<uint8_t, 3>>> m_values;
+
+  friend class CayenneLPP;
 };
 
 #endif

@@ -133,6 +133,7 @@ bool CayenneLPP::isType(uint8_t type) {
 #endif
 #ifndef ARDUINO
     case LPP_POLYLINE:
+    case LPP_POWER_MEASUREMENT:
 #endif
       return true;
   }
@@ -1127,6 +1128,30 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
 
 }
 #else
+
+const std::map<uint8_t, std::tuple<float CayenneLPPMessage::*, uint8_t, uint32_t, bool>> lppObjects = {
+    { LPP_ALTITUDE, { &CayenneLPPMessage::altitude, LPP_ALTITUDE_SIZE, LPP_ALTITUDE_MULT, true } },
+    { LPP_ANALOG_INPUT, { &CayenneLPPMessage::analogInput, LPP_ANALOG_INPUT_SIZE, LPP_ANALOG_INPUT_MULT, true } },
+    { LPP_ANALOG_OUTPUT, { &CayenneLPPMessage::analogOutput, LPP_ANALOG_OUTPUT_SIZE, LPP_ANALOG_OUTPUT_MULT, true } },
+    { LPP_CONCENTRATION, { &CayenneLPPMessage::concentration, LPP_CONCENTRATION_SIZE, LPP_CONCENTRATION_MULT, false } },
+    { LPP_DIGITAL_INPUT, { &CayenneLPPMessage::digitalInput, LPP_DIGITAL_INPUT_SIZE, LPP_DIGITAL_INPUT_MULT, false } },
+    { LPP_DIGITAL_OUTPUT, { &CayenneLPPMessage::digitalOutput, LPP_DIGITAL_OUTPUT_SIZE, LPP_DIGITAL_OUTPUT_MULT, false } },
+    { LPP_DIRECTION, { &CayenneLPPMessage::direction, LPP_DIRECTION_SIZE, LPP_DIRECTION_MULT, false } },
+    { LPP_DISTANCE, { &CayenneLPPMessage::distance, LPP_DISTANCE_SIZE, LPP_DISTANCE_MULT, false } },
+    { LPP_LUMINOSITY, { &CayenneLPPMessage::luminosity, LPP_LUMINOSITY_SIZE, LPP_LUMINOSITY_MULT, false } },
+    { LPP_PRESENCE, { &CayenneLPPMessage::presence, LPP_PRESENCE_SIZE, LPP_PERCENTAGE_MULT, false } },
+    { LPP_TEMPERATURE, { &CayenneLPPMessage::temperature, LPP_TEMPERATURE_SIZE, LPP_TEMPERATURE_MULT, true } },
+    { LPP_RELATIVE_HUMIDITY, { &CayenneLPPMessage::relativeHumidity, LPP_RELATIVE_HUMIDITY_SIZE, LPP_RELATIVE_HUMIDITY_MULT, false } },
+    { LPP_BAROMETRIC_PRESSURE, { &CayenneLPPMessage::barometricPressure, LPP_BAROMETRIC_PRESSURE_SIZE, LPP_BAROMETRIC_PRESSURE_MULT, false } },
+    { LPP_VOLTAGE, { &CayenneLPPMessage::voltage, LPP_VOLTAGE_SIZE, LPP_VOLTAGE_MULT, false } },
+    { LPP_CURRENT, { &CayenneLPPMessage::current, LPP_CURRENT_SIZE, LPP_CURRENT_MULT, false } },
+    { LPP_FREQUENCY, { &CayenneLPPMessage::frequency, LPP_FREQUENCY_SIZE, LPP_FREQUENCY_MULT, false } },
+    { LPP_PERCENTAGE, { &CayenneLPPMessage::percentage, LPP_PERCENTAGE_SIZE, LPP_PERCENTAGE_MULT, false } },
+    { LPP_POWER, { &CayenneLPPMessage::power, LPP_POWER_SIZE, LPP_POWER_MULT, false } },
+    { LPP_ENERGY, { &CayenneLPPMessage::energy, LPP_ENERGY_SIZE, LPP_ENERGY_MULT, false } },
+    { LPP_SWITCH, { &CayenneLPPMessage::onOffSwitch, LPP_SWITCH_SIZE, LPP_SWITCH_MULT, false } }
+};
+
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, CayenneLPPMessage> &messageMap) {
 
   uint8_t count = 0;
@@ -1137,19 +1162,35 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
     count++;
 
     // Get channel #
-    uint8_t channel = buffer[index++];
+    const uint8_t channel = buffer[index++];
 
     // Get data type
-    uint8_t type = buffer[index++];
+    const uint8_t type = buffer[index++];
     if (!isType(type)) {
       _error = LPP_ERROR_UNKOWN_TYPE;
       return 0;
     }
 
     // Type definition
-    uint8_t size = getTypeSize(type);
-    uint32_t multiplier = getTypeMultiplier(type);
-    bool is_signed = getTypeSigned(type);
+    uint8_t size = 0;
+    uint32_t multiplier = 0;
+    bool is_signed = false;
+    if (lppObjects.count(type)) {
+      size = std::get<1>(lppObjects.at(type));
+      multiplier = std::get<2>(lppObjects.at(type));
+      is_signed = std::get<3>(lppObjects.at(type));
+
+      messageMap[channel].*std::get<0>(lppObjects.at(type)) = getValue(&buffer[index], size, multiplier, is_signed);
+      messageMap[channel].m_values[type] = getValue(&buffer[index], size, multiplier, is_signed);
+
+      index += size;
+      continue;
+    }
+
+    // Type definition
+    size = getTypeSize(type);
+    multiplier = getTypeMultiplier(type);
+    is_signed = getTypeSigned(type);
 
     // Check buffer size
     if (index + size > len) {
@@ -1159,72 +1200,12 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
 
     // Parse types
     switch (type) {
-    case LPP_DIGITAL_INPUT:
-      messageMap[channel].digitalInput = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_DIGITAL_OUTPUT:
-      messageMap[channel].digitalOutput = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_ANALOG_INPUT:
-      messageMap[channel].analogInput = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_ANALOG_OUTPUT:
-      messageMap[channel].analogOutput = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_LUMINOSITY:
-      messageMap[channel].luminosity = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_PRESENCE:
-      messageMap[channel].presence = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_TEMPERATURE:
-      messageMap[channel].temperature = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_RELATIVE_HUMIDITY:
-      messageMap[channel].relativeHumidity = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_BAROMETRIC_PRESSURE:
-      messageMap[channel].barometricPressure = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_VOLTAGE:
-      messageMap[channel].voltage = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_CURRENT:
-      messageMap[channel].current = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_FREQUENCY:
-      messageMap[channel].frequency = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_PERCENTAGE:
-      messageMap[channel].percentage = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_ALTITUDE:
-      messageMap[channel].altitude = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_CONCENTRATION:
-      messageMap[channel].concentration = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_POWER:
-      messageMap[channel].power = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_DISTANCE:
-      messageMap[channel].distance = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_ENERGY:
-      messageMap[channel].energy = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_DIRECTION:
-      messageMap[channel].direction = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-    case LPP_SWITCH:
-      messageMap[channel].onOffSwitch = getValue(&buffer[index], size, multiplier, is_signed);
-      break;
-
 #ifndef CAYENNE_DISABLE_COLOUR
     case LPP_COLOUR:
       messageMap[channel].colour[0] = getValue(&buffer[index], 1, multiplier, is_signed);
       messageMap[channel].colour[1] = getValue(&buffer[index+1], 1, multiplier, is_signed);
       messageMap[channel].colour[2] = getValue(&buffer[index+2], 1, multiplier, is_signed);
+      messageMap[channel].m_values[type] = messageMap[channel].colour;
       break;
 #endif
 #ifndef CAYENNE_DISABLE_ACCELEROMETER
@@ -1232,6 +1213,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
       messageMap[channel].accelerometer[0] = getValue(&buffer[index], 2, multiplier, is_signed);
       messageMap[channel].accelerometer[1] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       messageMap[channel].accelerometer[2] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+      messageMap[channel].m_values[type] = messageMap[channel].accelerometer;
       break;
 #endif
 #ifndef CAYENNE_DISABLE_GYROMETER
@@ -1239,6 +1221,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
       messageMap[channel].gyrometer[0] = getValue(&buffer[index], 2, multiplier, is_signed);
       messageMap[channel].gyrometer[1] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       messageMap[channel].gyrometer[2] = getValue(&buffer[index+4], 2, multiplier, is_signed);
+      messageMap[channel].m_values[type] = messageMap[channel].gyrometer;
       break;
 #endif
 #ifndef CAYENNE_DISABLE_GPS
@@ -1246,16 +1229,19 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
       messageMap[channel].gps[0] = getValue(&buffer[index], 3, 10000, is_signed);
       messageMap[channel].gps[1] = getValue(&buffer[index+3], 3, 10000, is_signed);
       messageMap[channel].gps[2] = getValue(&buffer[index+6], 3, 100, is_signed);
+      messageMap[channel].m_values[type] = messageMap[channel].gps;
       break;
 #endif
 #ifndef CAYENNE_DISABLE_GENERIC_SENSOR
     case LPP_GENERIC_SENSOR:
       messageMap[channel].genericSensor = getValue32(&buffer[index], size);
+      messageMap[channel].m_values[type] = messageMap[channel].genericSensor;
       break;
 #endif
 #ifndef CAYENNE_DISABLE_UNIX_TIME
     case LPP_UNIXTIME:
       messageMap[channel].unixTime = getValue32(&buffer[index], size);
+      messageMap[channel].m_values[type] = messageMap[channel].unixTime;
       break;
 #endif
 #ifndef ARDUINO
