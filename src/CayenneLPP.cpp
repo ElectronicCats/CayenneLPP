@@ -8,6 +8,9 @@
 #ifndef ARDUINO
 #include <cstdlib>
 #include <cstring>
+
+#include "CayenneLPPMessage.h"
+#include "CayenneLPPPowerMeasurement.h"
 #endif
 
 // ----------------------------------------------------------------------------
@@ -898,6 +901,30 @@ uint8_t CayenneLPP::addPolyline(uint8_t channel,
 
     return _cursor;
 }
+
+uint8_t CayenneLPP::addPowerMeasurement(uint8_t channel, const CayenneLPPPowerMeasurement& powerMeasurement) {
+    // check buffer overflow for minimum size
+    if ((_cursor + LPP_MIN_POWER_MEASUREMENT_SIZE + 2) > _maxsize) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    // encode coordinates
+    auto buffer = powerMeasurement.encode();
+
+    // check buffer overflow for encoded size
+    if ((_cursor + buffer.size() + 2) > _maxsize) {
+      _error = LPP_ERROR_OVERFLOW;
+      return 0;
+    }
+
+    _buffer[_cursor++] = channel;
+    _buffer[_cursor++] = LPP_POWER_MEASUREMENT;
+    std::memcpy(_buffer+_cursor, buffer.data(), buffer.size());
+    _cursor += buffer.size();
+
+    return _cursor;
+}
 #endif
 
 // ----------------------------------------------------------------------------
@@ -1249,6 +1276,14 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, Cayen
       size = buffer[index];
       const std::vector<uint8_t> buffer2(&buffer[index], &buffer[index] + size);
       messageMap[channel].polyline = _polyline.decode(buffer2);
+      messageMap[channel].m_values[type] = messageMap[channel].polyline;
+      break;
+    }
+    case LPP_POWER_MEASUREMENT: {
+      auto pwrMea = CayenneLPPPowerMeasurement::fromRawPointer(&buffer[index]);
+      size = pwrMea.encodedSize();
+      messageMap[channel].powerMeasurement = pwrMea;
+      messageMap[channel].m_values[type] = std::move(pwrMea);
       break;
     }
 #endif

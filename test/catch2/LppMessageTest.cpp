@@ -10,6 +10,7 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <CayenneLPP.h>
+#include <CayenneLPPMessage.h>
 
 TEST_CASE("CayenneLPPMessage parameters A-C are decoded", "[LppMessage]") {
     CayenneLPPMessage in;
@@ -123,4 +124,20 @@ TEST_CASE("CayenneLPPMessage parameters P-V are decoded", "[LppMessage]") {
     REQUIRE(in.temperature == out[10].temperature);
     REQUIRE(in.unixTime == out[11].unixTime);
     REQUIRE(in.voltage == out[12].voltage);
+}
+
+TEST_CASE("CayenneLPPMessage generic value access", "[CayenneLPPMessage]") {
+    CayenneLPP clpp(255);
+    clpp.addGPS(9, 4.0f, 5.0f, 6.0f);
+    clpp.addColour(10, 1, 2, 3);
+    clpp.addUnixTime(11, 1234);
+
+    std::map<uint8_t, CayenneLPPMessage> out;
+    clpp.decode(clpp.getBuffer(), clpp.getSize(), out);
+    REQUIRE(out[9].getValue<float>(LPP_GPS) == std::nullopt);
+    REQUIRE(out[9].getValue<std::array<float, 3>>(LPP_GPS) == std::array<float, 3>{ 4.0f, 5.0f, 6.0f });
+    REQUIRE(out[10].getValue<std::array<float, 3>>(LPP_COLOUR) == std::nullopt);
+    REQUIRE(out[10].getValue<std::array<uint8_t, 3>>(LPP_COLOUR) == std::array<uint8_t, 3>{ 1, 2, 3 });
+    REQUIRE(out[11].getValue<float>(LPP_UNIXTIME) == std::nullopt);
+    REQUIRE(out[11].getValue<uint32_t>(LPP_UNIXTIME) == 1234);
 }

@@ -17,6 +17,8 @@
 #include <variant>
 #include <vector>
 
+#include "CayenneLPPPowerMeasurement.h"
+
 class CayenneLPPMessage {
 public:
   template <typename T>
@@ -51,12 +53,20 @@ public:
   float onOffSwitch = 0;
   float concentration = 0;
   std::array<uint8_t, 3> colour;
+  std::optional<CayenneLPPPowerMeasurement> powerMeasurement;
 
   // Non-IPSO data types
   std::vector<std::pair<double, double>> polyline;
 
 private:
-  std::map<uint8_t, std::variant<float, uint32_t, std::array<float, 3>, std::array<uint8_t, 3>>> m_values;
+  using LppValue = std::variant<float,
+                                uint32_t,                               // Timestamp, generic
+                                std::array<float, 3>,                   // Acc, Gyro, GPS
+                                std::array<uint8_t, 3>,                 // Colour
+                                std::vector<std::pair<double, double>>, // Polyline
+                                CayenneLPPPowerMeasurement>;
+
+  std::map<uint8_t, LppValue> m_values;
 
   friend class CayenneLPP;
 };
