@@ -14,6 +14,7 @@
 #include <cstdint>
 #include <map>
 #include "CayenneLPPMessage.h"
+#include "CayenneLPPPolyline.h"
 #endif
 
 #define LPP_DIGITAL_INPUT 0         // 1 byte
@@ -40,8 +41,9 @@
 #define LPP_UNIXTIME 133            // 4 bytes, unsigned
 #define LPP_GYROMETER 134           // 2 bytes per axis, 0.01 °/s
 #define LPP_COLOUR 135              // 1 byte per RGB Color
-#define LPP_GPS 136    // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01 meter
-#define LPP_SWITCH 142 // 1 byte, 0/1
+#define LPP_GPS 136                 // 3 byte lon/lat 0.0001 °, 3 bytes alt 0.01 meter
+#define LPP_SWITCH 142              // 1 byte, 0/1
+#define LPP_POLYLINE 240            // 1 byte size, 1 byte delta factor, 3 byte lon/lat 0.0001° * factor, n (size-8) bytes deltas
 
 // Only Data Size
 #define LPP_DIGITAL_INPUT_SIZE 1
@@ -70,6 +72,7 @@
 #define LPP_SWITCH_SIZE 1
 #define LPP_CONCENTRATION_SIZE 2
 #define LPP_COLOUR_SIZE 3
+#define LPP_MIN_POLYLINE_SIZE 8
 
 // Multipliers
 #define LPP_DIGITAL_INPUT_MULT 1
@@ -207,6 +210,12 @@ public:
 #ifndef CAYENNE_DISABLE_COLOUR
   uint8_t addColour(uint8_t channel, uint8_t r, uint8_t g, uint8_t b);
 #endif
+#ifndef ARDUINO
+  uint8_t addPolyline(uint8_t channel,
+                      const std::vector<std::pair<double, double>>& coords,
+                      CayenneLPPPolyline::Precision precision = CayenneLPPPolyline::Prec0_0001,
+                      CayenneLPPPolyline::Simplification simplification = CayenneLPPPolyline::DouglasPeucker);
+#endif
 
 protected:
   bool isType(uint8_t type);
@@ -224,6 +233,10 @@ protected:
   uint8_t _maxsize;
   uint8_t _cursor;
   uint8_t _error = LPP_ERROR_OK;
+
+#ifndef ARDUINO
+  CayenneLPPPolyline _polyline;
+#endif
 };
 
 #endif

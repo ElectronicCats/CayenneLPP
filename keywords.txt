@@ -46,6 +46,7 @@ addSwitch	KEYWORD2
 
 addConcentration 	KEYWORD2
 addColour	KEYWORD2
+addPolyline	KEYWORD2
 
 getTypeName	KEYWORD2
 decode	KEYWORD2

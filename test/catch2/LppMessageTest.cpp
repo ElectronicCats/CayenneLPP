@@ -11,7 +11,7 @@
 
 #include <CayenneLPP.h>
 
-TEST_CASE("CayenneLPPMessage parameters A-C are decoded", "[CayenneLPPMessage]") {
+TEST_CASE("CayenneLPPMessage parameters A-C are decoded", "[LppMessage]") {
     CayenneLPPMessage in;
     in.accelerometer[0] = 1.0;
     in.accelerometer[1] = 2.0;
@@ -51,7 +51,7 @@ TEST_CASE("CayenneLPPMessage parameters A-C are decoded", "[CayenneLPPMessage]")
     REQUIRE(in.current == out[1].current);
 }
 
-TEST_CASE("CayenneLPPMessage parameters D-O are decoded", "[CayenneLPPMessage]") {
+TEST_CASE("CayenneLPPMessage parameters D-O are decoded", "[LppMessage]") {
     CayenneLPPMessage in;
     in.digitalInput = 13;
     in.digitalOutput = 14;
@@ -94,7 +94,7 @@ TEST_CASE("CayenneLPPMessage parameters D-O are decoded", "[CayenneLPPMessage]")
     REQUIRE(in.onOffSwitch == out[7].onOffSwitch);
 }
 
-TEST_CASE("CayenneLPPMessage parameters P-V are decoded", "[CayenneLPPMessage]") {
+TEST_CASE("CayenneLPPMessage parameters P-V are decoded", "[LppMessage]") {
     CayenneLPPMessage in;
     in.percentage = 28;
     in.power = 29;
