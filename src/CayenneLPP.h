@@ -13,8 +13,10 @@
 #else
 #include <cstdint>
 #include <map>
-#include "CayenneLPPMessage.h"
 #include "CayenneLPPPolyline.h"
+
+class CayenneLPPMessage;
+class CayenneLPPPowerMeasurement;
 #endif
 
 #define LPP_DIGITAL_INPUT 0         // 1 byte
@@ -26,6 +28,7 @@
 #define LPP_PRESENCE 102            // 1 byte, bool
 #define LPP_TEMPERATURE 103         // 2 bytes, 0.1°C signed
 #define LPP_RELATIVE_HUMIDITY 104   // 1 byte, 0.5% unsigned
+#define LPP_POWER_MEASUREMENT 105   // 1 byte flags, 2 byte power, n * 2 bytes for optional fields
 #define LPP_ACCELEROMETER 113       // 2 bytes per axis, 0.001G
 #define LPP_BAROMETRIC_PRESSURE 115 // 2 bytes 0.1hPa unsigned
 #define LPP_VOLTAGE 116             // 2 bytes 0.01V unsigned
@@ -73,6 +76,7 @@
 #define LPP_CONCENTRATION_SIZE 2
 #define LPP_COLOUR_SIZE 3
 #define LPP_MIN_POLYLINE_SIZE 8
+#define LPP_MIN_POWER_MEASUREMENT_SIZE 3
 
 // Multipliers
 #define LPP_DIGITAL_INPUT_MULT 1
@@ -215,6 +219,7 @@ public:
                       const std::vector<std::pair<double, double>>& coords,
                       CayenneLPPPolyline::Precision precision = CayenneLPPPolyline::Prec0_0001,
                       CayenneLPPPolyline::Simplification simplification = CayenneLPPPolyline::DouglasPeucker);
+  uint8_t addPowerMeasurement(uint8_t channel, const CayenneLPPPowerMeasurement& powerMeasurement);
 #endif
 
 protected:

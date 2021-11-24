@@ -13,8 +13,22 @@ FetchContent_MakeAvailable(Catch2)
 add_executable(clpp_test
   LppMessageTest.cpp
   LppPolylineTest.cpp
+  LppPowerMeasurementTest.cpp
+  ../../src/SFloat16.cpp
   ../../src/CayenneLPP.cpp
+  ../../src/CayenneLPPByteBuffer
+  ../../src/CayenneLPPMessage.cpp
   ../../src/CayenneLPPPolyline.cpp
+  ../../src/CayenneLPPPowerMeasurement.cpp
+)
+
+set_property(TARGET clpp_test
+  PROPERTY CXX_STANDARD 17
+)
+
+target_compile_options(clpp_test
+PRIVATE
+  -Wall -Wextra -Wpedantic -Werror
 )
 
 target_include_directories(clpp_test

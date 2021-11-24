@@ -10,19 +10,20 @@
 #include <catch2/catch_test_macros.hpp>
 
 #include <CayenneLPP.h>
+#include <CayenneLPPMessage.h>
 
 TEST_CASE("CayenneLPPMessage parameters A-C are decoded", "[LppMessage]") {
     CayenneLPPMessage in;
-    in.accelerometer[0] = 1.0;
-    in.accelerometer[1] = 2.0;
-    in.accelerometer[2] = 3.0;
-    in.altitude = 4.0;
-    in.analogInput = 5.0;
-    in.analogOutput = 6.0;
+    in.accelerometer[0] = -1.0;
+    in.accelerometer[1] = -2.0;
+    in.accelerometer[2] = -3.0;
+    in.altitude = -4.0;
+    in.analogInput = -5.0;
+    in.analogOutput = -6.0;
     in.barometricPressure = 7.0;
-    in.colour[0] = 8;
-    in.colour[1] = 9;
-    in.colour[2] = 10;
+    in.colour[0] = -8;
+    in.colour[1] = -9;
+    in.colour[2] = -10;
     in.concentration = 11;
     in.current = 12.0;
 
@@ -60,8 +61,8 @@ TEST_CASE("CayenneLPPMessage parameters D-O are decoded", "[LppMessage]") {
     in.energy = 17.0;
     in.frequency = 18;
     in.genericSensor = 19.0;
-    in.gps = { 20.0, 21.0, 22.0 };
-    in.gyrometer = { 23.0, 24.0, 25.0 };
+    in.gps = { -20.0, -21.0, -22.0 };
+    in.gyrometer = { -23.0, -24.0, -25.0 };
     in.luminosity = 26;
     in.onOffSwitch = 27;
 
@@ -100,7 +101,7 @@ TEST_CASE("CayenneLPPMessage parameters P-V are decoded", "[LppMessage]") {
     in.power = 29;
     in.presence = 30;
     in.relativeHumidity = 31.0;
-    in.temperature = 32.0;
+    in.temperature = -32.0;
     in.unixTime = 33;
     in.voltage = 34.0;
 
@@ -123,4 +124,20 @@ TEST_CASE("CayenneLPPMessage parameters P-V are decoded", "[LppMessage]") {
     REQUIRE(in.temperature == out[10].temperature);
     REQUIRE(in.unixTime == out[11].unixTime);
     REQUIRE(in.voltage == out[12].voltage);
+}
+
+TEST_CASE("CayenneLPPMessage generic value access", "[CayenneLPPMessage]") {
+    CayenneLPP clpp(255);
+    clpp.addGPS(9, 4.0f, 5.0f, 6.0f);
+    clpp.addColour(10, 1, 2, 3);
+    clpp.addUnixTime(11, 1234);
+
+    std::map<uint8_t, CayenneLPPMessage> out;
+    clpp.decode(clpp.getBuffer(), clpp.getSize(), out);
+    REQUIRE(out[9].getValue<float>(LPP_GPS) == std::nullopt);
+    REQUIRE(out[9].getValue<std::array<float, 3>>(LPP_GPS) == std::array<float, 3>{ 4.0f, 5.0f, 6.0f });
+    REQUIRE(out[10].getValue<std::array<float, 3>>(LPP_COLOUR) == std::nullopt);
+    REQUIRE(out[10].getValue<std::array<uint8_t, 3>>(LPP_COLOUR) == std::array<uint8_t, 3>{ 1, 2, 3 });
+    REQUIRE(out[11].getValue<float>(LPP_UNIXTIME) == std::nullopt);
+    REQUIRE(out[11].getValue<uint32_t>(LPP_UNIXTIME) == 1234);
 }

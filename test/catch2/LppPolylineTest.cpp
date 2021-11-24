@@ -15,6 +15,7 @@
 #include <catch2/generators/catch_generators.hpp>
 
 #include <CayenneLPP.h>
+#include <CayenneLPPMessage.h>
 
 using Expectations = std::vector<std::tuple<CayenneLPPPolyline::Precision, double, uint32_t, uint32_t, uint32_t>>;
 using SampleData = std::vector<CayenneLPPPolyline::Point>;
@@ -1495,4 +1496,5 @@ TEST_CASE("Decode polyline from message", "[LppPolyline]") {
     std::map<uint8_t, CayenneLPPMessage> messages;
     REQUIRE(lpp.decode(lpp.getBuffer(), lpp.getSize(), messages) == 2);
     REQUIRE(messages.at(2).polyline == coords);
+    REQUIRE(messages.at(2).getValue<std::vector<std::pair<double, double>>>(LPP_POLYLINE) == coords);
 }
