@@ -10,11 +10,12 @@ CayenneLPP is a format designed by [myDevices](https://mydevices.com) to integra
 
 ## Description
 
-CayenneLPP format is a quite well optimized way to send sensor data over low bit rate connection, like LoRa. You may find, probably, a better way for your specific project but CayenneLPP is a standarized and proven format that packs data in a suffiient way. It implements basic sensor types specified by [OMA SpecWorks](https://www.omaspecworks.org), formerly IPSO Alliance.
+CayenneLPP format is a quite well-optimized way to send sensor data over low bit rate connection, like LoRa. You may find, probably, a better way for your specific project but CayenneLPP is a standardized and proven format that packs data in a sufficient way. It implements basic sensor types specified by [OMA SpecWorks](https://www.omaspecworks.org), formerly IPSO Alliance.
 
 It supports multichannel data, which means that you can use it on multisensor devices.
 
-This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people, **these additional data types are not supported by myDevices Cayenne**. In addition it includes fully backwards compatibly decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance. 
+#### ⚠ Warning ⚠
+This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people, **these additional data types are not supported by myDevices Cayenne**. In addition, it includes a fully backward-compatible decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance. 
 
 ## Dependencies
 
@@ -31,7 +32,7 @@ See [API.md](API.md).
 
 ### Maintainer
 
-Electronic Cats invests time and resources providing this open source design, please support Electronic Cats and open-source hardware by purchasing products from Electronic Cats!
+Electronic Cats invests time and resources in providing this open-source design design, please support Electronic Cats and open-source hardware by purchasing products from Electronic Cats!
 
 <a href="https://github.com/sponsors/ElectronicCats">
   <img src="https://electroniccats.com/wp-content/uploads/2020/07/Badge_GHS.png" height="104" />
