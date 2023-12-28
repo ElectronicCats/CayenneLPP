@@ -10,6 +10,10 @@ CayenneLPP is a format designed by [myDevices](https://mydevices.com) to integra
 
 CayenneLPP format is a quite well-optimized way to send sensor data over low bit rate connection, like LoRa. You may find, probably, a better way for your specific project but CayenneLPP is a standardized and proven format that packs data in a sufficient way. It implements basic sensor types specified by [OMA SpecWorks](https://www.omaspecworks.org), formerly IPSO Alliance.
 
+<a href="https://github.com/ElectronicCats/CayenneLPP/wiki">
+  <img src="https://github.com/ElectronicCats/CayenneLPP/assets/139595394/a17c04ef-8c5c-493c-bf1a-f3dd4037408a" />
+</a>
+
 It supports multichannel data, which means that you can use it on multisensor devices.
 
 > ⚠ Warning ⚠
