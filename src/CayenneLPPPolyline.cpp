@@ -199,7 +199,12 @@ void CayenneLPPPolyline::pushFirst(double lat, double lon, uint8_t factor) {
 }
 
 void CayenneLPPPolyline::writeHeader(int32_t lat, int32_t lon, uint8_t factor) {
+// ESP-IDF framework
+#if !defined(ARDUINO) && defined(IDF_VER)
+    m_buffer.resize(std::max(static_cast<long unsigned int>(m_buffer.size()), 8UL));
+#else
     m_buffer.resize(std::max(m_buffer.size(), 8UL));
+#endif
     m_buffer[0] = m_buffer.size();
     m_buffer[1] = factor;
     m_buffer[2] = (lat >> 16); m_buffer[3] = (lat >> 8); m_buffer[4] = (lat);

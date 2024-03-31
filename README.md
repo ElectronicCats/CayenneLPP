@@ -1,8 +1,8 @@
-# CayenneLPP _by Electronic Cats_ - Library for Arduino
+# CayenneLPP _by Electronic Cats_ - Library for Arduino and ESP-IDF
 
 ![LibraryBuild](https://github.com/ElectronicCats/CayenneLPP/workflows/LibraryBuild/badge.svg?branch=master)
 
-This is an Arduino Library for Arduino Compatible with Cayenne Low Power Payload with Extended Data Types.
+This is an Library for Arduino and ESP-IDF Compatible with Cayenne Low Power Payload with Extended Data Types.
 
 CayenneLPP is a format designed by [myDevices](https://mydevices.com) to integrate LoRaWan nodes into their [IoT Platform](https://mydevices.com/capabilities). It is used to send sensor data in a packed way to [The Things Network platform](https://www.thethingsnetwork.org). You can read more on [myDevices CayenneLPP](https://docs.mydevices.com/docs/lorawan/cayenne-lpp)
 
