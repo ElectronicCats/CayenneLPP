@@ -11,6 +11,7 @@ if(ESP_PLATFORM)
   idf_component_register(
     SRCS ${CAYENNELPP_ESP_SOURCES} 
     INCLUDE_DIRS src 
+    REQUIRES bblanchon__arduinojson
   )
 
   return()
