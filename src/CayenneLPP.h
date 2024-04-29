@@ -7,10 +7,17 @@
 #ifndef CAYENNE_LPP_H
 #define CAYENNE_LPP_H
 
+// Arduino framework
 #ifdef ARDUINO
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#else
+#endif
+// ESP-IDF framework
+#if !defined(ARDUINO) && defined(IDF_VER)
+#include <ArduinoJson.h>
+#endif
+// Non Arduino frameworks
+#ifndef ARDUINO
 #include <cstdint>
 #include <map>
 #include "CayenneLPPMessage.h"
@@ -121,10 +128,13 @@ public:
 
   // Decoder methods
   const char *getTypeName(uint8_t type);
-#ifdef ARDUINO
+// Arduino or ESP-IDF framework
+#if defined(ARDUINO) || defined(IDF_VER)
   uint8_t decode(uint8_t *buffer, uint8_t size, JsonArray &root);
   uint8_t decodeTTN(uint8_t *buffer, uint8_t size, JsonObject &root);
-#else
+#endif
+// Non Arduino frameworks
+#ifndef ARDUINO
   uint8_t decode(uint8_t *buffer, uint8_t size, std::map<uint8_t, CayenneLPPMessage> &messageMap);
 #endif
 

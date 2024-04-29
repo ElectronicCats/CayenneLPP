@@ -1,0 +1,13 @@
+version: "1.3.0"
+description: "CayenneLPP library for Arduino and ESP-IDF. Compatible with Cayenne Low Power Payload."
+tags: "communication, LoRa, LoRaWAN"
+url: "https://github.com/ElectronicCats/CayenneLPP"
+issues: https://github.com/ElectronicCats/CayenneLPP/issues
+documentation: https://github.com/ElectronicCats/CayenneLPP/blob/master/API.md
+repository: "https://github.com/ElectronicCats/CayenneLPP.git"
+license: "MIT"
+dependencies:
+  bblanchon/arduinojson:
+    version: "*"
+maintainers:
+  "Electronic Cats <hola@electroniccats.com>"

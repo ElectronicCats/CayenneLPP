@@ -12,6 +12,10 @@
 
 #include <utility>
 #include <vector>
+// ESP-IDF framework
+#if !defined(ARDUINO) && defined(IDF_VER)
+#include <stdint.h>
+#endif
 
 struct DeltaCoord;
 

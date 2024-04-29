@@ -932,7 +932,7 @@ uint32_t CayenneLPP::getValue32(uint8_t * buffer, uint8_t size) {
 
 }
 
-#ifdef ARDUINO
+#if defined(ARDUINO) || defined(IDF_VER)
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 
   uint8_t count = 0;
@@ -967,8 +967,12 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
     JsonObject data = root.createNestedObject();
     data["channel"] = channel;
     data["type"] = type;
+#ifdef ARDUINO
     data["name"] = String(getTypeName(type));
-
+#else
+    data["name"] = std::string(getTypeName(type));
+#endif
+    
     // Parse types
 	if (false) {
 	}
@@ -1059,7 +1063,11 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
     }
 
     // Init object
+#ifdef ARDUINO
     String name = String(getTypeName(type)) + "_" + channel;
+#else
+    std::string name = std::string(getTypeName(type)) + "_" + std::to_string(channel);
+#endif
 
     // Parse types
 	if (false) {
@@ -1126,7 +1134,9 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
   return count;
 
 }
-#else
+#endif
+// Non Arduino frameworks
+#ifndef ARDUINO
 uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, std::map<uint8_t, CayenneLPPMessage> &messageMap) {
 
   uint8_t count = 0;
