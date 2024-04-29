@@ -1,4 +1,4 @@
-version: "1.3.0"
+version: "1.4.0"
 description: "CayenneLPP library for Arduino and ESP-IDF. Compatible with Cayenne Low Power Payload."
 tags: "communication, LoRa, LoRaWAN"
 url: "https://github.com/ElectronicCats/CayenneLPP"
