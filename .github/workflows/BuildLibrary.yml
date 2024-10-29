@@ -90,4 +90,5 @@ jobs:
           platform-url: ${{ matrix.platform-url }}
           required-libraries: ${{ env.REQUIRED_LIBRARIES }}
           sketches-exclude: ${{ matrix.sketches-exclude }}
+          build-properties: ${{ toJson(matrix.build-properties) }}
           extra-arduino-cli-args: ${{ matrix.extra-arduino-cli-args }}
