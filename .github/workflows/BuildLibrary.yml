@@ -36,7 +36,7 @@ jobs:
           - arduino:samd:nano_33_iot|All-US_915
           - arduino:mbed:nano33ble|All-US_915
           - esp8266:esp8266:huzzah:eesz=4M3M,xtal=80|All-US_915
-          - esp32:esp32:featheresp32:FlashFreq=80|All-US_915
+          - esp32:esp32:featheresp32:FlashFreq=80
 
         # Specify parameters for each board.
         # Parameters can be: platform-url, examples-exclude and examples-build-properties
@@ -95,3 +95,4 @@ jobs:
           platform-url: ${{ matrix.platform-url }}
           required-libraries: ${{ env.REQUIRED_LIBRARIES }}
           sketches-exclude: ${{ matrix.sketches-exclude }}
+          extra-arduino-cli-args: ${{ matrix.extra-arduino-cli-args }}
