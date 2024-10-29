@@ -48,35 +48,30 @@ jobs:
               All:
                 -DUS_915
                 -DDEBUG 
-
           - arduino-boards-fqbn: arduino:avr:leonardo|All-US_915
             build-properties: 
               All:
                 -DUS_915
                 -DDEBUG 
-          
           - arduino-boards-fqbn: arduino:samd:nano_33_iot|All-US_915
             build-properties: 
               All:
                 -DUS_915
                 -DDEBUG 
-          
           - arduino-boards-fqbn: arduino:mbed:nano33ble|All-US_915
             build-properties: 
               All:
                 -DUS_915
                 -DDEBUG 
-
           - arduino-boards-fqbn: esp8266:esp8266:huzzah:eesz=4M3M,xtal=80|All-US_915
             platform-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
             build-properties: 
               All:
                 -DUS_915
                 -DDEBUG 
-
           - arduino-boards-fqbn: esp32:esp32:featheresp32:FlashFreq=80
             platform-url: https://dl.espressif.com/dl/package_esp32_index.json
-            sketches-exclude: Basic_LoRaWAN_Beelan
+            sketches-exclude: basic_lorawan_beelan
 
       # Do not cancel all jobs / architectures if one job fails
       fail-fast: false
@@ -89,7 +84,7 @@ jobs:
         uses: actions/checkout@master
 
       - name: Compile all examples
-        uses: ArminJo/arduino-test-compile@v3
+        uses: ArminJo/arduino-test-compile@master
         with:
           arduino-board-fqbn: ${{ matrix.arduino-boards-fqbn }}
           platform-url: ${{ matrix.platform-url }}
