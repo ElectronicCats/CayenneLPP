@@ -31,28 +31,48 @@ jobs:
         # You may add a suffix behind the fqbn with "|" to specify one board for e.g. different compile options like arduino:avr:uno|trace 
         #############################################################################################################
         arduino-boards-fqbn:
-          - arduino:avr:uno
-          - arduino:avr:leonardo
-          - arduino:samd:nano_33_iot
-          - arduino:mbed:nano33ble
-          - esp8266:esp8266:huzzah:eesz=4M3M,xtal=80
-          - esp32:esp32:featheresp32:FlashFreq=80
+          - arduino:avr:uno|All-US_915
+          - arduino:avr:leonardo|All-US_915
+          - arduino:samd:nano_33_iot|All-US_915
+          - arduino:mbed:nano33ble|All-US_915
+          - esp8266:esp8266:huzzah:eesz=4M3M,xtal=80|All-US_915
+          - esp32:esp32:featheresp32:FlashFreq=80|All-US_915
 
         # Specify parameters for each board.
         # Parameters can be: platform-url, examples-exclude and examples-build-properties
         # With examples-exclude you may exclude specific examples for a board. Use a space separated list.
         #############################################################################################################
         include:
-          - arduino-boards-fqbn: arduino:avr:uno
+          - arduino-boards-fqbn: arduino:avr:uno|All-US_915
+            build-properties: 
+              All:
+                -DUS_915
+                -DDEBUG 
 
-          - arduino-boards-fqbn: arduino:avr:leonardo
+          - arduino-boards-fqbn: arduino:avr:leonardo|All-US_915
+            build-properties: 
+              All:
+                -DUS_915
+                -DDEBUG 
           
-          - arduino-boards-fqbn: arduino:samd:nano_33_iot
+          - arduino-boards-fqbn: arduino:samd:nano_33_iot|All-US_915
+            build-properties: 
+              All:
+                -DUS_915
+                -DDEBUG 
           
-          - arduino-boards-fqbn: arduino:mbed:nano33ble
+          - arduino-boards-fqbn: arduino:mbed:nano33ble|All-US_915
+            build-properties: 
+              All:
+                -DUS_915
+                -DDEBUG 
 
-          - arduino-boards-fqbn: esp8266:esp8266:huzzah:eesz=4M3M,xtal=80
+          - arduino-boards-fqbn: esp8266:esp8266:huzzah:eesz=4M3M,xtal=80|All-US_915
             platform-url: https://arduino.esp8266.com/stable/package_esp8266com_index.json
+            build-properties: 
+              All:
+                -DUS_915
+                -DDEBUG 
 
           - arduino-boards-fqbn: esp32:esp32:featheresp32:FlashFreq=80
             platform-url: https://dl.espressif.com/dl/package_esp32_index.json
