@@ -19,9 +19,9 @@ CayenneLPP format is a quite well-optimized way to send sensor data over low bit
 It supports multichannel data, which means that you can use it on multisensor devices.
 
 > [!Warning]
-> This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people, **these additional data types are not supported by myDevices Cayenne**. In addition, it includes a fully backward-compatible decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance. 
+> This version of the library includes several IPSO data types not included in the original work by [Johan Stokking](https://github.com/TheThingsNetwork/arduino-device-lib) or most of the forks and side works by other people, **these additional data types are not supported by My Devices Cayenne**. In addition, it includes a fully backward-compatible decoder in JavaScript, suitable for implementations with NodeRED or TTN, for instance. 
 
-When using the decoder, you must install the [ArduinoJson 6.X](https://arduinojson.org/) library. You can find it in both the Arduino IDE and PlatformIO library managers.
+When using the decoder, you must install the [ArduinoJson 6.X](https://arduinojson.org/) library. You can find it in both the Arduino IDE and Platform IO library managers.
 
 ## How to contribute <img src="https://electroniccats.com/wp-content/uploads/2018/01/fav.png" height="35"><img src="https://raw.githubusercontent.com/gist/ManulMax/2d20af60d709805c55fd784ca7cba4b9/raw/bcfeac7604f674ace63623106eb8bb8471d844a6/github.gif" height="30">
  Contributions are welcome! 
@@ -41,7 +41,7 @@ See the [**community code of conduct**](https://github.com/ElectronicCats/electr
 
 ### Maintainer
 
-Electronic Cats invests time and resources in providing this open-source design design, please support Electronic Cats and open-source hardware by purchasing products from Electronic Cats!
+Electronic Cats invests time and resources in providing this open-source design, please support Electronic Cats and open-source hardware by purchasing products from Electronic Cats!
 
 <a href="https://github.com/sponsors/ElectronicCats">
   <img src="https://electroniccats.com/wp-content/uploads/2020/07/Badge_GHS.png" height="104" />
