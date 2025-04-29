@@ -964,7 +964,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
     }
 
     // Init object
-    JsonObject data = root.createNestedObject();
+    JsonObject data = root.add<JsonObject>();
     data["channel"] = channel;
     data["type"] = type;
 #ifdef ARDUINO
@@ -979,7 +979,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 #ifndef CAYENNE_DISABLE_COLOUR
 	else if (LPP_COLOUR == type) {
 
-      JsonObject object = data.createNestedObject("value");
+      JsonObject object = data["value"].to<JsonObject>();
       object["r"] = getValue(&buffer[index], 1, multiplier, is_signed);
       object["g"] = getValue(&buffer[index+1], 1, multiplier, is_signed);
       object["b"] = getValue(&buffer[index+2], 1, multiplier, is_signed);
@@ -988,7 +988,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 #endif
 #ifndef CAYENNE_DISABLE_ACCELEROMETER
 	else if (LPP_ACCELEROMETER == type) {
-      JsonObject object = data.createNestedObject("value");
+      JsonObject object = data["value"].to<JsonObject>();
       object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
       object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
@@ -996,7 +996,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 #endif
 #ifndef CAYENNE_DISABLE_GYROMETER
 	else if (LPP_GYROMETER == type) {
-      JsonObject object = data.createNestedObject("value");
+      JsonObject object = data["value"].to<JsonObject>();
       object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
       object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
@@ -1004,7 +1004,7 @@ uint8_t CayenneLPP::decode(uint8_t *buffer, uint8_t len, JsonArray& root) {
 #endif
 #ifndef CAYENNE_DISABLE_GPS
 	else if (LPP_GPS == type) {
-      JsonObject object = data.createNestedObject("value");
+      JsonObject object = data["value"].to<JsonObject>();
       object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
@@ -1074,7 +1074,7 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
 	}
 #ifndef CAYENNE_DISABLE_COLOUR
 	else if (LPP_COLOUR == type) {
-      JsonObject object = root.createNestedObject(name);
+      JsonObject object = root[name].to<JsonObject>();
       object["r"] = getValue(&buffer[index], 1, multiplier, is_signed);
       object["g"] = getValue(&buffer[index+1], 1, multiplier, is_signed);
       object["b"] = getValue(&buffer[index+2], 1, multiplier, is_signed);
@@ -1084,7 +1084,7 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
 #ifndef CAYENNE_DISABLE_ACCELEROMETER
 	else if (LPP_ACCELEROMETER == type) {
 
-      JsonObject object = root.createNestedObject(name);
+      JsonObject object = root[name].to<JsonObject>();
       object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
       object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
@@ -1094,7 +1094,7 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
 #ifndef CAYENNE_DISABLE_GYROMETER
 	else if (LPP_GYROMETER == type) {
 
-      JsonObject object = root.createNestedObject(name);
+      JsonObject object = root[name].to<JsonObject>();
       object["x"] = getValue(&buffer[index], 2, multiplier, is_signed);
       object["y"] = getValue(&buffer[index+2], 2, multiplier, is_signed);
       object["z"] = getValue(&buffer[index+4], 2, multiplier, is_signed);
@@ -1104,7 +1104,7 @@ uint8_t CayenneLPP::decodeTTN(uint8_t *buffer, uint8_t len, JsonObject& root) {
 #ifndef CAYENNE_DISABLE_GPS
 	else if (LPP_GPS == type) {
 
-      JsonObject object = root.createNestedObject(name);
+      JsonObject object = root[name].to<JsonObject>();
       object["latitude"] = getValue(&buffer[index], 3, 10000, is_signed);
       object["longitude"] = getValue(&buffer[index+3], 3, 10000, is_signed);
       object["altitude"] = getValue(&buffer[index+6], 3, 100, is_signed);
