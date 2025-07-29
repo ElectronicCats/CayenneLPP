@@ -719,7 +719,7 @@ uint8_t CayenneLPP::addAltitude(uint8_t channel, float value) {
 #endif
 
 #ifndef CAYENNE_DISABLE_POWER
-uint8_t CayenneLPP::addPower(uint8_t channel, uint32_t value) {
+uint8_t CayenneLPP::addPower(uint8_t channel, float value) {
   return addField(LPP_POWER, channel, value);
 }
 #endif
