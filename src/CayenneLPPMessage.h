@@ -38,7 +38,7 @@ struct CayenneLPPMessage {
   uint32_t frequency = 0;
   uint32_t percentage = 0;
   float altitude = 0.0f;
-  uint32_t power = 0;
+  float power = 0.0f;
   float distance = 0.0f;
   float energy = 0.0f;
   float direction = 0.0f;

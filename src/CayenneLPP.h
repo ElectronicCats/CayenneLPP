@@ -200,7 +200,7 @@ public:
   uint8_t addAltitude(uint8_t channel, float value);
 #endif
 #ifndef CAYENNE_DISABLE_POWER
-  uint8_t addPower(uint8_t channel, uint32_t value);
+  uint8_t addPower(uint8_t channel, float value);
 #endif
 #ifndef CAYENNE_DISABLE_DISTANCE
   uint8_t addDistance(uint8_t channel, float value);

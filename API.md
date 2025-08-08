@@ -142,7 +142,7 @@ uint8_t addCurrent(uint8_t channel, float value); // in amperes (3 decimals)
 uint8_t addFrequency(uint8_t channel, uint32_t value); // in hertzs
 uint8_t addPercentage(uint8_t channel, uint32_t value); // 0 to 100
 uint8_t addAltitude(uint8_t channel, float value); // in meters
-uint8_t addPower(uint8_t channel, uint32_t value); // in watts
+uint8_t addPower(uint8_t channel, float value); // in watts
 uint8_t addDistance(uint8_t channel, float value); // in meters (3 decimals)
 uint8_t addEnergy(uint8_t channel, float value); // in kWh (3 decimals)
 uint8_t addDirection(uint8_t channel, float value); // in degrees
