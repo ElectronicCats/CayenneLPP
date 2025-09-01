@@ -556,7 +556,12 @@ uint32_t CayenneLPP::getTypeMultiplier(uint8_t type) {
 bool CayenneLPP::getTypeSigned(uint8_t type) {
 
   switch (type) {
-
+#ifndef CAYENNE_DISABLE_VOLTAGE
+    case LPP_VOLTAGE:
+#endif
+#ifndef CAYENNE_DISABLE_CURRENT
+    case LPP_CURRENT:
+#endif
 #ifndef CAYENNE_DISABLE_ANALOG_INPUT
     case LPP_ANALOG_INPUT:
 #endif
