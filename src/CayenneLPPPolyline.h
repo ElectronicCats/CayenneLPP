@@ -12,8 +12,8 @@
 
 #include <utility>
 #include <vector>
-// ESP-IDF framework
-#if !defined(ARDUINO) && defined(IDF_VER)
+// Non Arduino frameworks
+#ifndef ARDUINO
 #include <stdint.h>
 #endif
 
